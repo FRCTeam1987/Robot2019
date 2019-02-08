@@ -13,10 +13,12 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.Drive;
+import frc.robot.subsystems.Elevator;
 
 
 public class Robot extends TimedRobot {
   public static final Drive drive = new Drive();
+  public static final Elevator elevator = new Elevator();
   public static OI m_oi;
 
   Command m_autonomousCommand;

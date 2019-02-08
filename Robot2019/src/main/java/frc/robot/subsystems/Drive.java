@@ -24,6 +24,7 @@ import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
+import frc.robot.Util;
 import frc.robot.commands.drive.TeleopDrive;
 
 public class Drive extends Subsystem {
@@ -80,7 +81,7 @@ public class Drive extends Subsystem {
       slave.follow(master);
     });
 
-    configTalonSRXWithEncoder(master);
+    Util.configTalonSRXWithEncoder(master);
   }
 
   public void xboxDrive(XboxController xbox) {
@@ -115,14 +116,6 @@ public class Drive extends Subsystem {
 
   public double getAngle() {
     return ahrs.getAngle();
-  }
-
-  public void configTalonSRXWithEncoder(final WPI_TalonSRX master) {
-    final ErrorCode errorCode = master.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
-
-    SmartDashboard.putString(master.getSubsystem() + "_" + master.getName() + "_status", errorCode.toString());
-
-    master.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 1);   //need default timeout?
   }
 
   public void zeroDriveEncoders() {
