@@ -1,4 +1,4 @@
-package frc.team1987;
+package frc.team1987.util;
 
 import com.ctre.phoenix.ErrorCode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
@@ -6,6 +6,7 @@ import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.team1987.RobotMap;
 
 public class Util {
 

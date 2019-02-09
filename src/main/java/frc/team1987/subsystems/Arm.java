@@ -6,7 +6,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.team1987.RobotMap;
-import frc.team1987.Util;
+import frc.team1987.util.Util;
 
 public class Arm extends Subsystem {
 

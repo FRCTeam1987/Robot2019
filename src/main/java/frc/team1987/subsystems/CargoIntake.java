@@ -14,7 +14,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.team1987.RobotMap;
-import frc.team1987.Util;
+import frc.team1987.util.Util;
 
 public class CargoIntake extends Subsystem {
 
@@ -30,6 +30,7 @@ public class CargoIntake extends Subsystem {
     cargoIntakeProx = new DigitalInput(RobotMap.cargoIntakeProxID);
 
     configIntakePivot(intakePivot);
+    zeroCargoIntakePivot();
   }
 
   public void configIntakePivot(final WPI_TalonSRX motor) {
@@ -44,7 +45,10 @@ public class CargoIntake extends Subsystem {
     cargoRoller.set(ControlMode.PercentOutput, rollerPercent);
   }
 
-  public int degreesToTicks(final double degrees) {
+  public void zeroCargoIntakePivot() {
+    intakePivot.setSelectedSensorPosition(0);
+  }
+  private int degreesToTicks(final double degrees) {
     return (int) ((degrees / 360.0) * RobotMap.ticksPerRotation);
   }
 
@@ -63,6 +67,5 @@ public class CargoIntake extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
-    
   }
 }

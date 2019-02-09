@@ -3,6 +3,14 @@ package frc.team1987;
 
 public class RobotMap {
     
+    //Driver Buttons
+    public static int releaseHatchButton = 1;
+    public static int stopAll = 2;
+    public static int shootCargoButton = 3;
+    public static int cargoCollectButton = 4;
+    public static int toggleShifterButton = 9;
+    public static int switchClawSideButton = 10;
+        
     //MotorIDs
     public static int leftMasterID = 1;
 	public static int leftSlave1ID = 2;
@@ -36,6 +44,4 @@ public class RobotMap {
     public static double setElevatorAbsoluteTimeout = 2.0;   //NOT REAL NEEDS TO BE CHANGED
     public static double wristTolerance = 100;
     public static double wristGearboxReduction = 4.444444;
-
-
 }
