@@ -15,7 +15,7 @@ public class RobotMap {
     public static int cargoRollerMotorID = 9;
     public static int armMotorID = 10;
 
-    //MiscIDs
+    //Misc
     public static double driveBaseWheelsDiameter = 5.0; //might need to be tweaked
 
     //DIO IDs
@@ -29,9 +29,10 @@ public class RobotMap {
     public static int highGearID = 0;   //NOT REAL
     public static int lowGearID = 1;    //NOT REAL
 
-    //ElevatorIDs
+    //Elevator
     public static double elevatorShaftDiameter = 2.0;   //NOT REAL NEEDS TO BE CHANGED
     public static double elevatorTolerance = 1.0;       //NOT REAL NEEDS TO BE CHANGED
     public static double setElevatorAbsoluteTimeout = 2.0;   //NOT REAL NEEDS TO BE CHANGED
+    public static double wristTolerance = 100;
 
 }
