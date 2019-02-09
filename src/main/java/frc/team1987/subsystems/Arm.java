@@ -38,7 +38,7 @@ public class Arm extends Subsystem {
   }
 
   public boolean isWithinTolerance(final double desiredDegrees) {
-    return Util.isWithinTolerance(wristGearboxReduction(getTicks()), degreesToTicks(desiredDegrees), RobotMap.wristTolerance);
+    return Util.isWithinTolerance(wristGearboxReduction(), degreesToTicks(desiredDegrees), RobotMap.wristTolerance);
   }
 
   public void zeroWristEncoder() {
@@ -61,8 +61,8 @@ public class Arm extends Subsystem {
     return (int) (((degrees / 360) * 4096) * 4.4444);
   }
 
-  private double wristGearboxReduction(final int rawTicks) {
-    return rawTicks * RobotMap.wristGearboxReduction;
+  private double wristGearboxReduction() {
+    return getTicks() * RobotMap.wristGearboxReduction;
   }
 
   @Override
