@@ -10,6 +10,7 @@ public class IntakeCargo extends Command {
 
   @Override
   protected void initialize() {
+    Robot.cargoIntake.setIntakePivot(90); //arbitrary number
     Robot.cargoIntake.setRoller(0.7);
   }
 
@@ -25,6 +26,7 @@ public class IntakeCargo extends Command {
   @Override
   protected void end() {
     Robot.cargoIntake.setRoller(0);
+    Robot.cargoIntake.setIntakePivot(0); //arbitraty number 
   }
 
   @Override

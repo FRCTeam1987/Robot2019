@@ -7,6 +7,7 @@
 
 package frc.team1987;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -25,6 +26,7 @@ public class Robot extends TimedRobot {
   public static final Arm arm = new Arm();
   public static final CargoIntake cargoIntake = new CargoIntake();
   public static final Claw claw = new Claw();
+  public static final Compressor compressor = new Compressor();
   public static OI m_oi;
 
   Command m_autonomousCommand;
