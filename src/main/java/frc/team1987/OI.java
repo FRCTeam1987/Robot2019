@@ -3,6 +3,8 @@ package frc.team1987;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.team1987.commands.claw.PlaceHatch;
+import frc.team1987.commands.claw.ShootCargo;
 import frc.team1987.commands.elevator.ManualElevator;
 import frc.team1987.util.XboxDPad;
 import frc.team1987.util.XboxDPad.Direction;
@@ -30,6 +32,8 @@ public class OI {
 
     elevatorManualUp.whileHeld(new ManualElevator(0.4));
     elevatorManualDown.whileHeld(new ManualElevator(-0.4));
+    shootCargo.whenPressed(new ShootCargo(0.8));
+    releaseHatch.whenPressed(new PlaceHatch());
   }
   
   public XboxController getDriver() {
