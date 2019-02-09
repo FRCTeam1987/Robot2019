@@ -24,7 +24,7 @@ public class Elevator extends Subsystem {     //POSSIBLE BRAKE IN ELEVATOR????
     elevator.configMotionAcceleration(443); //change once we know gearing reduction
     elevator.configMotionCruiseVelocity(443); //this too
 
-    Util.configTalonSRXWithEncoder(elevator);
+    Util.configTalonSRXWithEncoder(elevator, false);
   }
 
   public int getTicks() {

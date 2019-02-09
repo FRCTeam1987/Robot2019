@@ -37,7 +37,7 @@ public class CargoIntake extends Subsystem {
     intakePivot.configMotionAcceleration(443); //Fix value
     intakePivot.configMotionCruiseVelocity(443);
 
-    Util.configTalonSRXWithEncoder(motor);
+    Util.configTalonSRXWithEncoder(motor, false);
   }
 
   public void setRoller(final double rollerPercent) {
