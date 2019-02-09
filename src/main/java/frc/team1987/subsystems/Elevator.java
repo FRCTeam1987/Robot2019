@@ -1,12 +1,12 @@
-package frc.robot.subsystems;
+package frc.team1987.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.RobotMap;
-import frc.robot.Util;
+import frc.team1987.RobotMap;
+import frc.team1987.Util;
 
 public class Elevator extends Subsystem {     //POSSIBLE BRAKE IN ELEVATOR????
 
@@ -58,6 +58,10 @@ public class Elevator extends Subsystem {     //POSSIBLE BRAKE IN ELEVATOR????
     }
 
     elevator.set(ControlMode.MotionMagic, ticksAbsolute);
+  }
+
+  public void setElevatorPercent(final double percent) {
+    elevator.set(ControlMode.PercentOutput, percent);
   }
 
   public boolean isWithinTolerance(final double desiredDegrees) {

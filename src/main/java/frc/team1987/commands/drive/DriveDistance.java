@@ -5,14 +5,14 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.drive;
+package frc.team1987.commands.drive;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Robot;
-import frc.robot.RobotMap;
-import frc.robot.Util;
+import frc.team1987.Robot;
+import frc.team1987.RobotMap;
+import frc.team1987.Util;
 
 public class DriveDistance extends Command {
 

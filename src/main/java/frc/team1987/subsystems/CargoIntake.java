@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.subsystems;
+package frc.team1987.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
@@ -13,8 +13,8 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.RobotMap;
-import frc.robot.Util;
+import frc.team1987.RobotMap;
+import frc.team1987.Util;
 
 public class CargoIntake extends Subsystem {
 
@@ -51,6 +51,10 @@ public class CargoIntake extends Subsystem {
   public void setIntakePivot(final double degrees) {
     final int ticksAbsolute = degreesToTicks(degrees);
     intakePivot.set(ControlMode.MotionMagic, ticksAbsolute);
+  }
+
+  public void setIntakePivotPercent(final double percent) {
+    intakePivot.set(ControlMode.PercentOutput, percent);
   }
 
   public boolean isCargoCollected() {

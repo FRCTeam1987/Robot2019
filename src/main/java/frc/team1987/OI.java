@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot;
+package frc.team1987;
 
 import edu.wpi.first.wpilibj.XboxController;
 

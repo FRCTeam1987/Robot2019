@@ -1,4 +1,4 @@
-package frc.robot;
+package frc.team1987;
 
 
 public class RobotMap {
@@ -21,10 +21,11 @@ public class RobotMap {
     //DIO IDs
     public static int cargoIntakeProxID = 0;
 
+    //Misc
     public static int defaultTimeout = 10;
     public static int driverID = 0;
     public static int ticksPerRotation = 4096;
-
+    
     //Pneumatics
     public static int highGearID = 0;   //NOT REAL
     public static int lowGearID = 1;    //NOT REAL
@@ -34,5 +35,7 @@ public class RobotMap {
     public static double elevatorTolerance = 1.0;       //NOT REAL NEEDS TO BE CHANGED
     public static double setElevatorAbsoluteTimeout = 2.0;   //NOT REAL NEEDS TO BE CHANGED
     public static double wristTolerance = 100;
+    public static double wristGearboxReduction = 4.444444;
+
 
 }

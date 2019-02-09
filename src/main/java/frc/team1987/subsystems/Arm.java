@@ -1,16 +1,13 @@
-package frc.robot.subsystems;
+package frc.team1987.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.RobotMap;
-import frc.robot.Util;
+import frc.team1987.RobotMap;
+import frc.team1987.Util;
 
-/**
- * Add your docs here.
- */
 public class Arm extends Subsystem {
 
   private final WPI_TalonSRX wrist;
@@ -28,28 +25,24 @@ public class Arm extends Subsystem {
     wrist.config_kP(0, 0.975, 0);
     wrist.config_kI(0, 0.0, 0);
     wrist.config_kD(0, 0.4, 0);
-    // setBrake();
+    setBrake();
   }
 
   public void setWristAbsolute(final double desiredDegrees) {
     final int ticksAbsolute = degreesToTicks(desiredDegrees);
-
     wrist.set(ControlMode.MotionMagic, ticksAbsolute);
+  }
+
+  public void setWristPercent(final double percent) {
+    wrist.set(ControlMode.PercentOutput, percent);
   }
 
   public boolean isWithinTolerance(final double desiredDegrees) {
     return Util.isWithinTolerance(wristGearboxReduction(getTicks()), degreesToTicks(desiredDegrees), RobotMap.wristTolerance);
   }
 
-  private int getTicks() {
-    return wrist.getSelectedSensorPosition();
-  }
-  private int degreesToTicks(final double degrees) {
-    return (int) (((degrees / 360) * 4096) * 4.4444);
-  }
-
-  private double wristGearboxReduction(final int rawTicks) {
-    return rawTicks * 4.44444;
+  public void zeroWristEncoder() {
+    wrist.setSelectedSensorPosition(0);
   }
 
   public void setBrake() {
@@ -58,6 +51,18 @@ public class Arm extends Subsystem {
 
   public void setCoast() {
     wrist.setNeutralMode(NeutralMode.Coast);
+  }
+
+  private int getTicks() {
+    return wrist.getSelectedSensorPosition();
+  }
+
+  private int degreesToTicks(final double degrees) {
+    return (int) (((degrees / 360) * 4096) * 4.4444);
+  }
+
+  private double wristGearboxReduction(final int rawTicks) {
+    return rawTicks * RobotMap.wristGearboxReduction;
   }
 
   @Override

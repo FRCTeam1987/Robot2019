@@ -5,11 +5,11 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.elevator;
+package frc.team1987.commands.elevator;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Robot;
-import frc.robot.RobotMap;
+import frc.team1987.Robot;
+import frc.team1987.RobotMap;
 
 public class SetElevatorAbsolute extends Command {
 
