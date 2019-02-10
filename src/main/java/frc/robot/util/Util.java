@@ -40,6 +40,10 @@ public class Util {
         return (int)(rotations * RobotMap.ticksPerRotation);
     }
 
+    public static double ticksToRotations(final int ticks) {
+        return ticks / RobotMap.ticksPerRotation;
+    }
+
     public static double circumference(final double diameter) {
         return Math.PI * diameter;
     }

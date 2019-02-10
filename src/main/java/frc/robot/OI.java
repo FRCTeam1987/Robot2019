@@ -15,6 +15,7 @@ import frc.robot.commands.claw.PlaceHatch;
 import frc.robot.commands.claw.ShootCargo;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.elevator.ElevatorManual;
+import frc.robot.commands.elevator.SetElevatorAbsolute;
 import frc.robot.util.XboxDPad;
 import frc.robot.util.XboxDPad.Direction;
 
@@ -43,6 +44,10 @@ public class OI {
     elevatorManualDown.whileHeld(new ElevatorManual(-0.4));
     shootCargo.whenPressed(new ShootCargo(0.8));
     releaseHatch.whenPressed(new PlaceHatch());
+
+    SmartDashboard.putData("Set Elevator Absolute 3", new SetElevatorAbsolute(3));
+    SmartDashboard.putData("Set Elevator Absolute 10", new SetElevatorAbsolute(10));
+    SmartDashboard.putData("Set Elevator Absolute 30", new SetElevatorAbsolute(30));
   }
 
   public XboxController getDriver() {
