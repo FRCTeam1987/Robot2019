@@ -23,7 +23,7 @@ import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
-import frc.robot.Util;
+import frc.robot.util.Util;
 import frc.robot.commands.drive.TeleopDrive;
 
 public class Drive extends Subsystem {
