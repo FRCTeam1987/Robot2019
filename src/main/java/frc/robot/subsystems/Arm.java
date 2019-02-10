@@ -28,7 +28,7 @@ public class Arm extends Subsystem {
     wrist.config_kP(0, 0.975, 0);
     wrist.config_kI(0, 0.0, 0);
     wrist.config_kD(0, 0.4, 0);
-    // setBrake();
+    setBrake();
   }
 
   public void setWristAbsolute(final double desiredDegrees) {
@@ -41,15 +41,12 @@ public class Arm extends Subsystem {
     return Util.isWithinTolerance(wristGearboxReduction(getTicks()), degreesToTicks(desiredDegrees), RobotMap.wristTolerance);
   }
 
-  private int getTicks() {
-    return wrist.getSelectedSensorPosition();
-  }
-  private int degreesToTicks(final double degrees) {
-    return (int) (((degrees / 360) * 4096) * 4.4444);
+  public void setWristPercent(final double percent) {
+    wrist.set(ControlMode.PercentOutput, percent);
   }
 
-  private double wristGearboxReduction(final int rawTicks) {
-    return rawTicks * 4.44444;
+  public void zeroWristEncoder() {
+    wrist.setSelectedSensorPosition(0);
   }
 
   public void setBrake() {
@@ -58,6 +55,17 @@ public class Arm extends Subsystem {
 
   public void setCoast() {
     wrist.setNeutralMode(NeutralMode.Coast);
+  }
+
+  private int getTicks() {
+    return wrist.getSelectedSensorPosition();
+  }
+  private int degreesToTicks(final double degrees) {
+    return (int) (((degrees / 360) * 4096) * 4.4444);
+  }
+
+  private double wristGearboxReduction(final int rawTicks) {
+    return rawTicks * RobotMap.wristGearboxReduction;
   }
 
   @Override

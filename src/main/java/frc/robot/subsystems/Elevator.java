@@ -60,6 +60,10 @@ public class Elevator extends Subsystem {     //POSSIBLE BRAKE IN ELEVATOR????
     elevator.set(ControlMode.MotionMagic, ticksAbsolute);
   }
 
+  public void setElevatorPercent(final double percent) {
+    elevator.set(ControlMode.PercentOutput, percent);
+  }
+
   public boolean isWithinTolerance(final double desiredDegrees) {
     return Util.isWithinTolerance(getTicks(), desiredDegrees, RobotMap.elevatorTolerance);
   }

@@ -34,7 +34,7 @@ public class Drive extends Subsystem {
   private final WPI_TalonSRX rightMaster;
   private final WPI_TalonSRX rightSlave1;
   private final WPI_VictorSPX rightSlave2;
-  private final DoubleSolenoid shifter;
+  // private final DoubleSolenoid shifter;
   private final DifferentialDrive robotDrive;
   private final AHRS ahrs;
   private boolean isBrake;
@@ -55,7 +55,7 @@ public class Drive extends Subsystem {
 
     robotDrive = new DifferentialDrive(leftMaster, rightMaster);
     ahrs = new AHRS(SPI.Port.kMXP);
-    shifter = new DoubleSolenoid(RobotMap.highGearID, RobotMap.lowGearID);
+    // shifter = new DoubleSolenoid(RobotMap.highGearID, RobotMap.lowGearID);
 
     configSideOfDrive(leftMaster, true, leftSlave1, leftSlave2);
     configSideOfDrive(rightMaster, false, rightSlave1, rightSlave2);
@@ -152,15 +152,15 @@ public class Drive extends Subsystem {
   }
 
   public boolean isHighGear() {
-    return shifter.get() == Value.kForward;
+    return true; // shifter.get() == Value.kForward;
   }
 
   public void setHighGear() {
-    shifter.set(Value.kForward);
+    // shifter.set(Value.kForward);
   }
   
   public void setLowGear() {
-    shifter.set(Value.kReverse);
+    // shifter.set(Value.kReverse);
   }
 
   public void ahrsReset() {

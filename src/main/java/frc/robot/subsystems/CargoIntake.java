@@ -53,6 +53,10 @@ public class CargoIntake extends Subsystem {
     intakePivot.set(ControlMode.MotionMagic, ticksAbsolute);
   }
 
+  public void setIntakePivotPercent(final double percent) {
+    intakePivot.set(ControlMode.PercentOutput, percent);
+  }
+
   public boolean isCargoCollected() {
     return cargoIntakeProx.get();
   }
