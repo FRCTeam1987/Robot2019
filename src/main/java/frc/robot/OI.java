@@ -10,6 +10,10 @@ package frc.robot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commands.elevator.ElevatorManual;
+import frc.robot.util.XboxDPad;
+import frc.robot.util.XboxDPad.Direction;
 
 public class OI {
 
@@ -31,8 +35,8 @@ public class OI {
     elevatorManualUp = new XboxDPad(driver, Direction.Up);
     elevatorManualDown = new XboxDPad(driver, Direction.Down);
 
-    elevatorManualUp.whileHeld(new ManualElevator(0.4));
-    elevatorManualDown.whileHeld(new ManualElevator(-0.4));
+    elevatorManualUp.whileHeld(new ElevatorManual(0.4));
+    elevatorManualDown.whileHeld(new ElevatorManual(-0.4));
   }
 
   public XboxController getDriver() {

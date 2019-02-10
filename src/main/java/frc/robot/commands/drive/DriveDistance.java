@@ -12,7 +12,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
-import frc.robot.Util;
+import frc.robot.util.Util;
 
 public class DriveDistance extends Command {
 
