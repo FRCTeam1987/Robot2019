@@ -34,6 +34,7 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     m_oi = new OI();
     SmartDashboard.putData("Auto mode", m_chooser);
+    SmartDashboard.putString("Robot Status:", "OK");
   }
 
   @Override

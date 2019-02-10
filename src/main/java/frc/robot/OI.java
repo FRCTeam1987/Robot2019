@@ -10,6 +10,9 @@ package frc.robot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+
+import frc.robot.commands.claw.PlaceHatch;
+import frc.robot.commands.claw.ShootCargo;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.elevator.ElevatorManual;
 import frc.robot.util.XboxDPad;
@@ -25,6 +28,7 @@ public class OI {
   private final Button switchClawSide;
   private final XboxDPad elevatorManualUp;
   private final XboxDPad elevatorManualDown;
+  
 
   public OI() {
     driver = new XboxController(RobotMap.driverID);
@@ -34,9 +38,11 @@ public class OI {
     switchClawSide = new JoystickButton(driver, RobotMap.switchClawSideButton);
     elevatorManualUp = new XboxDPad(driver, Direction.Up);
     elevatorManualDown = new XboxDPad(driver, Direction.Down);
-
+    
     elevatorManualUp.whileHeld(new ElevatorManual(0.4));
     elevatorManualDown.whileHeld(new ElevatorManual(-0.4));
+    shootCargo.whenPressed(new ShootCargo(0.8));
+    releaseHatch.whenPressed(new PlaceHatch());
   }
 
   public XboxController getDriver() {
