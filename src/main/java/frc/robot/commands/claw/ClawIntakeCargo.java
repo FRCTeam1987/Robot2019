@@ -3,19 +3,18 @@ package frc.robot.commands.claw;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class ShootCargo extends Command {
- 
+public class ClawIntakeCargo extends Command {
+  
   private final double m_percent;
 
-  public ShootCargo(final double percent) {
+  public ClawIntakeCargo(final double percent) {
     requires(Robot.claw);
-    setTimeout(1);
     m_percent = percent;
   }
 
   @Override
   protected void initialize() {
-    Robot.claw.setWheels(-m_percent);
+    Robot.claw.setWheels(m_percent);
   }
 
   @Override
@@ -24,7 +23,7 @@ public class ShootCargo extends Command {
 
   @Override
   protected boolean isFinished() {
-    return isTimedOut();
+    return Robot.claw.isCargoCollected();
   }
 
   @Override
