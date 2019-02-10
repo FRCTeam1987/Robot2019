@@ -32,7 +32,7 @@ public class SetElevatorAbsolute extends Command {
 
   @Override
   protected boolean isFinished() {
-    return false;
+    return Robot.elevator.isWithinTolerance(m_inches) || isTimedOut();
   }
 
   @Override

@@ -5,8 +5,10 @@ import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team1987.RobotMap;
 import frc.team1987.util.Util;
+// import jdk.jfr.Percentage;
 
 public class Elevator extends Subsystem {     //POSSIBLE BRAKE IN ELEVATOR????
 
@@ -14,6 +16,7 @@ public class Elevator extends Subsystem {     //POSSIBLE BRAKE IN ELEVATOR????
 
   public Elevator() {
     elevator = new WPI_TalonSRX(RobotMap.elevatorMotorID);
+    elevator.setName("elevator", "motor");
 
     configElevator(elevator);
     zeroElevatorEncoders();
@@ -25,7 +28,7 @@ public class Elevator extends Subsystem {     //POSSIBLE BRAKE IN ELEVATOR????
     elevator.configMotionCruiseVelocity(443); //this too
 
     elevator.config_kF(0, 0.0);
-    elevator.config_kP(0, 0.0);
+    elevator.config_kP(0, 1.0);
     elevator.config_kI(0, 0.0);
     elevator.config_kD(0, 0.0);
 
@@ -36,13 +39,18 @@ public class Elevator extends Subsystem {     //POSSIBLE BRAKE IN ELEVATOR????
     return elevator.getSelectedSensorPosition();
   }
 
+  // public double getInches() {
+  //   return 
+  // }
+
   public void zeroElevatorEncoders() {
     elevator.setSelectedSensorPosition(0);
   }
 
   public void setElevatorAbsolute(final double desiredInches) {     //UNTESTED PID
-    final int ticksAbsolute = Util.distanceToTicks(desiredInches, RobotMap.elevatorShaftDiameter);  //are we using shaft diameter?
-    elevator.set(ControlMode.MotionMagic, ticksAbsolute);
+    final int ticksAbsolute = Util.distanceToTicks(desiredInches, RobotMap.elevatorShaftDiameter);  
+    // elevator.set(ControlMode.MotionMagic, ticksAbsolute);
+    elevator.set(ControlMode.Position, ticksAbsolute);
   }
 
   public void setElevatorPercent(final double percent) {
@@ -51,6 +59,11 @@ public class Elevator extends Subsystem {     //POSSIBLE BRAKE IN ELEVATOR????
 
   public boolean isWithinTolerance(final double desiredDistance) {
     return Util.isWithinTolerance(getTicks(), desiredDistance, RobotMap.elevatorTolerance);
+  }
+
+  @Override
+  public void periodic() {
+    SmartDashboard.putNumber("Elevator-inches-from-encoder", getTicks());
   }
 
   @Override
