@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
@@ -37,6 +38,12 @@ public class CargoIntake extends Subsystem {
     intakePivot.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 1);
     intakePivot.configMotionAcceleration(443); //Fix value
     intakePivot.configMotionCruiseVelocity(443);
+    intakePivot.setNeutralMode(NeutralMode.Brake);
+
+    intakePivot.config_kF(0, 0.0);
+    intakePivot.config_kP(0, 0.0);
+    intakePivot.config_kI(0, 0.0);
+    intakePivot.config_kD(0, 0.0);
 
     Util.configTalonSRXWithEncoder(motor, false);
   }
@@ -49,7 +56,15 @@ public class CargoIntake extends Subsystem {
     intakePivot.setSelectedSensorPosition(0);
   }
 
-  public int degreesToTicks(final double degrees) {
+  public int getTicks() {
+    return intakePivot.getSelectedSensorPosition();
+  }
+
+  public boolean isWithinTolerance(final double desiredAngle) {
+    return Util.isWithinTolerance(getTicks(), desiredAngle, RobotMap.wristTolerance);
+  }
+
+  private int degreesToTicks(final double degrees) {
     return (int) ((degrees / 360.0) * RobotMap.ticksPerRotation);
   }
 

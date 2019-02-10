@@ -38,7 +38,7 @@ public class Arm extends Subsystem {
   }
 
   public boolean isWithinTolerance(final double desiredDegrees) {
-    return Util.isWithinTolerance(wristGearboxReduction(getTicks()), degreesToTicks(desiredDegrees), RobotMap.wristTolerance);
+    return Util.isWithinTolerance(getArmTicks(), degreesToTicks(desiredDegrees), RobotMap.wristTolerance);
   }
 
   public void setWristPercent(final double percent) {
@@ -57,15 +57,15 @@ public class Arm extends Subsystem {
     wrist.setNeutralMode(NeutralMode.Coast);
   }
 
-  private int getTicks() {
+  private int getRawTicks() {
     return wrist.getSelectedSensorPosition();
   }
   private int degreesToTicks(final double degrees) {
     return (int) (((degrees / 360) * 4096) * 4.4444);
   }
 
-  private double wristGearboxReduction(final int rawTicks) {
-    return rawTicks * RobotMap.wristGearboxReduction;
+  public double getArmTicks() {
+    return getRawTicks() * RobotMap.wristGearboxReduction;
   }
 
   @Override

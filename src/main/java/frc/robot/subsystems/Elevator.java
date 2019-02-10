@@ -24,6 +24,11 @@ public class Elevator extends Subsystem {     //POSSIBLE BRAKE IN ELEVATOR????
     elevator.configMotionAcceleration(443); //change once we know gearing reduction
     elevator.configMotionCruiseVelocity(443); //this too
 
+    elevator.config_kF(0, 0.0);
+    elevator.config_kP(0, 0.0);
+    elevator.config_kI(0, 0.0);
+    elevator.config_kD(0, 0.0);
+
     Util.configTalonSRXWithEncoder(elevator, false);
   }
 
@@ -36,27 +41,7 @@ public class Elevator extends Subsystem {     //POSSIBLE BRAKE IN ELEVATOR????
   }
 
   public void setElevatorAbsolute(final double desiredInches) {     //UNTESTED PID
-    final int ticksAbsolute = Util.distanceToTicks(desiredInches, RobotMap.elevatorShaftDiameter);  //are we using shaft diameter??
-
-    if (Util.isWithinTolerance(getTicks(), ticksAbsolute, 4096)) {    //arbitrary number 
-      elevator.config_kF(0, 0.9, 0);
-      elevator.config_kP(0, 0.8, 0);
-      elevator.config_kI(0, 0.0, 0);
-      elevator.config_kD(0, 0.0, 0);
-    }
-    else if (ticksAbsolute > getTicks()) {
-      elevator.config_kF(0, 0.4, 0);
-      elevator.config_kP(0, 0.18, 0);
-      elevator.config_kI(0, 0.0, 0);
-      elevator.config_kD(0, 0.0, 0);
-    }
-    else {
-      elevator.config_kF(0, 0.3, 0);
-      elevator.config_kP(0, 0.1, 0);
-      elevator.config_kI(0, 0.0, 0);
-      elevator.config_kD(0, 0.0, 0);
-    }
-
+    final int ticksAbsolute = Util.distanceToTicks(desiredInches, RobotMap.elevatorPulleyDiameter);  
     elevator.set(ControlMode.MotionMagic, ticksAbsolute);
   }
 
