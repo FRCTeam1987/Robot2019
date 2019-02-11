@@ -16,6 +16,9 @@ import frc.robot.commands.claw.ShootCargo;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.elevator.ElevatorManual;
 import frc.robot.commands.elevator.SetElevatorAbsolute;
+import frc.robot.commands.elevator.ZeroElevator;
+import frc.robot.commands.vision.AimRobot;
+import frc.robot.commands.vision.AutoCamera;
 import frc.robot.util.XboxDPad;
 import frc.robot.util.XboxDPad.Direction;
 
@@ -39,15 +42,23 @@ public class OI {
     switchClawSide = new JoystickButton(driver, RobotMap.switchClawSideButton);
     elevatorManualUp = new XboxDPad(driver, Direction.Up);
     elevatorManualDown = new XboxDPad(driver, Direction.Down);
-    
-    elevatorManualUp.whileHeld(new ElevatorManual(0.4));
-    elevatorManualDown.whileHeld(new ElevatorManual(-0.4));
+
+    // elevatorManualUp.whileHeld(new ElevatorManual(0.4));
+    // elevatorManualDown.whileHeld(new ElevatorManual(-0.4));
     shootCargo.whenPressed(new ShootCargo(0.8));
     releaseHatch.whenPressed(new PlaceHatch());
 
+    SmartDashboard.putData("Zero Elevator", new ZeroElevator());
+
+    SmartDashboard.putData("Set Elevator 40%", new ElevatorManual(.4));
+
+    SmartDashboard.putData("Set Elevator Absolute 1", new SetElevatorAbsolute(1));
     SmartDashboard.putData("Set Elevator Absolute 3", new SetElevatorAbsolute(3));
     SmartDashboard.putData("Set Elevator Absolute 10", new SetElevatorAbsolute(10));
     SmartDashboard.putData("Set Elevator Absolute 30", new SetElevatorAbsolute(30));
+
+    SmartDashboard.putData("Aim Robot", new AimRobot());
+    SmartDashboard.putData("Driver Camera", new AutoCamera());
   }
 
   public XboxController getDriver() {

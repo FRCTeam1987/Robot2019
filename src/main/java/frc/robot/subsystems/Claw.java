@@ -15,7 +15,7 @@ public class Claw extends Subsystem {
   private final DigitalInput cargoProx;
   private final DigitalInput hatchProxTop;
   private final DigitalInput hatchProxBottom;
-  private final DoubleSolenoid hatchRelease;
+  // private final DoubleSolenoid hatchRelease;
 
   public Claw() {
     clawIntake = new WPI_TalonSRX(RobotMap.clawIntakeMotorID);
@@ -23,7 +23,7 @@ public class Claw extends Subsystem {
     cargoProx = new DigitalInput(RobotMap.clawCargoProxID);
     hatchProxTop = new DigitalInput(RobotMap.clawHatchProxTopID);
     hatchProxBottom = new DigitalInput(RobotMap.clawHatchProxBottomID);
-    hatchRelease = new DoubleSolenoid(RobotMap.hatchRetractID, RobotMap.hatchReleaseID);
+    // hatchRelease = new DoubleSolenoid(RobotMap.hatchRetractID, RobotMap.hatchReleaseID);
   }
 
   public void setWheels(final double percent) {
@@ -39,11 +39,11 @@ public class Claw extends Subsystem {
   }
 
   public void releaseHatch() {
-    hatchRelease.set(Value.kReverse);
+    // hatchRelease.set(Value.kReverse);
   }
 
   public void retractHatchPistons() {
-    hatchRelease.set(Value.kForward);
+    // hatchRelease.set(Value.kForward);
   }
 
   @Override

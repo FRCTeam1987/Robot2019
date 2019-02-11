@@ -44,7 +44,7 @@ public class RobotMap {
     public static int hatchReleaseID = 3;
 
     //Elevator
-    public static double elevatorPulleyDiameter = 1.506;   //NOT REAL NEEDS TO BE CHANGED
+    public static double elevatorPulleyDiameter = 1.506;   
     public static double elevatorTolerance = 1.0;       //NOT REAL NEEDS TO BE CHANGED
     public static double setElevatorAbsoluteTimeout = 2.0;   //NOT REAL NEEDS TO BE CHANGED
     public static double wristTolerance = 100;

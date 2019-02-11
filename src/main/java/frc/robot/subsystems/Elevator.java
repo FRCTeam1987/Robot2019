@@ -22,17 +22,21 @@ public class Elevator extends Subsystem {     //POSSIBLE BRAKE IN ELEVATOR????
   }
 
   public void configElevator(final WPI_TalonSRX motor) {
-    elevator.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 1); //need default timeout???
+    elevator.configFactoryDefault();
+    // elevator.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 1); //need default timeout???
     elevator.configMotionAcceleration(443); //change once we know gearing reduction
     elevator.configMotionCruiseVelocity(443); //this too
     elevator.setName("elevator", "motor");
 
+
     elevator.config_kF(0, 0.0);
-    elevator.config_kP(0, 0.0);
-    elevator.config_kI(0, 1.0);
+    elevator.config_kP(0, 0.1);
+    elevator.config_kI(0, 0.0);
     elevator.config_kD(0, 0.0);
 
     Util.configTalonSRXWithEncoder(elevator, false);
+
+    setElevatorPercent(0);
   }
 
   public int getTicks() {
@@ -45,7 +49,8 @@ public class Elevator extends Subsystem {     //POSSIBLE BRAKE IN ELEVATOR????
 
   public void setElevatorAbsolute(final double desiredInches) {     //UNTESTED PID
     final int ticksAbsolute = Util.distanceToTicks(desiredInches, RobotMap.elevatorPulleyDiameter);  
-    elevator.set(ControlMode.MotionMagic, ticksAbsolute);
+    // elevator.set(ControlMode.Position, ticksAbsolute);
+    SmartDashboard.putNumber("Elevator Ticks Target", ticksAbsolute);
   }
 
   public void setElevatorPercent(final double percent) {
@@ -57,7 +62,7 @@ public class Elevator extends Subsystem {     //POSSIBLE BRAKE IN ELEVATOR????
   }
 
   public void periodic() {
-    SmartDashboard.putNumber("Elevator Inches", getTicks());
+    SmartDashboard.putNumber("Elevator Ticks", getTicks());
   }
 
   @Override

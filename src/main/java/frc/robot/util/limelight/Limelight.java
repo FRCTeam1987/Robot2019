@@ -21,7 +21,7 @@ public class Limelight {
     }
 
     public double getCameraMode() {
-        return this.get("cameraMode"); 
+        return this.get("camMode"); 
     }
     
     public double getLedMode() {
@@ -85,7 +85,7 @@ public class Limelight {
     }
 
     public void setCameraMode(final CameraMode mode) {
-        this.set("cameraMode", mode.get());
+        this.set("camMode", mode.get());
     }
 
     public void setLedMode(final LedMode mode) {

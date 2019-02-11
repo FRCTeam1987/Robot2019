@@ -8,9 +8,6 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.util.Util;
 
-/**
- * Add your docs here.
- */
 public class Arm extends Subsystem {
 
   private final WPI_TalonSRX wrist;
