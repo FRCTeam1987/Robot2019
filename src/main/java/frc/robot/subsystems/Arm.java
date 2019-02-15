@@ -14,12 +14,13 @@ public class Arm extends Subsystem {
 
   public Arm() {
     wrist = new WPI_TalonSRX(RobotMap.armMotorID);
+    wrist.setName("Arm", "wrist");
     configWrist();
   }
 
   public void configWrist() {
-    wrist.configMotionCruiseVelocity(443);
-    wrist.configMotionAcceleration(443);
+    // wrist.configMotionCruiseVelocity(443);
+    // wrist.configMotionAcceleration(443);
     Util.configTalonSRXWithEncoder(wrist, false);
     wrist.config_kF(0, 0.0, 0);
     wrist.config_kP(0, 0.975, 0);

@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.CargoIntake;
 import frc.robot.subsystems.Claw;
+import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Vision;
@@ -26,6 +27,7 @@ public class Robot extends TimedRobot {
   public static final Arm arm = new Arm();
   public static final CargoIntake cargoIntake = new CargoIntake();
   public static final Claw claw = new Claw();
+  public static final Climber climber = new Climber();     
   public static final Vision vision = new Vision();
   public static OI m_oi;
 

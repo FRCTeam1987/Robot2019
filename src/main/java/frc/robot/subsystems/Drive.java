@@ -34,7 +34,7 @@ public class Drive extends Subsystem {
   private final WPI_TalonSRX rightMaster;
   private final WPI_TalonSRX rightSlave1;
   private final WPI_VictorSPX rightSlave2;
-  // private final DoubleSolenoid shifter;
+  private final DoubleSolenoid shifter;
   private final DifferentialDrive robotDrive;
   private final AHRS ahrs;
   private boolean isBrake;
@@ -46,16 +46,16 @@ public class Drive extends Subsystem {
     rightMaster = new WPI_TalonSRX(RobotMap.rightMasterID);
     rightSlave1 = new WPI_TalonSRX(RobotMap.rightSlave1ID);
     rightSlave2 = new WPI_VictorSPX(RobotMap.rightSlave2ID);
-    leftMaster.setName("drive", "left-master");
-    leftSlave1.setName("drive", "left-slave1");
-    leftSlave2.setName("drive", "left-slave2");
-    rightMaster.setName("drive", "right-master");
-    rightSlave1.setName("drive", "right-slave1");
-    rightSlave2.setName("drive", "right-slave2");
+    leftMaster.setName("Drive", "left-master");
+    leftSlave1.setName("Drive", "left-slave1");
+    leftSlave2.setName("Drive", "left-slave2");
+    rightMaster.setName("Drive", "right-master");
+    rightSlave1.setName("Drive", "right-slave1");
+    rightSlave2.setName("Drive", "right-slave2");
 
     robotDrive = new DifferentialDrive(leftMaster, rightMaster);
     ahrs = new AHRS(SPI.Port.kMXP);
-    // shifter = new DoubleSolenoid(RobotMap.highGearID, RobotMap.lowGearID);
+    shifter = new DoubleSolenoid(RobotMap.highGearID, RobotMap.lowGearID);
 
     configSideOfDrive(leftMaster, true, leftSlave1, leftSlave2);
     configSideOfDrive(rightMaster, false, rightSlave1, rightSlave2);
@@ -152,15 +152,15 @@ public class Drive extends Subsystem {
   }
 
   public boolean isHighGear() {
-    return true; // shifter.get() == Value.kForward;
+    return shifter.get() == Value.kForward;
   }
 
   public void setHighGear() {
-    // shifter.set(Value.kForward);
+    shifter.set(Value.kForward);
   }
   
   public void setLowGear() {
-    // shifter.set(Value.kReverse);
+    shifter.set(Value.kReverse);
   }
 
   public void ahrsReset() {

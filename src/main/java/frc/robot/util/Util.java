@@ -2,7 +2,6 @@ package frc.robot.util;
 
 import com.ctre.phoenix.ErrorCode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -10,14 +9,14 @@ import frc.robot.RobotMap;
 
 public class Util {
 
-    public static void configTalonSRXWithEncoder(final WPI_TalonSRX master, final boolean isInverted) {
-        final ErrorCode errorCode = master.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
-    
-        SmartDashboard.putString(master.getSubsystem() + "_" + master.getName() + "_status", errorCode.toString());
-    
-        master.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 1);   //need default timeout?
-
-        master.setSensorPhase(isInverted);
+    public static void configTalonSRXWithEncoder(final WPI_TalonSRX srx, final boolean isInverted) {
+        final ErrorCode errorCode = srx.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+        if(errorCode == ErrorCode.OK) {
+            srx.setSensorPhase(isInverted);
+        }
+        else {
+            SmartDashboard.putString(srx.getSubsystem() + "_" + srx.getName() + "_status", errorCode.toString());
+        }
     }
 
     public static boolean isWithinTolerance(final double value, final double target, final double tolerance){
@@ -42,6 +41,10 @@ public class Util {
 
     public static double ticksToRotations(final int ticks) {
         return ticks / RobotMap.ticksPerRotation;
+    }
+
+    public static double ticksToDistance(final int ticks, final double diameter) {
+        return rotationsToDistance(ticksToRotations(ticks), diameter);
     }
 
     public static double circumference(final double diameter) {

@@ -26,7 +26,9 @@ public class CargoIntake extends Subsystem {
 
   public CargoIntake() {
     intakePivot = new WPI_TalonSRX(RobotMap.intakePivotMotorID);
+    intakePivot.setName("CargoIntake", "pivot");
     cargoRoller = new WPI_TalonSRX(RobotMap.cargoRollerMotorID);
+    cargoRoller.setName("CargoIntake", "roller");
 
     cargoIntakeProx = new DigitalInput(RobotMap.cargoIntakeProxID);
 
@@ -35,7 +37,6 @@ public class CargoIntake extends Subsystem {
   }
 
   public void configIntakePivot(final WPI_TalonSRX motor) {
-    intakePivot.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 1);
     intakePivot.configMotionAcceleration(443); //Fix value
     intakePivot.configMotionCruiseVelocity(443);
     intakePivot.setNeutralMode(NeutralMode.Brake);

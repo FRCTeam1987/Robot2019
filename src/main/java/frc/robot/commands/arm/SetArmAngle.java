@@ -15,14 +15,14 @@ public class SetArmAngle extends Command {
   private final double m_angle;
   
   public SetArmAngle(final double angle) {
-    requires(Robot.arm);
+    // requires(Robot.arm);
     m_angle = angle;
     setTimeout(1);
   }
 
   @Override
   protected void initialize() {
-    Robot.arm.setWristAbsolute(m_angle);
+    // Robot.arm.setWristAbsolute(m_angle);
   }
 
   @Override
@@ -31,12 +31,12 @@ public class SetArmAngle extends Command {
 
   @Override
   protected boolean isFinished() {
-    return Robot.arm.isWithinTolerance(m_angle) || isTimedOut();
+    return false;//Robot.arm.isWithinTolerance(m_angle) || isTimedOut();
   }
 
   @Override
   protected void end() {
-    Robot.arm.setWristPercent(0);
+    // Robot.arm.setWristPercent(0);
   }
 
   @Override

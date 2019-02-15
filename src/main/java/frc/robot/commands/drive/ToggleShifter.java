@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.elevator;
+package frc.robot.commands.drive;
 
 import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
@@ -13,16 +13,23 @@ import frc.robot.Robot;
 /**
  * Add your docs here.
  */
-public class ZeroElevator extends InstantCommand {
-
-  public ZeroElevator() {
+public class ToggleShifter extends InstantCommand {
+  /**
+   * Add your docs here.
+   */
+  public ToggleShifter() {
     super();
-    requires(Robot.elevator);
+    requires(Robot.drive);
   }
 
+  // Called once when the command executes
   @Override
   protected void initialize() {
-    Robot.elevator.zeroElevatorEncoder();
+    if(Robot.drive.isHighGear() == true) {
+      Robot.drive.setLowGear();
+    } else {
+      Robot.drive.setHighGear();
+    }
   }
 
 }

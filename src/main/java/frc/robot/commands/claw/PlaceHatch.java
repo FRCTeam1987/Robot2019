@@ -6,6 +6,7 @@ import frc.robot.Robot;
 public class PlaceHatch extends Command {
   public PlaceHatch() {
     requires(Robot.claw);
+    setTimeout(0.5); // temporary? no hatch prox sensors...
   }
 
   @Override
@@ -19,7 +20,8 @@ public class PlaceHatch extends Command {
 
   @Override
   protected boolean isFinished() {
-    return !Robot.claw.isHatchCollected();
+    return isTimedOut();
+    // return !Robot.claw.isHatchCollected();
   }
 
   @Override
