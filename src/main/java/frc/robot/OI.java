@@ -14,8 +14,8 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.claw.PlaceHatch;
 import frc.robot.commands.claw.ShootCargo;
 import frc.robot.commands.climber.ClimberManual;
-import frc.robot.commands.drive.DriveDistance;
-import frc.robot.commands.drive.ToggleShifter;
+// import frc.robot.commands.drive.DriveDistance;
+// import frc.robot.commands.drive.ToggleShifter;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.elevator.ElevatorManual;
 import frc.robot.commands.elevator.SetElevatorAbsolute;
@@ -54,6 +54,7 @@ public class OI {
     // SmartDashboard.putData("drive-toggle-shifter", new ToggleShifter());
     // SmartDashboard.putData("drive-drive-distance", new DriveDistance(15.07));
     // SmartDashboard.putData("claw-place-hatch", new PlaceHatch());
+    SmartDashboard.putData("claw-shoot-cargo", new ShootCargo(0.5));
 
     SmartDashboard.putData("Zero Elevator", new ZeroElevator());
 

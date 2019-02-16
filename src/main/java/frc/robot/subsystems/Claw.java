@@ -24,6 +24,7 @@ public class Claw extends Subsystem {
     hatchProxTop = new DigitalInput(RobotMap.clawHatchProxTopID);
     hatchProxBottom = new DigitalInput(RobotMap.clawHatchProxBottomID);
     hatchRelease = new DoubleSolenoid(RobotMap.hatchRetractID, RobotMap.hatchReleaseID);
+    hatchRelease.setName("Claw", "hatch-release");
     retractHatchPistons();
   }
 

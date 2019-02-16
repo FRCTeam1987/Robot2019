@@ -11,6 +11,6 @@ public class CollectCargo extends CommandGroup {
     addParallel(new SetElevatorAbsolute(0));
     addSequential(new SetArmAngle(90));
     addSequential(new IntakeCargo());
-    addSequential(new ClawIntakeCargo(0.7));
+    addSequential(new ClawIntakeCargo());
   }
 }

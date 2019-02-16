@@ -22,10 +22,10 @@ public class RobotMap {
     public static int armMotorID = 8;           //white stripe
     public static int intakePivotMotorID = 10;   //cargo intake pivot
     public static int cargoRollerMotorID = 14;   
-    public static int clawIntakeMotorID = 13;
+    public static int clawIntakeMotorID = 11;
     public static int winchMasterID = 9; // winch motor ID might change
     public static int winchSlaveID = 12;
-    public static int hatchCollectMotorID = 11;
+    public static int hatchCollectMotorID = 13;
 
     //Misc
     public static double driveBaseWheelsDiameter = 5.0; //might need to be tweaked
