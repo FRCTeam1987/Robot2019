@@ -30,8 +30,8 @@ public class OI {
   private final XboxController driver;
 
   private final Button cargoCollect;
-  private final Button shootCargo;
-  private final Button releaseHatch;
+  private final Button hatchCollect;
+  private final Button place;
   private final Button switchClawSide;
   private final XboxDPad elevatorManualUp;
   private final XboxDPad elevatorManualDown;
@@ -40,16 +40,14 @@ public class OI {
   public OI() {
     driver = new XboxController(RobotMap.driverID);
     cargoCollect = new JoystickButton(driver, RobotMap.cargoCollectButton);
-    shootCargo = new JoystickButton(driver, RobotMap.shootCargoButton);
-    releaseHatch = new JoystickButton(driver, RobotMap.releaseHatchButton);
+    hatchCollect = new JoystickButton(driver, RobotMap.hatchCollectButton);
+    place = new JoystickButton(driver, RobotMap.placeButton);
     switchClawSide = new JoystickButton(driver, RobotMap.switchClawSideButton);
     elevatorManualUp = new XboxDPad(driver, Direction.Up);
     elevatorManualDown = new XboxDPad(driver, Direction.Down);
 
     // elevatorManualUp.whileHeld(new ElevatorManual(0.4));
     // elevatorManualDown.whileHeld(new ElevatorManual(-0.4));
-    shootCargo.whenPressed(new ShootCargo(0.8));
-    releaseHatch.whenPressed(new PlaceHatch());
 
     // SmartDashboard.putData("drive-toggle-shifter", new ToggleShifter());
     // SmartDashboard.putData("drive-drive-distance", new DriveDistance(15.07));

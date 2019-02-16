@@ -4,12 +4,14 @@ package frc.robot;
 public class RobotMap {
 
     //Driver Buttons
-    public static int releaseHatchButton = 1;
-    public static int stopAll = 2;
-    public static int shootCargoButton = 3;
-    public static int cargoCollectButton = 4;
-    public static int toggleShifterButton = 9;
-    public static int switchClawSideButton = 10;
+
+
+    public static int elevatorToHeightButton = 1; //a
+    public static int hatchCollectButton = 2; //b
+    public static int cargoCollectButton = 3; //x
+    public static int placeButton = 4; //y
+    public static int toggleShifterButton = 9; //left stick push
+    public static int switchClawSideButton = 10; //right stick push
     
     //MotorIDs
     public static int leftMasterID = 1;  //
