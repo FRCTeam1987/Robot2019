@@ -30,21 +30,45 @@ public class Arm extends Subsystem {
   }
 
   public void setWristAbsolute(final double desiredDegrees) {
-    final int ticksAbsolute = degreesToTicks(desiredDegrees);
+    final int ticksAbsolute = Util.degreesToTicks(desiredDegrees, RobotMap.wristGearboxReduction);
 
     wrist.set(ControlMode.MotionMagic, ticksAbsolute);
-  }
-
-  public boolean isWithinTolerance(final double desiredDegrees) {
-    return Util.isWithinTolerance(getArmTicks(), degreesToTicks(desiredDegrees), RobotMap.wristTolerance);
   }
 
   public void setWristPercent(final double percent) {
     wrist.set(ControlMode.PercentOutput, percent);
   }
 
+  public boolean isWithinTolerance(final double desiredDegrees) {
+    return Util.isWithinTolerance(getArmTicks(), Util.degreesToTicks(desiredDegrees, RobotMap.wristGearboxReduction), RobotMap.wristTolerance);
+  }
+
+  public boolean isArmFront() {
+    if (getArmAngle() >= 0) {
+      return true;
+    }
+    else if (getArmAngle() < 0) {
+      return false;
+    }
+    else {
+      return true;
+    }
+  }
+
   public void zeroWristEncoder() {
     wrist.setSelectedSensorPosition(0);
+  }
+  
+  public int getArmTicks() {
+    return (int)(getRawTicks() * RobotMap.wristGearboxReduction);
+  }
+
+  public double getArmAngle() {
+    return Util.ticksToDegrees((int)getArmTicks(), RobotMap.wristGearboxReduction);
+  }
+
+  private int getRawTicks() {
+    return wrist.getSelectedSensorPosition();
   }
 
   public void setBrake() {
@@ -53,17 +77,6 @@ public class Arm extends Subsystem {
 
   public void setCoast() {
     wrist.setNeutralMode(NeutralMode.Coast);
-  }
-
-  private int getRawTicks() {
-    return wrist.getSelectedSensorPosition();
-  }
-  private int degreesToTicks(final double degrees) {
-    return (int) (((degrees / 360) * 4096) * 4.4444);
-  }
-
-  public double getArmTicks() {
-    return getRawTicks() * RobotMap.wristGearboxReduction;
   }
 
   @Override

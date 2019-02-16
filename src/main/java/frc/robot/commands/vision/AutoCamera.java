@@ -14,11 +14,8 @@ public class AutoCamera extends InstantCommand {
 
   @Override
   protected void initialize() {
-    Robot.vision.limeFront.setCameraMode(CameraMode.DRIVERCAMERA);
-    Robot.vision.limeFront.setPipeline(1);
-    Robot.vision.limeBack.setCameraMode(CameraMode.DRIVERCAMERA);
-    Robot.vision.limeBack.setPipeline(1);
-    Robot.vision.limeFront.setLedMode(LedMode.OFF);
-    Robot.vision.limeBack.setLedMode(LedMode.OFF);
+    Robot.vision.getLimelight().setCameraMode(CameraMode.DRIVERCAMERA);
+    Robot.vision.getLimelight().setPipeline(1);
+    Robot.vision.getLimelight().setLedMode(LedMode.OFF);
   }
 }

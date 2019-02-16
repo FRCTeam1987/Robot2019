@@ -47,6 +47,18 @@ public class Util {
         return rotationsToDistance(ticksToRotations(ticks), diameter);
     }
 
+    public static double ticksToDegrees(final int ticks) {
+        return ((ticks / RobotMap.ticksPerRotation) * 360);
+    }
+
+    public static double ticksToDegrees(final int ticks, final double gearReduction) {
+        return ((ticks / RobotMap.ticksPerRotation) * 360) * gearReduction;
+    }
+
+    public static int degreesToTicks(final double degrees, final double gearReduction) {
+        return (int) (((degrees / 360) * RobotMap.ticksPerRotation) * gearReduction);
+    }
+
     public static double circumference(final double diameter) {
         return Math.PI * diameter;
     }

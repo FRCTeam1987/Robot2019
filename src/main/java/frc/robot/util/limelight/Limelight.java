@@ -20,6 +20,10 @@ public class Limelight {
         return NetworkTableInstance.getDefault().getTable(tableName).getEntry(entry).getDouble(0);
     }
 
+    public boolean hasTarget() {
+        return this.getTv() == 1.0;
+    }
+
     public double getCameraMode() {
         return this.get("camMode"); 
     }

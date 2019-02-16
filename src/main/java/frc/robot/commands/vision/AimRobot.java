@@ -12,7 +12,8 @@ public class AimRobot extends Command {
   private double leftPercent;
   private double rightPercent;
 
-  private final double tolerance = 0.2;
+  //minimum motor percent
+  private final double minCommand = 0.2;
   
   public AimRobot() {
     requires(Robot.vision);
@@ -25,20 +26,21 @@ public class AimRobot extends Command {
   protected void initialize() {
     leftPercent = 0.0;
     rightPercent = 0.0;
-    Robot.vision.limeFront.setLedMode(LedMode.ON);
+    Robot.vision.getLimelight().setLedMode(LedMode.ON);
+    Robot.drive.setLowGear();
   }
 
   @Override
   protected void execute() {
     double steeringAdjust = 0.0;
-    double target = Robot.vision.limeFront.getTx();
+    double target = Robot.vision.getLimelight().getTx();
     double headingError = -target;
 
     if (target > 1.0) {
-      steeringAdjust = kP * headingError - tolerance;
+      steeringAdjust = kP * headingError - minCommand;
     }
     else if (target < 1.0) {
-      steeringAdjust = kP * headingError + tolerance;
+      steeringAdjust = kP * headingError + minCommand;
     }
 
     leftPercent += steeringAdjust;
