@@ -10,6 +10,8 @@ public class RobotMap {
     public static int hatchCollectButton = 2; //b
     public static int cargoCollectButton = 3; //x
     public static int placeButton = 4; //y
+    public static int armFrontButton = 5;
+    public static int armBackButton = 6;
     public static int toggleShifterButton = 9; //left stick push
     public static int switchClawSideButton = 10; //right stick push
     
@@ -35,8 +37,6 @@ public class RobotMap {
     //DIO IDs
     public static int cargoIntakeProxID = 0;
     public static int clawCargoProxID = 1;
-    public static int clawHatchProxTopID = 2;
-    public static int clawHatchProxBottomID = 3;
 
     public static int defaultTimeout = 10;
     public static int driverID = 0;

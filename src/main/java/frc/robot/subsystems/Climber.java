@@ -66,7 +66,7 @@ public class Climber extends Subsystem {
 
   @Override
   public void periodic() {
-    SmartDashboard.putNumber("Climber RPM", getEncoderRPM(winchMaster));
+    // SmartDashboard.putNumber("Climber RPM", getEncoderRPM(winchMaster));
   }
 
   @Override

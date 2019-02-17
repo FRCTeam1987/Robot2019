@@ -5,6 +5,7 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 import frc.robot.util.Util;
 
@@ -16,6 +17,7 @@ public class Arm extends Subsystem {
     wrist = new WPI_TalonSRX(RobotMap.armMotorID);
     wrist.setName("Arm", "wrist");
     configWrist();
+    zeroWristEncoder();
   }
 
   public void configWrist() {
@@ -64,7 +66,7 @@ public class Arm extends Subsystem {
   }
 
   public double getArmAngle() {
-    return Util.ticksToDegrees((int)getArmTicks(), RobotMap.wristGearboxReduction);
+    return Util.ticksToDegrees((int)getArmTicks());
   }
 
   private int getRawTicks() {
@@ -77,6 +79,13 @@ public class Arm extends Subsystem {
 
   public void setCoast() {
     wrist.setNeutralMode(NeutralMode.Coast);
+  }
+
+  @Override
+  public void periodic() {
+    SmartDashboard.putNumber("Arm Angle", getArmAngle());
+    // SmartDashboard.putBoolean("Is Arm in Front", isArmFront());
+    // SmartDashboard.putNumber("Arm Ticks", getRawTicks());
   }
 
   @Override

@@ -1,10 +1,3 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -13,6 +6,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 import frc.robot.util.Util;
 
@@ -77,8 +71,9 @@ public class CargoIntake extends Subsystem {
     intakePivot.set(ControlMode.PercentOutput, percent);
   }
 
-  public boolean isCargoCollected() {
-    return cargoIntakeProx.get();
+  public void periodic() {
+    SmartDashboard.putNumber("Intake Pivot Degrees", Util.ticksToDegrees(getTicks())); 
+    // SmartDashboard.putNumber("Intake Pivot Ticks", getTicks());
   }
 
   @Override

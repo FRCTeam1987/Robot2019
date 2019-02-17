@@ -10,6 +10,7 @@ public class Place extends Command {
   public Place(final double percent) {
     requires(Robot.claw);
     m_percent = percent;
+    setTimeout(0.5);
   }
 
   @Override
@@ -17,11 +18,8 @@ public class Place extends Command {
     if (Robot.claw.isCargoCollected()) {
       Robot.claw.setWheels(m_percent);
     }
-    else if (Robot.claw.isHatchCollected()) {
-      Robot.claw.releaseHatch();
-    }
     else {
-      end();
+      Robot.claw.releaseHatch();
     }
   }
 
@@ -31,7 +29,7 @@ public class Place extends Command {
 
   @Override
   protected boolean isFinished() {
-    return !Robot.claw.isCargoCollected() && !Robot.claw.isHatchCollected();
+    return !Robot.claw.isCargoCollected() || isTimedOut();
   }
 
   @Override

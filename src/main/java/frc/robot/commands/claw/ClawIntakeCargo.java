@@ -5,10 +5,11 @@ import frc.robot.Robot;
 
 public class ClawIntakeCargo extends Command {
   
-  private final double m_percent = 0.5;
+  private final double m_percent;
 
-  public ClawIntakeCargo() {
+  public ClawIntakeCargo(final double percent) {
     requires(Robot.claw);
+    m_percent = percent;
   }
 
   @Override

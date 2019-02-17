@@ -5,15 +5,16 @@ import frc.robot.Robot;
 
 public class IntakeCargo extends Command {
 
-
   public IntakeCargo() {
     requires(Robot.cargoIntake);
+    requires(Robot.claw);
   }
 
   @Override
   protected void initialize() {
-    Robot.cargoIntake.setIntakePivot(90); //arbitrary number
-    Robot.cargoIntake.setRoller(.70);
+    // Robot.cargoIntake.setIntakePivot(90); //arbitrary number
+    Robot.cargoIntake.setRoller(-0.40);
+    Robot.claw.setWheels(0.7);
   }
   
   @Override
@@ -22,13 +23,14 @@ public class IntakeCargo extends Command {
 
   @Override
   protected boolean isFinished() {
-    return Robot.cargoIntake.isCargoCollected();
+    return Robot.claw.isCargoCollected();
   }
 
   @Override
   protected void end() {
     Robot.cargoIntake.setRoller(0.0);
-    Robot.cargoIntake.setIntakePivot(0.0);
+    Robot.claw.setWheels(0.0);
+    // Robot.cargoIntake.setIntakePivot(0.0);
   }
 
   @Override
