@@ -40,13 +40,13 @@ public class OI {
     hatchCollect = new JoystickButton(driver, RobotMap.hatchCollectButton);
     place = new JoystickButton(driver, RobotMap.placeButton);
     switchClawSide = new JoystickButton(driver, RobotMap.switchClawSideButton);
-    elevatorManualUp = new XboxDPad(driver, Direction.Up);
-    elevatorManualDown = new XboxDPad(driver, Direction.Down);
+    elevatorManualUp = new XboxDPad(driver, XboxDPad.Direction.Up);
+    elevatorManualDown = new XboxDPad(driver, XboxDPad.Direction.Down);
     armManualForward = new JoystickButton(driver, RobotMap.armFrontButton);
     armManualBack = new JoystickButton(driver, RobotMap.armBackButton);
 
-    // elevatorManualUp.whileHeld(new ElevatorManual(0.4));
-    // elevatorManualDown.whileHeld(new ElevatorManual(-0.4));
+    elevatorManualUp.whileHeld(new ElevatorManual(0.4));
+    elevatorManualDown.whileHeld(new ElevatorManual(-0.4));
 
     armManualForward.whileHeld(new ArmManual(-0.4));
     armManualBack.whileHeld(new ArmManual(0.4));

@@ -13,6 +13,9 @@ public class Arm extends Subsystem {
 
   private final WPI_TalonSRX wrist;
 
+  public ArmSide armSide;
+  public ArmAngle armAngle;
+
   public Arm() {
     wrist = new WPI_TalonSRX(RobotMap.armMotorID);
     wrist.setName("Arm", "wrist");
@@ -32,45 +35,14 @@ public class Arm extends Subsystem {
   }
 
   public void setWristAbsolute(final double desiredDegrees) {
-    final int ticksAbsolute = Util.degreesToTicks(desiredDegrees, RobotMap.wristGearboxReduction);
+    final int ticksAbsolute = Util.degreesToTicks(desiredDegrees);
 
-    wrist.set(ControlMode.MotionMagic, ticksAbsolute);
+    // wrist.set(ControlMode.MotionMagic, ticksAbsolute); 
+    wrist.set(ControlMode.Position, ticksAbsolute);
   }
 
   public void setWristPercent(final double percent) {
     wrist.set(ControlMode.PercentOutput, percent);
-  }
-
-  public boolean isWithinTolerance(final double desiredDegrees) {
-    return Util.isWithinTolerance(getArmTicks(), Util.degreesToTicks(desiredDegrees, RobotMap.wristGearboxReduction), RobotMap.wristTolerance);
-  }
-
-  public boolean isArmFront() {
-    if (getArmAngle() >= 0) {
-      return true;
-    }
-    else if (getArmAngle() < 0) {
-      return false;
-    }
-    else {
-      return true;
-    }
-  }
-
-  public void zeroWristEncoder() {
-    wrist.setSelectedSensorPosition(0);
-  }
-  
-  public int getArmTicks() {
-    return (int)(getRawTicks() * RobotMap.wristGearboxReduction);
-  }
-
-  public double getArmAngle() {
-    return Util.ticksToDegrees((int)getArmTicks());
-  }
-
-  private int getRawTicks() {
-    return wrist.getSelectedSensorPosition();
   }
 
   public void setBrake() {
@@ -81,15 +53,53 @@ public class Arm extends Subsystem {
     wrist.setNeutralMode(NeutralMode.Coast);
   }
 
+  public boolean isWithinTolerance(final double desiredDegrees) {
+    return Util.isWithinTolerance(getTicks(), Util.degreesToTicks(desiredDegrees), Util.degreesToTicks(RobotMap.wristTolerance));
+  }
+
+  public void zeroWristEncoder() {
+    wrist.setSelectedSensorPosition(0);
+  }
+
+  public double getArmAngle() {
+    return Util.ticksToDegrees((int)getTicks());
+  }
+
+  public int getTicks() {
+    return wrist.getSelectedSensorPosition();
+  }
+
   @Override
   public void periodic() {
     SmartDashboard.putNumber("Arm Angle", getArmAngle());
-    // SmartDashboard.putBoolean("Is Arm in Front", isArmFront());
-    // SmartDashboard.putNumber("Arm Ticks", getRawTicks());
   }
 
   @Override
   public void initDefaultCommand() {
     // setDefaultCommand(new MySpecialCommand());
   }
+
+  public enum ArmSide {
+    FRONT,
+    BACK
+  }
+
+  public void setArmSide(final ArmSide newArmSide) {
+    armSide = newArmSide;
+  }
+
+  public ArmSide getArmSide() {
+    return (getArmAngle() >= 0) ? ArmSide.FRONT : ArmSide.BACK;
+  }
+
+  public enum ArmAngle {
+    HATCH,
+    CARGOCOLLECTFLOOR,
+    CARGOLOADINGSTATION
+  }
+
+  public ArmAngle getArmSetpoint() {
+    return armAngle;
+  }
+
 }

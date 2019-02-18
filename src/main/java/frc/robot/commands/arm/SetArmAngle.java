@@ -9,20 +9,33 @@ package frc.robot.commands.arm;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
+import frc.robot.subsystems.Arm.ArmAngle;
 
 public class SetArmAngle extends Command {
   
-  private final double m_angle;
+  private final ArmAngle m_angle;
   
-  public SetArmAngle(final double angle) {
+  public SetArmAngle(final ArmAngle angle) {
     requires(Robot.arm);
     m_angle = angle;
     setTimeout(1);
   }
 
   @Override
-  protected void initialize() {
-    Robot.arm.setWristAbsolute(m_angle);
+  protected void initialize() {    
+    switch(m_angle) {
+      case HATCH:
+        Robot.arm.setWristAbsolute(RobotMap.armHatchAngle);
+        break;
+      case CARGOCOLLECTFLOOR:
+        Robot.arm.setWristAbsolute(RobotMap.armFloorCollectCargoAngle);
+        break;
+      case CARGOLOADINGSTATION:
+        Robot.arm.setWristAbsolute(RobotMap.armLoadingStationCargoAngle);
+        break;
+    }
+
   }
 
   @Override
@@ -31,7 +44,7 @@ public class SetArmAngle extends Command {
 
   @Override
   protected boolean isFinished() {
-    return Robot.arm.isWithinTolerance(m_angle) || isTimedOut();
+    return Robot.arm.isWithinTolerance() || isTimedOut();
   }
 
   @Override

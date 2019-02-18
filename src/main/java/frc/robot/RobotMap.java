@@ -31,9 +31,6 @@ public class RobotMap {
     public static int winchSlaveID = 12;
     public static int hatchCollectMotorID = 13;
 
-    //Misc
-    public static double driveBaseWheelsDiameter = 5.0; //might need to be tweaked
-
     //DIO IDs
     public static int cargoIntakeProxID = 0;
     public static int clawCargoProxID = 1;
@@ -48,11 +45,29 @@ public class RobotMap {
     public static int hatchRetractID = 2;
     public static int hatchReleaseID = 3;
 
-    //Elevator
-    public static double elevatorPulleyDiameter = 1.506;   
-    public static double elevatorTolerance = 0.25;       //NOT REAL NEEDS TO BE CHANGED
-    public static double setElevatorAbsoluteTimeout = 60.0;   //NOT REAL NEEDS TO BE CHANGED
+    //Robot Dimensions
+    public static double driveBaseWheelsDiameter = 5.0; //might need to be tweaked
+
+    //Elevator Setpoints
+    public static double elevatorGroundCollectHeight;
+    public static double elevatorLevel1HatchHeight;
+    public static double elevatorLevel1CargoHeight;
+    public static double elevatorLevel2HatchHeight;
+    public static double elevatorLevel2CargoHeight;
+    public static double elevatorCargoLoadingStationHeight;
+    public static double elevatorFlipHeight;
     
-    public static double wristTolerance = 100;
-    public static double wristGearboxReduction = 2; //was 4.444444
+    //Arm Setpoints
+    public static double armHatchAngle;
+    public static double armLoadingStationCargoAngle;
+    public static double armFloorCollectCargoAngle;
+    public static double armFullSendCargoAngle;
+
+
+    //Elevator Misc
+    public static double elevatorPulleyDiameter = 1.506;   
+    public static double elevatorTolerance = 0.25;       
+    public static double setElevatorAbsoluteTimeout = 60.0;   
+    
+    public static double wristTolerance = 10;
 }

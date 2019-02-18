@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Robot;
+import frc.robot.subsystems.Arm.ArmSide;
 import frc.robot.util.Util;
 import frc.robot.util.limelight.Limelight;
 
@@ -17,7 +18,7 @@ public class Vision extends Subsystem {
 
   //UNTESTED
   public Limelight getLimelight() {
-    if (Robot.arm.isArmFront()) {
+    if (Robot.arm.getArmSide() == ArmSide.FRONT) {
       return limeFront;
     }
     else {

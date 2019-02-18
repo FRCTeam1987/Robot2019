@@ -33,5 +33,6 @@ private final double m_percent;
 
   @Override
   protected void interrupted() {
+    end();
   }
 }

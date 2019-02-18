@@ -55,8 +55,8 @@ public class Util {
         return ((ticks / RobotMap.ticksPerRotation) * 360) * gearReduction;
     }
 
-    public static int degreesToTicks(final double degrees, final double gearReduction) {
-        return (int) (((degrees / 360) * RobotMap.ticksPerRotation) * gearReduction);
+    public static int degreesToTicks(final double degrees) {
+        return (int) ((degrees / 360) * RobotMap.ticksPerRotation);
     }
 
     public static double circumference(final double diameter) {

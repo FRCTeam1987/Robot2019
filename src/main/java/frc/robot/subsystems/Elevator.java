@@ -47,7 +47,7 @@ public class Elevator extends Subsystem {     //POSSIBLE BRAKE IN ELEVATOR????
     elevator.setSelectedSensorPosition(0);
   }
 
-  public void setElevatorAbsolute(final double desiredInches) {     //UNTESTED PID
+  public void setElevatorAbsolute(final double desiredInches) {
     final int ticksAbsolute = Util.distanceToTicks(desiredInches, RobotMap.elevatorPulleyDiameter);  
     elevator.set(ControlMode.Position, ticksAbsolute);
     SmartDashboard.putNumber("Elevator Ticks Target", ticksAbsolute);
@@ -68,5 +68,15 @@ public class Elevator extends Subsystem {     //POSSIBLE BRAKE IN ELEVATOR????
   @Override
   public void initDefaultCommand() {
 
+  }
+
+  public enum ElevatorHeight {
+    CARGOGROUNDCOLLECT,
+    LEVEL1HATCH,
+    LEVEL1CARGO,
+    LEVEL2HATCH,
+    LEVEL2CARGO,
+    LOADINGSTATIONCARGO,
+    FLIP
   }
 }

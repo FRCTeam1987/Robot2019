@@ -15,23 +15,18 @@ public class CargoIntake extends Subsystem {
   private final WPI_TalonSRX intakePivot;
   private final WPI_TalonSRX cargoRoller;
 
-  private final DigitalInput cargoIntakeProx; 
-
   public CargoIntake() {
     intakePivot = new WPI_TalonSRX(RobotMap.intakePivotMotorID);
     intakePivot.setName("CargoIntake", "pivot");
     cargoRoller = new WPI_TalonSRX(RobotMap.cargoRollerMotorID);
     cargoRoller.setName("CargoIntake", "roller");
-
-    cargoIntakeProx = new DigitalInput(RobotMap.cargoIntakeProxID);
-
     configIntakePivot(intakePivot);
     zeroCargoIntakePivot();
   }
 
   public void configIntakePivot(final WPI_TalonSRX motor) {
-    intakePivot.configMotionAcceleration(443); //Fix value
-    intakePivot.configMotionCruiseVelocity(443);
+    // intakePivot.configMotionAcceleration(443); //Fix value
+    // intakePivot.configMotionCruiseVelocity(443);
     intakePivot.setNeutralMode(NeutralMode.Brake);
 
     intakePivot.config_kF(0, 0.0);
@@ -58,13 +53,10 @@ public class CargoIntake extends Subsystem {
     return Util.isWithinTolerance(getTicks(), desiredAngle, RobotMap.wristTolerance);
   }
 
-  private int degreesToTicks(final double degrees) {
-    return (int) ((degrees / 360.0) * RobotMap.ticksPerRotation);
-  }
-
   public void setIntakePivot(final double degrees) {
-    final int ticksAbsolute = degreesToTicks(degrees);
-    intakePivot.set(ControlMode.MotionMagic, ticksAbsolute);
+    final int ticksAbsolute = Util.degreesToTicks(degrees);
+    // intakePivot.set(ControlMode.MotionMagic, ticksAbsolute);
+    intakePivot.set(ControlMode.Position, ticksAbsolute);
   }
 
   public void setIntakePivotPercent(final double percent) {
@@ -73,7 +65,6 @@ public class CargoIntake extends Subsystem {
 
   public void periodic() {
     SmartDashboard.putNumber("Intake Pivot Degrees", Util.ticksToDegrees(getTicks())); 
-    // SmartDashboard.putNumber("Intake Pivot Ticks", getTicks());
   }
 
   @Override
