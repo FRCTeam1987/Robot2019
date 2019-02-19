@@ -9,34 +9,59 @@ public class GoToElevatorHeight extends Command {
   
   private final ElevatorHeight m_elevatorHeight;
 
+  private double m_targetInches;
+
   public GoToElevatorHeight(final ElevatorHeight elevatorHeight) {
     requires(Robot.elevator);
     m_elevatorHeight = elevatorHeight;
+    m_targetInches = 0;
+    setTimeout(1.5);
+  }
+
+  public GoToElevatorHeight() {
+    m_elevatorHeight = Robot.elevator.getElevatorHeight();
+    m_targetInches = 0;
+    setTimeout(1.5);
   }
 
   @Override
   protected void initialize() {
     switch(m_elevatorHeight) {
       case CARGOGROUNDCOLLECT:
-        Robot.elevator.setElevatorAbsolute(RobotMap.elevatorGroundCollectHeight);
+        m_targetInches = RobotMap.elevatorGroundCollectHeight;
+        Robot.elevator.setElevatorAbsolute(m_targetInches);
+        break;
+      case CARGOSHIP:
+        m_targetInches = RobotMap.elevatorCargoShipHeight;
+        Robot.elevator.setElevatorAbsolute(m_targetInches);
         break;
       case LEVEL1HATCH:
-        Robot.elevator.setElevatorAbsolute(RobotMap.elevatorLevel1HatchHeight);
+        m_targetInches = RobotMap.elevatorLevel1HatchHeight;
+        Robot.elevator.setElevatorAbsolute(m_targetInches);
         break;
-      case LEVEL1CARGO:
-        Robot.elevator.setElevatorAbsolute(RobotMap.elevatorLevel1CargoHeight);
+      case LEVEL1CARGOROCKET:
+        m_targetInches = RobotMap.elevatorLevel1CargoHeight;
+        Robot.elevator.setElevatorAbsolute(m_targetInches);
         break;
       case LEVEL2HATCH:
-        Robot.elevator.setElevatorAbsolute(RobotMap.elevatorLevel2HatchHeight);
+        m_targetInches = RobotMap.elevatorLevel2HatchHeight;
+        Robot.elevator.setElevatorAbsolute(m_targetInches);
         break;
-      case LEVEL2CARGO:
-        Robot.elevator.setElevatorAbsolute(RobotMap.elevatorLevel2CargoHeight);
+      case LEVEL2CARGOROCKET:
+        m_targetInches = RobotMap.elevatorLevel2CargoHeight;
+        Robot.elevator.setElevatorAbsolute(m_targetInches);
         break;
       case LOADINGSTATIONCARGO:
-        Robot.elevator.setElevatorAbsolute(RobotMap.elevatorCargoLoadingStationHeight);
+        m_targetInches = RobotMap.elevatorCargoLoadingStationHeight;
+        Robot.elevator.setElevatorAbsolute(m_targetInches);
         break;
       case FLIP:
-        Robot.elevator.setElevatorAbsolute(RobotMap.elevatorFlipHeight);
+        m_targetInches = RobotMap.elevatorFlipHeight;
+        Robot.elevator.setElevatorAbsolute(m_targetInches);
+        break;
+      case HOME:
+        m_targetInches = RobotMap.elevatorHomeHeight;
+        Robot.elevator.setElevatorAbsolute(m_targetInches);
         break;
     }
   }
@@ -47,7 +72,7 @@ public class GoToElevatorHeight extends Command {
 
   @Override
   protected boolean isFinished() {
-    return false;
+    return Robot.elevator.isWithinTolerance(m_targetInches) || isTimedOut();
   }
 
   @Override
@@ -57,5 +82,6 @@ public class GoToElevatorHeight extends Command {
 
   @Override
   protected void interrupted() {
+    end();
   }
 }

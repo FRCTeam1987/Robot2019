@@ -3,19 +3,18 @@ package frc.robot.commands.cargointake;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class SetIntakeAngle extends Command {
-
-  private final double m_angle;
+public class SetIntakePivotManual extends Command {
   
-  public SetIntakeAngle(final double angle) {
+  private final double m_percent;
+
+  public SetIntakePivotManual(final double percent) {
     requires(Robot.cargoIntake);
-    setTimeout(2);
-    m_angle = angle;
+    m_percent = percent;
   }
 
   @Override
   protected void initialize() {
-    Robot.cargoIntake.setIntakePivot(m_angle);
+    Robot.cargoIntake.setIntakePivotPercent(m_percent);
   }
 
   @Override
@@ -24,7 +23,7 @@ public class SetIntakeAngle extends Command {
 
   @Override
   protected boolean isFinished() {
-    return Robot.cargoIntake.isWithinTolerance(m_angle) || isTimedOut();
+    return false;
   }
 
   @Override
@@ -34,5 +33,6 @@ public class SetIntakeAngle extends Command {
 
   @Override
   protected void interrupted() {
+    end();
   }
 }

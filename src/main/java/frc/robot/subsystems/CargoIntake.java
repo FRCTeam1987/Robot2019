@@ -4,7 +4,6 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
@@ -30,9 +29,9 @@ public class CargoIntake extends Subsystem {
     intakePivot.setNeutralMode(NeutralMode.Brake);
 
     intakePivot.config_kF(0, 0.0);
-    intakePivot.config_kP(0, 0.0);
+    intakePivot.config_kP(0, 1.3);
     intakePivot.config_kI(0, 0.0);
-    intakePivot.config_kD(0, 0.0);
+    intakePivot.config_kD(0, 0.4);
 
     Util.configTalonSRXWithEncoder(motor, false);
   }
@@ -50,7 +49,7 @@ public class CargoIntake extends Subsystem {
   }
 
   public boolean isWithinTolerance(final double desiredAngle) {
-    return Util.isWithinTolerance(getTicks(), desiredAngle, RobotMap.wristTolerance);
+    return Util.isWithinTolerance(getTicks(), Util.degreesToTicks(desiredAngle), Util.degreesToTicks(RobotMap.cargoIntakeTolerance));
   }
 
   public void setIntakePivot(final double degrees) {

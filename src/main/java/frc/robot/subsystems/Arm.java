@@ -14,7 +14,7 @@ public class Arm extends Subsystem {
   private final WPI_TalonSRX wrist;
 
   public ArmSide armSide;
-  public ArmAngle armAngle;
+  public ArmSetpoint armSetpoint;
 
   public Arm() {
     wrist = new WPI_TalonSRX(RobotMap.armMotorID);
@@ -28,9 +28,10 @@ public class Arm extends Subsystem {
     // wrist.configMotionAcceleration(443);
     Util.configTalonSRXWithEncoder(wrist, false);
     wrist.config_kF(0, 0.0, 0);
-    wrist.config_kP(0, 0.975, 0);
+    wrist.config_kP(0, 1.4, 0);
     wrist.config_kI(0, 0.0, 0);
-    wrist.config_kD(0, 0.4, 0);
+    wrist.config_kD(0, 0.2, 0);
+    wrist.setInverted(true);
     setBrake();
   }
 
@@ -92,14 +93,19 @@ public class Arm extends Subsystem {
     return (getArmAngle() >= 0) ? ArmSide.FRONT : ArmSide.BACK;
   }
 
-  public enum ArmAngle {
+  public enum ArmSetpoint {
     HATCH,
+    HATCHCOLLECT,
+    CARGOSHIP,
+    CARGOROCKETLVL1,
+    CARGOROCKETLVL2,
     CARGOCOLLECTFLOOR,
-    CARGOLOADINGSTATION
+    CARGOLOADINGSTATION,
+    HOME
   }
 
-  public ArmAngle getArmSetpoint() {
-    return armAngle;
+  public ArmSetpoint getArmSetpoint() {
+    return armSetpoint;
   }
 
 }

@@ -10,8 +10,8 @@ public class RobotMap {
     public static int hatchCollectButton = 2; //b
     public static int cargoCollectButton = 3; //x
     public static int placeButton = 4; //y
-    public static int armFrontButton = 5;
-    public static int armBackButton = 6;
+    public static int armFrontButton = 6;
+    public static int armBackButton = 5;
     public static int toggleShifterButton = 9; //left stick push
     public static int switchClawSideButton = 10; //right stick push
     
@@ -49,25 +49,39 @@ public class RobotMap {
     public static double driveBaseWheelsDiameter = 5.0; //might need to be tweaked
 
     //Elevator Setpoints
-    public static double elevatorGroundCollectHeight;
-    public static double elevatorLevel1HatchHeight;
-    public static double elevatorLevel1CargoHeight;
-    public static double elevatorLevel2HatchHeight;
-    public static double elevatorLevel2CargoHeight;
+    public static double elevatorGroundCollectHeight = -1.5;
+    public static double elevatorHomeHeight = 0;
+    public static double elevatorLevel1HatchHeight = -9.0;
+    public static double elevatorLevel1CargoHeight = -0.6;
+    public static double elevatorCargoShipHeight = 20;
+    public static double elevatorLevel2HatchHeight = 21.1;
+    public static double elevatorLevel2CargoHeight = 19.5;
     public static double elevatorCargoLoadingStationHeight;
-    public static double elevatorFlipHeight;
+    public static double elevatorFlipHeight = 15;
+    public static double elevatorHatchCollectUp = -5.0;
     
     //Arm Setpoints
-    public static double armHatchAngle;
-    public static double armLoadingStationCargoAngle;
-    public static double armFloorCollectCargoAngle;
-    public static double armFullSendCargoAngle;
+    public static double armHomeAngle = 0;
+    public static double armHatchCollectedAngle = 70;
+    public static double armHatchAngle = 90;
+    public static double armCargoShipAngle = 105;
+    public static double armRocketLevel1CargoAngle = 90;
+    public static double armRocketLevel2CargoAngle = 73;
+    public static double armLoadingStationCargoAngle = 90;
+    public static double armFloorCollectCargoAngle = 135;
+    public static double armFullSendCargoAngle = 30;
+
+    //Cargo Intake Pivot Setpoints
+    public static double cargoIntakeAngle = 97;
+    public static double cargoIntakeHomeAngle = 0;
+
+    public static double cargoIntakeTolerance = 2.5;
 
 
     //Elevator Misc
     public static double elevatorPulleyDiameter = 1.506;   
-    public static double elevatorTolerance = 0.25;       
+    public static double elevatorTolerance = 1;       
     public static double setElevatorAbsoluteTimeout = 60.0;   
     
-    public static double wristTolerance = 10;
+    public static double wristTolerance = 5;
 }

@@ -11,10 +11,13 @@ import frc.robot.util.Util;
 public class Elevator extends Subsystem {     //POSSIBLE BRAKE IN ELEVATOR????
 
   private final WPI_TalonSRX elevator;    
+  private ElevatorHeight elevatorHeight;
 
   public Elevator() {
     elevator = new WPI_TalonSRX(RobotMap.elevatorMotorID);
     elevator.setName("Elevator", "winch");
+
+    elevatorHeight = ElevatorHeight.HOME;
 
     configElevator(elevator);
     zeroElevatorEncoder();
@@ -30,7 +33,7 @@ public class Elevator extends Subsystem {     //POSSIBLE BRAKE IN ELEVATOR????
     elevator.config_kF(0, 0.0);
     elevator.config_kP(0, 0.4);
     elevator.config_kI(0, 0.0);
-    elevator.config_kD(0, 0.0);
+    elevator.config_kD(0, 0.3);
 
     Util.configTalonSRXWithEncoder(elevator, false);
   }
@@ -50,7 +53,6 @@ public class Elevator extends Subsystem {     //POSSIBLE BRAKE IN ELEVATOR????
   public void setElevatorAbsolute(final double desiredInches) {
     final int ticksAbsolute = Util.distanceToTicks(desiredInches, RobotMap.elevatorPulleyDiameter);  
     elevator.set(ControlMode.Position, ticksAbsolute);
-    SmartDashboard.putNumber("Elevator Ticks Target", ticksAbsolute);
   }
 
   public void setElevatorPercent(final double percent) {
@@ -73,10 +75,20 @@ public class Elevator extends Subsystem {     //POSSIBLE BRAKE IN ELEVATOR????
   public enum ElevatorHeight {
     CARGOGROUNDCOLLECT,
     LEVEL1HATCH,
-    LEVEL1CARGO,
+    CARGOSHIP,
+    LEVEL1CARGOROCKET,
     LEVEL2HATCH,
-    LEVEL2CARGO,
+    LEVEL2CARGOROCKET,
     LOADINGSTATIONCARGO,
-    FLIP
+    FLIP,
+    HOME
+  }
+
+  public void setElevatorHeight(final ElevatorHeight newElevatorHeight) {
+    elevatorHeight = newElevatorHeight;
+  }
+
+  public ElevatorHeight getElevatorHeight() {
+    return elevatorHeight;
   }
 }
