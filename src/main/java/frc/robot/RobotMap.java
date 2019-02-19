@@ -4,7 +4,7 @@ package frc.robot;
 public class RobotMap {
 
     //Driver Buttons
-
+    public static int driverID = 0;
 
     public static int elevatorToHeightButton = 1; //a
     public static int hatchCollectButton = 2; //b
@@ -13,7 +13,17 @@ public class RobotMap {
     public static int armFrontButton = 6;
     public static int armBackButton = 5;
     public static int toggleShifterButton = 9; //left stick push
-    public static int switchClawSideButton = 10; //right stick push
+
+    //Co-driver Buttons
+    public static int coDriverID = 1;
+    public static int switchPotentialClawSideButton = 13;
+    public static int level1HatchSetButton = 8;
+    public static int level2HatchSetButton = 14;
+    public static int cargoShipCargoSetButton = 9;
+    public static int level1CargoSetButton = 15;
+    public static int level2CargoSetButton = 16;
+    public static int loadingStationCargoSetButton = 10;
+
     
     //MotorIDs
     public static int leftMasterID = 1;  //
@@ -32,11 +42,11 @@ public class RobotMap {
     public static int hatchCollectMotorID = 13;
 
     //DIO IDs
-    public static int cargoIntakeProxID = 0;
     public static int clawCargoProxID = 1;
+    public static int wristHome = 2;
+    public static int cargoIntakeHome = 3;
 
     public static int defaultTimeout = 10;
-    public static int driverID = 0;
     public static double ticksPerRotation = 4096.0;
 
     //Pneumatics
@@ -56,7 +66,7 @@ public class RobotMap {
     public static double elevatorCargoShipHeight = 20;
     public static double elevatorLevel2HatchHeight = 21.1;
     public static double elevatorLevel2CargoHeight = 19.5;
-    public static double elevatorCargoLoadingStationHeight;
+    public static double elevatorCargoLoadingStationHeight = 0;
     public static double elevatorFlipHeight = 15;
     public static double elevatorHatchCollectUp = -5.0;
     

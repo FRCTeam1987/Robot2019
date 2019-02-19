@@ -6,6 +6,7 @@ import frc.robot.commands.elevator.GoToElevatorHeight;
 import frc.robot.subsystems.Arm.ArmSetpoint;
 import frc.robot.subsystems.Arm.ArmSide;
 import frc.robot.subsystems.Elevator.ElevatorHeight;
+import frc.robot.Robot;
 
 public class SetElevatorAndArm extends CommandGroup {
 
@@ -17,6 +18,18 @@ public class SetElevatorAndArm extends CommandGroup {
     m_desiredArmSide = desiredArmSide;
     m_elevatorHeight = elevatorHeight;
     m_armAngle = armAngle;
+
+    addSequential(new ShouldGoToFlipHeight(m_desiredArmSide));
+    addSequential(new ShouldRollArm(m_desiredArmSide));
+    addSequential(new SetArmSide(m_desiredArmSide));
+    addSequential(new SetArmAngle(m_armAngle, m_desiredArmSide));
+    addSequential(new GoToElevatorHeight(m_elevatorHeight));
+  }
+
+  public SetElevatorAndArm() {
+    m_desiredArmSide = Robot.arm.getArmSideButton();
+    m_elevatorHeight = Robot.elevator.getElevatorHeight();
+    m_armAngle = Robot.arm.getArmSetpoint();
 
     addSequential(new ShouldGoToFlipHeight(m_desiredArmSide));
     addSequential(new ShouldRollArm(m_desiredArmSide));

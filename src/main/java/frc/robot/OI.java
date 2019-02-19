@@ -3,30 +3,20 @@ package frc.robot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.arm.ArmManual;
-import frc.robot.commands.arm.SetArmAngle;
-import frc.robot.commands.arm.ZeroArm;
 import frc.robot.commands.armavator.FrontHatchPlace;
 import frc.robot.commands.armavator.HatchCollect;
+import frc.robot.commands.armavator.SetArmSide;
+import frc.robot.commands.armavator.SetDesiredPosition;
 import frc.robot.commands.armavator.SetElevatorAndArm;
 import frc.robot.commands.cargointake.CollectCargo;
-import frc.robot.commands.cargointake.IntakeCargo;
-import frc.robot.commands.cargointake.SetIntakeAngle;
 import frc.robot.commands.cargointake.SetIntakePivotManual;
-import frc.robot.commands.cargointake.ZeroCargoIntakePivot;
-import frc.robot.commands.claw.ClawIntakeCargo;
 import frc.robot.commands.claw.Place;
-import frc.robot.commands.claw.ShootCargo;
-import frc.robot.commands.climber.ClimberManual;
+import frc.robot.commands.drive.ToggleShifter;
 // import frc.robot.commands.drive.DriveDistance;
 // import frc.robot.commands.drive.ToggleShifter;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.elevator.ElevatorManual;
-import frc.robot.commands.elevator.GoToElevatorHeight;
-import frc.robot.commands.elevator.SetElevatorAbsolute;
-import frc.robot.commands.elevator.ZeroElevator;
-import frc.robot.commands.vision.AimRobot;
-import frc.robot.commands.vision.AutoCamera;
 import frc.robot.subsystems.Arm.ArmSetpoint;
 import frc.robot.subsystems.Arm.ArmSide;
 import frc.robot.subsystems.Elevator.ElevatorHeight;
@@ -35,12 +25,16 @@ import frc.robot.util.XboxDPad.Direction;
 
 public class OI {
 
-  private final XboxController driver;
 
+  private final XboxController driver;
+  private final XboxController coDriver;
+
+  //Driver
+  private final Button goToElevatorHeight;
+  private final Button shifter;
   private final Button cargoCollect;
   private final Button hatchCollect;
   private final Button place;
-  private final Button switchClawSide;
   private final XboxDPad elevatorManualUp;
   private final XboxDPad elevatorManualDown;
   private final Button armManualForward;
@@ -48,12 +42,24 @@ public class OI {
   private final XboxDPad cargoIntakeManualForward;
   private final XboxDPad cargoIntakeManualBack;
 
+  //Co-driver
+  private final Button switchPotentialClawSide;
+  private final Button level1HatchSet;
+  private final Button level2HatchSet;
+  private final Button cargoShipCargoSet;
+  private final Button level1CargoSet;
+  private final Button level2CargoSet;
+  private final Button loadingStationCargoSet;
+
+
   public OI() {
+    //Driver
     driver = new XboxController(RobotMap.driverID);
+    shifter = new JoystickButton(driver, RobotMap.toggleShifterButton);
+    goToElevatorHeight = new JoystickButton(driver, RobotMap.elevatorToHeightButton);
     cargoCollect = new JoystickButton(driver, RobotMap.cargoCollectButton);
     hatchCollect = new JoystickButton(driver, RobotMap.hatchCollectButton);
     place = new JoystickButton(driver, RobotMap.placeButton);
-    switchClawSide = new JoystickButton(driver, RobotMap.switchClawSideButton);
     elevatorManualUp = new XboxDPad(driver, XboxDPad.Direction.Up);
     elevatorManualDown = new XboxDPad(driver, XboxDPad.Direction.Down);
     armManualForward = new JoystickButton(driver, RobotMap.armFrontButton);
@@ -61,67 +67,48 @@ public class OI {
     cargoIntakeManualForward = new XboxDPad(driver, XboxDPad.Direction.Left);
     cargoIntakeManualBack = new XboxDPad(driver, XboxDPad.Direction.Right);
 
+    //Co-Driver
+    coDriver = new XboxController(RobotMap.coDriverID);
+    switchPotentialClawSide = new JoystickButton(coDriver, RobotMap.switchPotentialClawSideButton);
+    level1HatchSet = new JoystickButton(coDriver, RobotMap.level1HatchSetButton);
+    level2HatchSet = new JoystickButton(coDriver, RobotMap.level2HatchSetButton);
+    cargoShipCargoSet = new JoystickButton(coDriver, RobotMap.cargoShipCargoSetButton);
+    level1CargoSet = new JoystickButton(coDriver, RobotMap.level1CargoSetButton);
+    level2CargoSet = new JoystickButton(coDriver, RobotMap.level2CargoSetButton);
+    loadingStationCargoSet = new JoystickButton(coDriver, RobotMap.loadingStationCargoSetButton);
+
+    //Driver Buttons
+    goToElevatorHeight.whenPressed(new SetElevatorAndArm());
+    shifter.whenPressed(new ToggleShifter());
+    hatchCollect.whenPressed(new HatchCollect());
+    cargoCollect.whenPressed(new CollectCargo());
+    place.whenPressed(new Place(1));
     elevatorManualUp.whileHeld(new ElevatorManual(0.4));
     elevatorManualDown.whileHeld(new ElevatorManual(-0.4));
-
     armManualForward.whileHeld(new ArmManual(-0.4));
     armManualBack.whileHeld(new ArmManual(0.4));
-
-    hatchCollect.whenPressed(new HatchCollect());
-
     cargoIntakeManualForward.whileHeld(new SetIntakePivotManual(0.4));
     cargoIntakeManualBack.whileHeld(new SetIntakePivotManual(-0.4));
 
-    cargoCollect.whenPressed(new CollectCargo());
-    place.whenPressed(new Place(1));
+    //Co-Driver buttons
+    switchPotentialClawSide.whenPressed(new SetArmSide(ArmSide.FRONT));
+    switchPotentialClawSide.whenReleased(new SetArmSide(ArmSide.BACK));
+    level1HatchSet.whenPressed(new SetDesiredPosition(ElevatorHeight.LEVEL1HATCH, ArmSetpoint.HATCH));
+    level2HatchSet.whenPressed(new SetDesiredPosition(ElevatorHeight.LEVEL2HATCH, ArmSetpoint.HATCH));
+    cargoShipCargoSet.whenPressed(new SetDesiredPosition(ElevatorHeight.CARGOSHIP, ArmSetpoint.CARGOSHIP));
+    level1CargoSet.whenPressed(new SetDesiredPosition(ElevatorHeight.LEVEL1CARGOROCKET, ArmSetpoint.CARGOROCKETLVL1));
+    level2CargoSet.whenPressed(new SetDesiredPosition(ElevatorHeight.LEVEL2CARGOROCKET, ArmSetpoint.CARGOROCKETLVL2));
+    loadingStationCargoSet.whenPressed(new SetDesiredPosition(ElevatorHeight.LOADINGSTATIONCARGO, ArmSetpoint.HATCH));
 
-
-
-    // SmartDashboard.putData("drive-toggle-shifter", new ToggleShifter());
-    // SmartDashboard.putData("drive-drive-distance", new DriveDistance(15.07));
-    // SmartDashboard.putData("claw-place-hatch", new PlaceHatch());
-    // SmartDashboard.putData("claw-shoot-cargo", new ShootCargo(1));
-
-    // SmartDashboard.putData("Intake Cargo", new IntakeCargo());
-    // SmartDashboard.putData("Claw Intake Cargo", new ClawIntakeCargo(0.8));
-
-    // SmartDashboard.putData("Zero Elevator", new ZeroElevator());
-    // SmartDashboard.putData("Zero Cargo Intake", new ZeroCargoIntakePivot());
-
-    // SmartDashboard.putData("Go to Intake Angle", new SetIntakeAngle(RobotMap.cargoIntakeAngle));
-    // SmartDashboard.putData("Go to Intake Home", new SetIntakeAngle(RobotMap.cargoIntakeHomeAngle));
-
-    SmartDashboard.putData("Front Hatch Place Set", new FrontHatchPlace());
-    // SmartDashboard.putData("Go to Flip Height", new GoToElevatorHeight(ElevatorHeight.FLIP));
-    SmartDashboard.putData("Collect Hatch", new HatchCollect());
-
-    // SmartDashboard.putData("Go To Back Level 1 Hatch Height", new SetElevatorAndArm(ArmSide.BACK, ElevatorHeight.LEVEL1HATCH, ArmSetpoint.HATCH));
-    SmartDashboard.putData("Go To Front Level 1 Hatch Height", new SetElevatorAndArm(ArmSide.FRONT, ElevatorHeight.LEVEL1HATCH, ArmSetpoint.HATCH));
-    SmartDashboard.putData("Go To Front Level 2 Hatch Height", new SetElevatorAndArm(ArmSide.FRONT, ElevatorHeight.LEVEL2HATCH, ArmSetpoint.HATCH));
-    // SmartDashboard.putData("Go To Back Level 2 Hatch  Height", new SetElevatorAndArm(ArmSide.BACK, ElevatorHeight.LEVEL2HATCH, ArmSetpoint.HATCH));
-    SmartDashboard.putData("Go To Front Level 2 Cargo Height", new SetElevatorAndArm(ArmSide.FRONT, ElevatorHeight.LEVEL2CARGOROCKET, ArmSetpoint.CARGOROCKETLVL2));
-    SmartDashboard.putData("Go To Front Level 1 Cargo Height", new SetElevatorAndArm(ArmSide.FRONT, ElevatorHeight.LEVEL1CARGOROCKET, ArmSetpoint.CARGOROCKETLVL1));
-    SmartDashboard.putData("Go To Cargo Ship Cargo Height", new SetElevatorAndArm(ArmSide.FRONT, ElevatorHeight.CARGOSHIP, ArmSetpoint.CARGOSHIP));
-
-
-    SmartDashboard.putData("Full Send Cargo", new ShootCargo(1));
-    SmartDashboard.putData("Collect Cargo", new CollectCargo());
-
-    // SmartDashboard.putData("Go To Elevator Home", new GoToElevatorHeight(ElevatorHeight.HOME));
-    // SmartDashboard.putData("Set Elevator Absolute 1", new SetElevatorAbsolute(1));
-    // SmartDashboard.putData("Set Elevator Absolute 3", new SetElevatorAbsolute(3));
-    // SmartDashboard.putData("Set Elevator Absolute 5 Inches", new SetElevatorAbsolute(5));
-    // SmartDashboard.putData("Set Elevator Absolute 10 Inches", new SetElevatorAbsolute(10));
-    // SmartDashboard.putData("Set Elevator Absolute 30", new SetElevatorAbsolute(30));
-
-    // SmartDashboard.putData("Set Arm Angle 0 Degrees", new SetArmAngle(ArmSetpoint.HOME, ArmSide.FRONT));
-    // SmartDashboard.putData("Set Arm Angle Hatch Front", new SetArmAngle(ArmSetpoint.HATCH, ArmSide.FRONT));
-    // SmartDashboard.putData("Set Arm Angle Hatch Back", new SetArmAngle(ArmSetpoint.HATCH, ArmSide.BACK));
-
-    SmartDashboard.putData("Zero Arm Wrist", new ZeroArm());
+    //SmartDashboard puts
+    SmartDashboard.putData("Front Hatch Place", new FrontHatchPlace());
   }
 
   public XboxController getDriver() {
 		return driver;
-	}
+  }
+  
+  public XboxController getCoDriver() {
+    return coDriver;
+  }
 }

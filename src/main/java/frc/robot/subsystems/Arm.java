@@ -71,11 +71,6 @@ public class Arm extends Subsystem {
   }
 
   @Override
-  public void periodic() {
-    SmartDashboard.putNumber("Arm Angle", getArmAngle());
-  }
-
-  @Override
   public void initDefaultCommand() {
     // setDefaultCommand(new MySpecialCommand());
   }
@@ -93,6 +88,10 @@ public class Arm extends Subsystem {
     return (getArmAngle() >= 0) ? ArmSide.FRONT : ArmSide.BACK;
   }
 
+  public ArmSide getArmSideButton() {
+    return armSide;
+  }
+
   public enum ArmSetpoint {
     HATCH,
     HATCHCOLLECT,
@@ -108,4 +107,12 @@ public class Arm extends Subsystem {
     return armSetpoint;
   }
 
+  public void setArmSetpoint(final ArmSetpoint newArmSetpoint) {
+    armSetpoint = newArmSetpoint;
+  }
+
+  @Override
+  public void periodic() {
+    SmartDashboard.putNumber("Arm Angle", getArmAngle());
+  }
 }
