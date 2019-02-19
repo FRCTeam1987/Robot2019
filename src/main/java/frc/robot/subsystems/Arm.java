@@ -4,6 +4,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
@@ -13,6 +14,8 @@ public class Arm extends Subsystem {
 
   private final WPI_TalonSRX wrist;
 
+  private final DigitalInput wristHome;
+
   public ArmSide armSide;
   public ArmSetpoint armSetpoint;
 
@@ -20,7 +23,12 @@ public class Arm extends Subsystem {
     wrist = new WPI_TalonSRX(RobotMap.armMotorID);
     wrist.setName("Arm", "wrist");
     configWrist();
-    zeroWristEncoder();
+    zeroWrist();
+
+    wristHome = new DigitalInput(RobotMap.wristHomeID);
+
+    armSetpoint = ArmSetpoint.HOME;
+    armSide = ArmSide.FRONT;
   }
 
   public void configWrist() {
@@ -58,8 +66,14 @@ public class Arm extends Subsystem {
     return Util.isWithinTolerance(getTicks(), Util.degreesToTicks(desiredDegrees), Util.degreesToTicks(RobotMap.wristTolerance));
   }
 
-  public void zeroWristEncoder() {
+  public void zeroWrist() {
     wrist.setSelectedSensorPosition(0);
+  }
+
+  private void zeroWristAtHome() {
+    if (wristHome.get()) {
+      zeroWrist();
+    }
   }
 
   public double getArmAngle() {
@@ -85,10 +99,7 @@ public class Arm extends Subsystem {
   }
 
   public ArmSide getArmSide() {
-    return (getArmAngle() >= 0) ? ArmSide.FRONT : ArmSide.BACK;
-  }
-
-  public ArmSide getArmSideButton() {
+    // return (getArmAngle() >= 0) ? ArmSide.FRONT : ArmSide.BACK;
     return armSide;
   }
 
@@ -114,5 +125,8 @@ public class Arm extends Subsystem {
   @Override
   public void periodic() {
     SmartDashboard.putNumber("Arm Angle", getArmAngle());
+    SmartDashboard.putString("Desired Arm Setpoint", getArmSetpoint().toString());
+    SmartDashboard.putString("Desired Arm Side", getArmSide().toString());
+    zeroWristAtHome();
   }
 }

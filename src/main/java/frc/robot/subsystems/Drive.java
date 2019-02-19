@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 import frc.robot.util.Util;
-import frc.robot.commands.drive.TeleopDrive;
+import frc.robot.commands.drive.XboxDrive;
 
 public class Drive extends Subsystem {
   
@@ -199,7 +199,7 @@ public class Drive extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new TeleopDrive());
+    setDefaultCommand(new XboxDrive());
   }
 
   public void periodic() {

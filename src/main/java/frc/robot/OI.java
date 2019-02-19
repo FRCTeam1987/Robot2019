@@ -11,17 +11,22 @@ import frc.robot.commands.armavator.SetArmSide;
 import frc.robot.commands.armavator.SetDesiredPosition;
 import frc.robot.commands.armavator.SetElevatorAndArm;
 import frc.robot.commands.cargointake.CollectCargo;
+import frc.robot.commands.cargointake.SetIntakeAngle;
 import frc.robot.commands.cargointake.SetIntakePivotManual;
 import frc.robot.commands.claw.Place;
+import frc.robot.commands.claw.PlaceHatch;
 import frc.robot.commands.drive.ToggleShifter;
 // import frc.robot.commands.drive.DriveDistance;
 // import frc.robot.commands.drive.ToggleShifter;
 import frc.robot.commands.elevator.ElevatorManual;
+import frc.robot.commands.elevator.SetElevatorAbsolute;
+import frc.robot.commands.vision.SetCameraMode;
+import frc.robot.commands.vision.SetCameraPipeline;
 import frc.robot.subsystems.Arm.ArmSetpoint;
 import frc.robot.subsystems.Arm.ArmSide;
 import frc.robot.subsystems.Elevator.ElevatorHeight;
 import frc.robot.util.XboxDPad;
-import frc.robot.util.XboxDPad.Direction;
+import frc.robot.util.limelight.CameraMode;
 
 public class OI {
 
@@ -102,6 +107,13 @@ public class OI {
 
     //SmartDashboard puts
     SmartDashboard.putData("Front Hatch Place", new FrontHatchPlace());
+    SmartDashboard.putData("Go to Intake Position", new SetIntakeAngle(RobotMap.cargoIntakeAngle));
+    SmartDashboard.putData("Go to Intake Home", new SetIntakeAngle(RobotMap.cargoIntakeHomeAngle));
+    SmartDashboard.putData("Set camera mode to driver camera", new SetCameraMode(CameraMode.DRIVERCAMERA));
+    SmartDashboard.putData("Set camera mode to vision processing", new SetCameraMode(CameraMode.VISION));
+    SmartDashboard.putData("Set camera pipeline to 9", new SetCameraPipeline(9)); //works
+    SmartDashboard.putData("Set camera pipeline to 0", new SetCameraPipeline(0));
+    SmartDashboard.putData("Set Elevator out of Bounds", new SetElevatorAbsolute(22.1));
   }
 
   public XboxController getDriver() {

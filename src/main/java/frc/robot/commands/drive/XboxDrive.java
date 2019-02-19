@@ -5,21 +5,38 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.arm;
+package frc.robot.commands.drive;
 
-import edu.wpi.first.wpilibj.command.InstantCommand;
+import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class ZeroArm extends InstantCommand {
 
-  public ZeroArm() {
-    super();
-    requires(Robot.arm);
+public class XboxDrive extends Command {
+  public XboxDrive() {
+    requires(Robot.drive);
   }
 
   @Override
   protected void initialize() {
-    Robot.arm.zeroWristEncoder();
+    Robot.vision.limeFront.setPipeline(9);
+    Robot.vision.limeBack.setPipeline(9);
   }
 
+  @Override
+  protected void execute() {
+    Robot.drive.xboxDrive(Robot.m_oi.getDriver());
+  }
+
+  @Override
+  protected boolean isFinished() {
+    return false;
+  }
+
+  @Override
+  protected void end() {
+  }
+
+  @Override
+  protected void interrupted() {
+  }
 }

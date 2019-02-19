@@ -5,7 +5,6 @@ public class RobotMap {
 
     //Driver Buttons
     public static int driverID = 0;
-
     public static int elevatorToHeightButton = 1; //a
     public static int hatchCollectButton = 2; //b
     public static int cargoCollectButton = 3; //x
@@ -43,15 +42,18 @@ public class RobotMap {
 
     //DIO IDs
     public static int clawCargoProxID = 1;
-    public static int wristHome = 2;
-    public static int cargoIntakeHome = 3;
+    public static int wristHomeID = 2;
+    public static int cargoIntakeHomeID = 3;
+    public static int elevatorMaxID = 4;
+    public static int elevatorHomeID = 5;
+    public static int elevatorMinID = 6;
 
     public static int defaultTimeout = 10;
     public static double ticksPerRotation = 4096.0;
 
     //Pneumatics
-    public static int highGearID = 0;   //NOT REAL
-    public static int lowGearID = 1;    //NOT REAL
+    public static int highGearID = 0;
+    public static int lowGearID = 1;
     public static int hatchRetractID = 2;
     public static int hatchReleaseID = 3;
 
@@ -78,20 +80,22 @@ public class RobotMap {
     public static double armRocketLevel1CargoAngle = 90;
     public static double armRocketLevel2CargoAngle = 73;
     public static double armLoadingStationCargoAngle = 90;
-    public static double armFloorCollectCargoAngle = 135;
+    public static double armFloorCollectCargoAngle = 125;
     public static double armFullSendCargoAngle = 30;
 
     //Cargo Intake Pivot Setpoints
     public static double cargoIntakeAngle = 97;
     public static double cargoIntakeHomeAngle = 0;
 
-    public static double cargoIntakeTolerance = 2.5;
+    public static double cargoIntakeTolerance = 0.5;
 
 
     //Elevator Misc
     public static double elevatorPulleyDiameter = 1.506;   
     public static double elevatorTolerance = 1;       
-    public static double setElevatorAbsoluteTimeout = 60.0;   
+    public static double setElevatorAbsoluteTimeout = 60.0; 
+    public static double elevatorMax = 21.5;
+    public static double elevatorMin = -20.0;   //NEED TO DEFINE  
     
     public static double wristTolerance = 5;
 }

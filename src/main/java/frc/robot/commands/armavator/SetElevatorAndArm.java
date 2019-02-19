@@ -27,7 +27,7 @@ public class SetElevatorAndArm extends CommandGroup {
   }
 
   public SetElevatorAndArm() {
-    m_desiredArmSide = Robot.arm.getArmSideButton();
+    m_desiredArmSide = Robot.arm.getArmSide();
     m_elevatorHeight = Robot.elevator.getElevatorHeight();
     m_armAngle = Robot.arm.getArmSetpoint();
 

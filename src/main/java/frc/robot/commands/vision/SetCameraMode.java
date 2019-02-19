@@ -5,36 +5,26 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.drive;
+package frc.robot.commands.vision;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
+import frc.robot.util.limelight.CameraMode;
 
 
-public class TeleopDrive extends Command {
-  public TeleopDrive() {
-    requires(Robot.drive);
+public class SetCameraMode extends InstantCommand {
+
+  private CameraMode m_cameraMode;
+
+  public SetCameraMode(final CameraMode cameraMode) {
+    super();
+    requires(Robot.vision);
+
+    m_cameraMode = cameraMode;
   }
 
   @Override
   protected void initialize() {
-  }
-
-  @Override
-  protected void execute() {
-    Robot.drive.xboxDrive(Robot.m_oi.getDriver());
-  }
-
-  @Override
-  protected boolean isFinished() {
-    return false;
-  }
-
-  @Override
-  protected void end() {
-  }
-
-  @Override
-  protected void interrupted() {
+    Robot.vision.limeFront.setCameraMode(m_cameraMode);
   }
 }

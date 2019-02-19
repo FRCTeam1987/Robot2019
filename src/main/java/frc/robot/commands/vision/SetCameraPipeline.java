@@ -5,24 +5,27 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.elevator;
+package frc.robot.commands.vision;
 
 import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
 
-/**
- * Add your docs here.
- */
-public class ZeroElevator extends InstantCommand {
 
-  public ZeroElevator() {
+public class SetCameraPipeline extends InstantCommand {
+
+  private final int m_pipeline;
+
+  public SetCameraPipeline(final int pipline) {
     super();
-    requires(Robot.elevator);
+    requires(Robot.vision);
+
+    m_pipeline = pipline;
   }
 
   @Override
   protected void initialize() {
-    Robot.elevator.zeroElevatorEncoder();
+    Robot.vision.limeFront.setPipeline(m_pipeline);;
+
   }
 
 }

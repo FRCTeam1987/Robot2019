@@ -9,7 +9,7 @@ public class SetIntakeAngle extends Command {
   
   public SetIntakeAngle(final double angle) {
     requires(Robot.cargoIntake);
-    setTimeout(2);
+    setTimeout(1.5);
     m_angle = angle;
   }
 

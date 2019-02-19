@@ -40,5 +40,6 @@ public class Place extends Command {
 
   @Override
   protected void interrupted() {
+    end();
   }
 }

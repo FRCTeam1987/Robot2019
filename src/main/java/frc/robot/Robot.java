@@ -12,6 +12,7 @@ import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Vision;
+import frc.robot.util.limelight.LedMode;
 
 
 public class Robot extends TimedRobot {
@@ -32,7 +33,6 @@ public class Robot extends TimedRobot {
     m_oi = new OI();
     SmartDashboard.putData("Auto mode", m_chooser);
     SmartDashboard.putString("Robot Status:", "OK");
-    
   }
 
   @Override
@@ -41,6 +41,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void disabledInit() {
+    Robot.vision.getLimelight().setLedMode(LedMode.OFF);
   }
 
   @Override
@@ -54,6 +55,7 @@ public class Robot extends TimedRobot {
 
     if (m_autonomousCommand != null) {
       m_autonomousCommand.start();
+      Robot.vision.getLimelight().setLedMode(LedMode.ON);
     }
   }
 
@@ -64,10 +66,11 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
+
+    Robot.vision.getLimelight().setLedMode(LedMode.OFF);
   }
 
   @Override
