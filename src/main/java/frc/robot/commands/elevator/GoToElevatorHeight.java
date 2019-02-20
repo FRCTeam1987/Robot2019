@@ -7,7 +7,7 @@ import frc.robot.subsystems.Elevator.ElevatorHeight;
 
 public class GoToElevatorHeight extends Command {
   
-  private final ElevatorHeight m_elevatorHeight;
+  private ElevatorHeight m_elevatorHeight;
 
   private double m_targetInches;
 
@@ -19,13 +19,14 @@ public class GoToElevatorHeight extends Command {
   }
 
   public GoToElevatorHeight() {
-    m_elevatorHeight = Robot.elevator.getElevatorHeight();
+    m_elevatorHeight = ElevatorHeight.HOME;
     m_targetInches = 0;
     setTimeout(1.5);
   }
 
   @Override
   protected void initialize() {
+    m_elevatorHeight = Robot.elevator.getElevatorHeight();
     switch(m_elevatorHeight) {
       case CARGOGROUNDCOLLECT:
         m_targetInches = RobotMap.elevatorGroundCollectHeight;

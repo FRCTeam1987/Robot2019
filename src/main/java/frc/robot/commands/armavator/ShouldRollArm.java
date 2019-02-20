@@ -5,6 +5,7 @@ import frc.robot.Robot;
 import frc.robot.commands.arm.SetArmAngle;
 import frc.robot.subsystems.Arm.ArmSetpoint;
 import frc.robot.subsystems.Arm.ArmSide;
+import frc.robot.subsystems.Elevator.ElevatorHeight;
 
 public class ShouldRollArm extends ConditionalCommand {
   
@@ -15,10 +16,14 @@ public class ShouldRollArm extends ConditionalCommand {
     m_desiredArmSide = desiredArmSide;
   }
 
-  @Override
-  public boolean condition() {
-    return Robot.arm.getArmSide() != m_desiredArmSide;
+  public ShouldRollArm() {
+    super(new SetArmAngle());
+    
   }
 
-  
+  @Override
+  public boolean condition() {
+    m_desiredArmSide = Robot.arm.getArmSide();
+    return Robot.arm.getArmSide() != m_desiredArmSide;
+  }
 }

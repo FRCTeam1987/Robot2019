@@ -5,8 +5,9 @@ public class RobotMap {
 
     //Driver Buttons
     public static int driverID = 0;
-    public static int elevatorToHeightButton = 1; //a
-    public static int hatchCollectButton = 2; //b
+    // public static int elevatorToHeightButton = 1; //a
+    public static int hatchPlaceOnBackButton = 2; //temporary //b
+    public static int hatchCollectButton = 1; //a
     public static int cargoCollectButton = 3; //x
     public static int placeButton = 4; //y
     public static int armFrontButton = 6;

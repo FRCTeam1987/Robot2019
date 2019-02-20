@@ -15,8 +15,14 @@ public class ShouldGoToFlipHeight extends ConditionalCommand {
     m_desiredArmSide = desiredArmSide;
   }
 
+  public ShouldGoToFlipHeight() {
+    super(new GoToElevatorHeight(ElevatorHeight.FLIP));
+    m_desiredArmSide = ArmSide.FRONT;
+  }
+
   @Override
   protected boolean condition() {
+    m_desiredArmSide = Robot.arm.getArmSide();
     return Robot.arm.getArmSide() != m_desiredArmSide;
   }
 }

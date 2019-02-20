@@ -11,6 +11,7 @@ import frc.robot.commands.armavator.SetArmSide;
 import frc.robot.commands.armavator.SetDesiredPosition;
 import frc.robot.commands.armavator.SetElevatorAndArm;
 import frc.robot.commands.cargointake.CollectCargo;
+import frc.robot.commands.cargointake.IntakeCargo;
 import frc.robot.commands.cargointake.SetIntakeAngle;
 import frc.robot.commands.cargointake.SetIntakePivotManual;
 import frc.robot.commands.claw.Place;
@@ -35,7 +36,8 @@ public class OI {
   private final XboxController coDriver;
 
   //Driver
-  private final Button goToElevatorHeight;
+  // private final Button goToElevatorHeight;
+  private final Button hatchPlaceOnBack;
   private final Button shifter;
   private final Button cargoCollect;
   private final Button hatchCollect;
@@ -61,7 +63,8 @@ public class OI {
     //Driver
     driver = new XboxController(RobotMap.driverID);
     shifter = new JoystickButton(driver, RobotMap.toggleShifterButton);
-    goToElevatorHeight = new JoystickButton(driver, RobotMap.elevatorToHeightButton);
+    // goToElevatorHeight = new JoystickButton(driver, RobotMap.elevatorToHeightButton);
+    hatchPlaceOnBack = new JoystickButton(driver, RobotMap.hatchPlaceOnBackButton);
     cargoCollect = new JoystickButton(driver, RobotMap.cargoCollectButton);
     hatchCollect = new JoystickButton(driver, RobotMap.hatchCollectButton);
     place = new JoystickButton(driver, RobotMap.placeButton);
@@ -83,9 +86,10 @@ public class OI {
     loadingStationCargoSet = new JoystickButton(coDriver, RobotMap.loadingStationCargoSetButton);
 
     //Driver Buttons
-    goToElevatorHeight.whenPressed(new SetElevatorAndArm());
+    // goToElevatorHeight.whenPressed(new SetElevatorAndArm()); //useless at the moment
+    hatchPlaceOnBack.whenPressed(new SetElevatorAndArm(ArmSide.BACK, ElevatorHeight.LEVEL1HATCH, ArmSetpoint.HATCH));
     shifter.whenPressed(new ToggleShifter());
-    hatchCollect.whenPressed(new HatchCollect());
+    hatchCollect.whenPressed(new SetElevatorAndArm(ArmSide.FRONT, ElevatorHeight.LEVEL1HATCH, ArmSetpoint.HATCH));
     cargoCollect.whenPressed(new CollectCargo());
     place.whenPressed(new Place(1));
     elevatorManualUp.whileHeld(new ElevatorManual(0.4));
@@ -114,6 +118,7 @@ public class OI {
     SmartDashboard.putData("Set camera pipeline to 9", new SetCameraPipeline(9)); //works
     SmartDashboard.putData("Set camera pipeline to 0", new SetCameraPipeline(0));
     SmartDashboard.putData("Set Elevator out of Bounds", new SetElevatorAbsolute(22.1));
+    SmartDashboard.putData("Intake Cargo", new IntakeCargo());
   }
 
   public XboxController getDriver() {

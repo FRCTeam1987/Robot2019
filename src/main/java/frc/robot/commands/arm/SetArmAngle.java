@@ -15,9 +15,10 @@ import frc.robot.subsystems.Arm.ArmSide;
 
 public class SetArmAngle extends Command {
   
-  private final ArmSetpoint m_setpoint;
-  private final ArmSide m_armSide;
+  private ArmSetpoint m_setpoint;
+  private ArmSide m_armSide;
   private double m_targetAngle;
+  private boolean m_isDefault;
   
   public SetArmAngle(final ArmSetpoint setpoint, final ArmSide armSide) {
     requires(Robot.arm);
@@ -25,10 +26,26 @@ public class SetArmAngle extends Command {
     m_targetAngle = 0;
     m_armSide = armSide;
     setTimeout(1.5);
+    m_isDefault = false;
+  }
+
+  public SetArmAngle() {
+    requires(Robot.arm);
+    m_setpoint = ArmSetpoint.HOME;
+    m_targetAngle = 0;
+    m_armSide = ArmSide.FRONT;
+    setTimeout(1.5);
+    m_isDefault = true;
   }
 
   @Override
-  protected void initialize() {    
+  protected void initialize() {
+    if (m_isDefault) {
+      m_setpoint = Robot.arm.getArmSetpoint();
+      m_armSide = Robot.arm.getArmSide();
+    }
+    
+
     switch(m_setpoint) {
       case HATCH:
         m_targetAngle = RobotMap.armHatchAngle * (m_armSide == ArmSide.FRONT ? 1 : -1);
