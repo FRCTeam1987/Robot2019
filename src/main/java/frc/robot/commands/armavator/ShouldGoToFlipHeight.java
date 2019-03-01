@@ -22,7 +22,7 @@ public class ShouldGoToFlipHeight extends ConditionalCommand {
 
   @Override
   protected boolean condition() {
-    m_desiredArmSide = Robot.arm.getArmSide();
+    // m_desiredArmSide = Robot.arm.getArmSide();
     return Robot.arm.getArmSide() != m_desiredArmSide;
   }
 }

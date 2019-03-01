@@ -14,12 +14,14 @@ public class Claw extends Subsystem {
   
   private final WPI_TalonSRX clawIntake;
   private final DigitalInput cargoProx;
+  private final DigitalInput hatchProx;
   private final DoubleSolenoid hatchRelease;
 
   public Claw() {
     clawIntake = new WPI_TalonSRX(RobotMap.clawIntakeMotorID);
     clawIntake.setName("Claw", "intake");
     cargoProx = new DigitalInput(RobotMap.clawCargoProxID);
+    hatchProx = new DigitalInput(RobotMap.clawHatchProxID);  
     hatchRelease = new DoubleSolenoid(RobotMap.hatchRetractID, RobotMap.hatchReleaseID);
     hatchRelease.setName("Claw", "hatch-release");
     retractHatchPistons();
@@ -31,6 +33,10 @@ public class Claw extends Subsystem {
 
   public boolean isCargoCollected() {
     return !cargoProx.get();
+  }
+
+  public boolean isHatchCollected() {   //untested - output to shuffleboard to check
+    return hatchProx.get(); 
   }
 
   public void releaseHatch() {

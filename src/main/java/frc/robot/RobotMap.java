@@ -26,23 +26,24 @@ public class RobotMap {
 
     
     //MotorIDs
-    public static int leftMasterID = 1;  //
-	public static int leftSlave1ID = 2;
-	public static int leftSlave2ID = 3;
-	public static int rightMasterID = 4;
-	public static int rightSlave1ID = 5;
-    public static int rightSlave2ID = 6;
-    public static int elevatorMotorID = 7;
-    public static int armMotorID = 8;           //white stripe
-    public static int intakePivotMotorID = 10;   //cargo intake pivot
-    public static int cargoRollerMotorID = 14;   
-    public static int clawIntakeMotorID = 11;
-    public static int winchMasterID = 9; // winch motor ID might change
-    public static int winchSlaveID = 12;
-    public static int hatchCollectMotorID = 13;
+    public static int leftMasterID = 1;         //Yellow
+	public static int leftSlave1ID = 2;         //Grey
+	public static int leftSlave2ID = 3;         //White
+	public static int rightMasterID = 4;        //Pink
+	public static int rightSlave1ID = 5;        //Blue
+    public static int rightSlave2ID = 6;        //Purple
+    public static int elevatorMotorID = 7;      //Toad
+    public static int armMotorID = 8;           //Zebra
+    public static int intakePivotMotorID = 10;  //Red               cargo intake pivot
+    public static int cargoRollerMotorID = 14;  //Pink Stripe
+    public static int clawIntakeMotorID = 11;   //Bumble Bee
+    public static int winchMasterID = 9;        //Green
+    public static int winchSlaveID = 12;        //Polka Dot Dolphin
+    public static int hatchCollectMotorID = 13; //Purple Stripe
 
     //DIO IDs
     public static int clawCargoProxID = 1;
+    public static int clawHatchProxID = 7;
     public static int wristHomeID = 2;
     public static int cargoIntakeHomeID = 3;
     public static int elevatorMaxID = 4;

@@ -8,7 +8,7 @@ import frc.robot.commands.arm.ArmManual;
 import frc.robot.commands.armavator.FrontHatchPlace;
 import frc.robot.commands.armavator.HatchCollect;
 import frc.robot.commands.armavator.SetArmSide;
-import frc.robot.commands.armavator.SetDesiredPosition;
+// import frc.robot.commands.armavator.SetDesiredPosition;
 import frc.robot.commands.armavator.SetElevatorAndArm;
 import frc.robot.commands.cargointake.CollectCargo;
 import frc.robot.commands.cargointake.IntakeCargo;
@@ -102,12 +102,12 @@ public class OI {
     //Co-Driver buttons
     switchPotentialClawSide.whenPressed(new SetArmSide(ArmSide.FRONT));
     switchPotentialClawSide.whenReleased(new SetArmSide(ArmSide.BACK));
-    level1HatchSet.whenPressed(new SetDesiredPosition(ElevatorHeight.LEVEL1HATCH, ArmSetpoint.HATCH));
-    level2HatchSet.whenPressed(new SetDesiredPosition(ElevatorHeight.LEVEL2HATCH, ArmSetpoint.HATCH));
-    cargoShipCargoSet.whenPressed(new SetDesiredPosition(ElevatorHeight.CARGOSHIP, ArmSetpoint.CARGOSHIP));
-    level1CargoSet.whenPressed(new SetDesiredPosition(ElevatorHeight.LEVEL1CARGOROCKET, ArmSetpoint.CARGOROCKETLVL1));
-    level2CargoSet.whenPressed(new SetDesiredPosition(ElevatorHeight.LEVEL2CARGOROCKET, ArmSetpoint.CARGOROCKETLVL2));
-    loadingStationCargoSet.whenPressed(new SetDesiredPosition(ElevatorHeight.LOADINGSTATIONCARGO, ArmSetpoint.HATCH));
+    // level1HatchSet.whenPressed(new SetDesiredPosition(ElevatorHeight.LEVEL1HATCH, ArmSetpoint.HATCH));
+    // level2HatchSet.whenPressed(new SetDesiredPosition(ElevatorHeight.LEVEL2HATCH, ArmSetpoint.HATCH));
+    // cargoShipCargoSet.whenPressed(new SetDesiredPosition(ElevatorHeight.CARGOSHIP, ArmSetpoint.CARGOSHIP));
+    // level1CargoSet.whenPressed(new SetDesiredPosition(ElevatorHeight.LEVEL1CARGOROCKET, ArmSetpoint.CARGOROCKETLVL1));
+    // level2CargoSet.whenPressed(new SetDesiredPosition(ElevatorHeight.LEVEL2CARGOROCKET, ArmSetpoint.CARGOROCKETLVL2));
+    // loadingStationCargoSet.whenPressed(new SetDesiredPosition(ElevatorHeight.LOADINGSTATIONCARGO, ArmSetpoint.HATCH));
 
     //SmartDashboard puts
     SmartDashboard.putData("Front Hatch Place", new FrontHatchPlace());
