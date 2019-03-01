@@ -18,7 +18,11 @@ public class Place extends Command {
     if (Robot.claw.isCargoCollected()) {
       Robot.claw.setWheels(-m_percent);
     }
+    else if (Robot.claw.isHatchCollected()) {
+      Robot.claw.releaseHatch();
+    }
     else {
+      Robot.claw.setWheels(-m_percent);   //do we want to do this????
       Robot.claw.releaseHatch();
     }
   }
