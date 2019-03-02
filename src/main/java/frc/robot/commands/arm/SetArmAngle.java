@@ -1,10 +1,3 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package frc.robot.commands.arm;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -31,9 +24,6 @@ public class SetArmAngle extends Command {
 
   public SetArmAngle() {
     requires(Robot.arm);
-    m_setpoint = ArmSetpoint.HOME;
-    m_targetAngle = 0;
-    m_armSide = ArmSide.FRONT;
     setTimeout(1.5);
     m_isDefault = true;
   }
@@ -41,11 +31,10 @@ public class SetArmAngle extends Command {
   @Override
   protected void initialize() {
     if (m_isDefault) {
-      m_setpoint = Robot.arm.getArmSetpoint();
-      m_armSide = Robot.arm.getArmSide();
+      m_setpoint = Robot.arm.getArmSetpointState();
+      m_armSide = Robot.arm.getArmSideState();
     }
     
-
     switch(m_setpoint) {
       case HATCH:
         m_targetAngle = RobotMap.armHatchAngle * (m_armSide == ArmSide.FRONT ? 1 : -1);

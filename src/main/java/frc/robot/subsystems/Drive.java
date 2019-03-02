@@ -17,6 +17,9 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 import frc.robot.util.Util;
+import jaci.pathfinder.Pathfinder;
+import jaci.pathfinder.PathfinderFRC;
+import jaci.pathfinder.followers.EncoderFollower;
 import frc.robot.commands.drive.XboxDrive;
 
 public class Drive extends Subsystem {
@@ -197,13 +200,33 @@ public class Drive extends Subsystem {
     return master.getSelectedSensorPosition(0);
   }
 
+  // public void followPath(EncoderFollower left, EncoderFollower right, boolean isReversed) { //not finished
+  //   double l;
+  //   double r;
+    
+  //   if (!isReversed){
+  //     l = left.calculate(-leftMaster.getSelectedSensorPosition(0));
+  //     r = right.calculate(-rightMaster.getSelectedSensorPosition(0));
+  //   }
+
+  //   else {
+  //     l = left.calculate(leftMaster.getSelectedSensorPosition(0));
+  //     r = right.calculate(rightMaster.getSelectedSensorPosition(0));
+  //   }
+  
+  //   double gyroHeading = getAngle();
+  //   double angleSetpoint = Pathfinder.r2d(left.getHeading());
+  //   double angleDifference = Pathfinder.boundHalfDegrees(angleSetpoint - gyroHeading);
+
+  // }
+
   @Override
   public void initDefaultCommand() {
     setDefaultCommand(new XboxDrive());
   }
 
   public void periodic() {
-    // SmartDashboard.putNumber("Left Drive Encoder Ticks", getEncoderTicks(leftMaster));
-    // SmartDashboard.putNumber("Right Drive Encoder Ticks", getEncoderTicks(rightMaster));
+    SmartDashboard.putNumber("Left Drive Encoder Ticks", getEncoderTicks(leftMaster));
+    SmartDashboard.putNumber("Right Drive Encoder Ticks", getEncoderTicks(rightMaster));
   }
 }

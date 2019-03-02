@@ -26,14 +26,14 @@ public class AimRobot extends Command {
   protected void initialize() {
     leftPercent = 0.0;
     rightPercent = 0.0;
-    Robot.vision.getLimelight().setLedMode(LedMode.ON);
+    Robot.vision.getActiveLimelight().setLedMode(LedMode.ON);
     Robot.drive.setLowGear();
   }
 
   @Override
   protected void execute() {
     double steeringAdjust = 0.0;
-    double target = Robot.vision.getLimelight().getTx();
+    double target = Robot.vision.getActiveLimelight().getTx();
     double headingError = -target;
 
     if (target > 1.0) {
@@ -59,6 +59,7 @@ public class AimRobot extends Command {
   @Override
   protected void end() {
     Robot.drive.tankDrive(0, 0);
+    Robot.vision.getActiveLimelight().setLedMode(LedMode.OFF);
   }
 
   @Override

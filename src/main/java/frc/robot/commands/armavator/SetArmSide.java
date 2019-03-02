@@ -7,20 +7,23 @@ import frc.robot.subsystems.Arm.ArmSide;
 public class SetArmSide extends InstantCommand {
 
   private ArmSide m_armSide;
+  private boolean m_isDefault;
 
   public SetArmSide(final ArmSide armSide) {
     super();
     m_armSide = armSide;
+    m_isDefault = false;
   }
   
   public SetArmSide() {
-    m_armSide = ArmSide.FRONT;
-
+    m_isDefault = true;
   }
 
   @Override
   protected void initialize() {
-    m_armSide = Robot.arm.getArmSide();
+    if (m_isDefault) {
+      m_armSide = Robot.arm.getArmSideState();
+    }
     Robot.arm.setArmSide(m_armSide);
   }
 

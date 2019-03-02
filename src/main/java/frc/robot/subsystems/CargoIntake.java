@@ -27,8 +27,6 @@ public class CargoIntake extends Subsystem {
   }
 
   public void configIntakePivot(final WPI_TalonSRX motor) {
-    // intakePivot.configMotionAcceleration(443); //Fix value
-    // intakePivot.configMotionCruiseVelocity(443);
     intakePivot.setNeutralMode(NeutralMode.Brake);
 
     intakePivot.config_kF(0, 0.0);

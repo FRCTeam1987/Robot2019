@@ -22,7 +22,7 @@ public class Place extends Command {
       Robot.claw.releaseHatch();
     }
     else {
-      Robot.claw.setWheels(-m_percent);   //do we want to do this????
+      Robot.claw.setWheels(-m_percent);
       Robot.claw.releaseHatch();
     }
   }
@@ -33,7 +33,8 @@ public class Place extends Command {
 
   @Override
   protected boolean isFinished() {
-    return !Robot.claw.isCargoCollected() || isTimedOut();
+    // return !Robot.claw.isCargoCollected() || isTimedOut(); this would only pulse the motors once the ball is slightly out of the claw
+    return isTimedOut();
   }
 
   @Override

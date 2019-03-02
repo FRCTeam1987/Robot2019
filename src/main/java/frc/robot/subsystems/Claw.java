@@ -35,7 +35,7 @@ public class Claw extends Subsystem {
     return !cargoProx.get();
   }
 
-  public boolean isHatchCollected() {   //untested - output to shuffleboard to check
+  public boolean isHatchCollected() {
     return hatchProx.get(); 
   }
 
@@ -49,6 +49,7 @@ public class Claw extends Subsystem {
 
   public void periodic() {
     SmartDashboard.putBoolean("Cargo Collected", isCargoCollected());
+    SmartDashboard.putBoolean("Hatch Collected", isHatchCollected());
   }
 
   @Override

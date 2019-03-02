@@ -27,9 +27,12 @@ public class SandstormDrive extends Command {
 
   @Override
   protected void end() {
+    Robot.vision.limeFront.setCameraMode(CameraMode.VISION);
+    Robot.vision.limeBack.setCameraMode(CameraMode.VISION);
   }
 
   @Override
   protected void interrupted() {
+    end();
   }
 }

@@ -8,25 +8,30 @@ import frc.robot.subsystems.Elevator.ElevatorHeight;
 public class GoToElevatorHeight extends Command {
   
   private ElevatorHeight m_elevatorHeight;
-
   private double m_targetInches;
+  private boolean m_isDefault;
 
   public GoToElevatorHeight(final ElevatorHeight elevatorHeight) {
     requires(Robot.elevator);
     m_elevatorHeight = elevatorHeight;
     m_targetInches = 0;
     setTimeout(1.5);
+    m_isDefault = false;
   }
 
   public GoToElevatorHeight() {
     m_elevatorHeight = ElevatorHeight.HOME;
     m_targetInches = 0;
+    m_isDefault = true;
     setTimeout(1.5);
   }
 
   @Override
   protected void initialize() {
-    m_elevatorHeight = Robot.elevator.getElevatorHeight();
+    if (m_isDefault) {
+      m_elevatorHeight = Robot.elevator.getElevatorHeightState();
+    }
+    
     switch(m_elevatorHeight) {
       case CARGOGROUNDCOLLECT:
         m_targetInches = RobotMap.elevatorGroundCollectHeight;

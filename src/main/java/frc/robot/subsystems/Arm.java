@@ -98,8 +98,12 @@ public class Arm extends Subsystem {
     armSide = newArmSide;
   }
 
-  public ArmSide getArmSide() {
+  public ArmSide getArmSide() { // might not be needed
     return (getArmAngle() >= 0) ? ArmSide.FRONT : ArmSide.BACK;
+  }
+
+  public ArmSide getArmSideState() {
+    return armSide;
   }
 
   public enum ArmSetpoint {
@@ -113,7 +117,7 @@ public class Arm extends Subsystem {
     HOME
   }
 
-  public ArmSetpoint getArmSetpoint() {
+  public ArmSetpoint getArmSetpointState() {
     return armSetpoint;
   }
 
@@ -124,9 +128,9 @@ public class Arm extends Subsystem {
   @Override
   public void periodic() {
     SmartDashboard.putNumber("Arm Angle", getArmAngle());
-    SmartDashboard.putString("Desired Arm Setpoint", getArmSetpoint().toString());
-    SmartDashboard.putString("Desired Arm Side", getArmSide().toString());
-    // zeroWristAtHome();
+    SmartDashboard.putString("Desired Arm Setpoint", getArmSetpointState().toString());
+    SmartDashboard.putString("Desired Arm Side", getArmSideState().toString());
+    zeroWristAtHome();
     SmartDashboard.putBoolean("Wrist Home", wristHome.get());
   }
 }

@@ -9,20 +9,25 @@ import frc.robot.subsystems.Elevator.ElevatorHeight;
 public class ShouldGoToFlipHeight extends ConditionalCommand {
   
   private ArmSide m_desiredArmSide;
+  private boolean m_isDefault;
   
   public ShouldGoToFlipHeight(final ArmSide desiredArmSide) { 
     super(new GoToElevatorHeight(ElevatorHeight.FLIP));
     m_desiredArmSide = desiredArmSide;
+    m_isDefault = false;
   }
 
   public ShouldGoToFlipHeight() {
     super(new GoToElevatorHeight(ElevatorHeight.FLIP));
-    m_desiredArmSide = ArmSide.FRONT;
+    m_isDefault = true;
   }
 
   @Override
   protected boolean condition() {
-    // m_desiredArmSide = Robot.arm.getArmSide();
-    return Robot.arm.getArmSide() != m_desiredArmSide;
+    if (m_isDefault) {
+      m_desiredArmSide = Robot.arm.getArmSideState();
+    }
+    
+    return Robot.arm.getArmSideState() != m_desiredArmSide;
   }
 }

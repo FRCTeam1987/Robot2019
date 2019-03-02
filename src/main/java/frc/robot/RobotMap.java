@@ -5,14 +5,15 @@ public class RobotMap {
 
     //Driver Buttons
     public static int driverID = 0;
-    // public static int elevatorToHeightButton = 1; //a
-    public static int hatchPlaceOnBackButton = 2; //temporary //b
-    public static int hatchCollectButton = 1; //a
+    public static int elevatorToHeightButton = 1; //a
     public static int cargoCollectButton = 3; //x
     public static int placeButton = 4; //y
-    public static int armFrontButton = 6;
-    public static int armBackButton = 5;
+    // public static int prepClimbButton = 5; //succ
+    // public static int climbButton = 6;
+    public static int armManualForwardButton = 5; //Temp buttons for systems test
+    public static int armManualBackButton;
     public static int toggleShifterButton = 9; //left stick push
+    public static int aimHatchButton = 10; 
 
     //Co-driver Buttons
     public static int coDriverID = 1;
@@ -23,6 +24,8 @@ public class RobotMap {
     public static int level1CargoSetButton = 15;
     public static int level2CargoSetButton = 16;
     public static int loadingStationCargoSetButton = 10;
+    public static int homeSetButton; //add button
+    public static int stopAllButton = 18; //change ID
 
     
     //MotorIDs
@@ -98,6 +101,7 @@ public class RobotMap {
     public static double setElevatorAbsoluteTimeout = 60.0; 
     public static double elevatorMax = 21.5;
     public static double elevatorMin = -20.0;   //NEED TO DEFINE  
+    public static double elevatorHomeTolerance = 0.2;
     
     public static double wristTolerance = 5;
 }

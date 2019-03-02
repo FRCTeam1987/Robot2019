@@ -4,18 +4,17 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.arm.ArmManual;
+import frc.robot.commands.StopAll;
 import frc.robot.commands.armavator.FrontHatchPlace;
-import frc.robot.commands.armavator.HatchCollect;
 import frc.robot.commands.armavator.SetArmSide;
-// import frc.robot.commands.armavator.SetDesiredPosition;
+// import frc.robot.commands.armavator.SetRobotState;
 import frc.robot.commands.armavator.SetElevatorAndArm;
+import frc.robot.commands.armavator.SetRobotState;
 import frc.robot.commands.cargointake.CollectCargo;
 import frc.robot.commands.cargointake.IntakeCargo;
 import frc.robot.commands.cargointake.SetIntakeAngle;
 import frc.robot.commands.cargointake.SetIntakePivotManual;
 import frc.robot.commands.claw.Place;
-import frc.robot.commands.claw.PlaceHatch;
 import frc.robot.commands.drive.ToggleShifter;
 // import frc.robot.commands.drive.DriveDistance;
 // import frc.robot.commands.drive.ToggleShifter;
@@ -36,16 +35,14 @@ public class OI {
   private final XboxController coDriver;
 
   //Driver
-  // private final Button goToElevatorHeight;
-  private final Button hatchPlaceOnBack;
+  private final Button goToElevatorHeight;
   private final Button shifter;
   private final Button cargoCollect;
-  private final Button hatchCollect;
   private final Button place;
-  private final XboxDPad elevatorManualUp;
-  private final XboxDPad elevatorManualDown;
   private final Button armManualForward;
   private final Button armManualBack;
+  private final XboxDPad elevatorManualUp;
+  private final XboxDPad elevatorManualDown;
   private final XboxDPad cargoIntakeManualForward;
   private final XboxDPad cargoIntakeManualBack;
 
@@ -57,21 +54,20 @@ public class OI {
   private final Button level1CargoSet;
   private final Button level2CargoSet;
   private final Button loadingStationCargoSet;
+  private final Button stopAll;
 
 
   public OI() {
     //Driver
     driver = new XboxController(RobotMap.driverID);
     shifter = new JoystickButton(driver, RobotMap.toggleShifterButton);
-    // goToElevatorHeight = new JoystickButton(driver, RobotMap.elevatorToHeightButton);
-    hatchPlaceOnBack = new JoystickButton(driver, RobotMap.hatchPlaceOnBackButton);
+    goToElevatorHeight = new JoystickButton(driver, RobotMap.elevatorToHeightButton);
     cargoCollect = new JoystickButton(driver, RobotMap.cargoCollectButton);
-    hatchCollect = new JoystickButton(driver, RobotMap.hatchCollectButton);
     place = new JoystickButton(driver, RobotMap.placeButton);
+    armManualForward = new JoystickButton(driver, RobotMap.armManualForwardButton);
+    armManualBack = new JoystickButton(driver, RobotMap.armManualBackButton);
     elevatorManualUp = new XboxDPad(driver, XboxDPad.Direction.Up);
     elevatorManualDown = new XboxDPad(driver, XboxDPad.Direction.Down);
-    armManualForward = new JoystickButton(driver, RobotMap.armFrontButton);
-    armManualBack = new JoystickButton(driver, RobotMap.armBackButton);
     cargoIntakeManualForward = new XboxDPad(driver, XboxDPad.Direction.Left);
     cargoIntakeManualBack = new XboxDPad(driver, XboxDPad.Direction.Right);
 
@@ -84,30 +80,28 @@ public class OI {
     level1CargoSet = new JoystickButton(coDriver, RobotMap.level1CargoSetButton);
     level2CargoSet = new JoystickButton(coDriver, RobotMap.level2CargoSetButton);
     loadingStationCargoSet = new JoystickButton(coDriver, RobotMap.loadingStationCargoSetButton);
+    stopAll = new JoystickButton(coDriver, RobotMap.stopAllButton);
 
     //Driver Buttons
-    // goToElevatorHeight.whenPressed(new SetElevatorAndArm()); //useless at the moment
-    hatchPlaceOnBack.whenPressed(new SetElevatorAndArm(ArmSide.BACK, ElevatorHeight.LEVEL1HATCH, ArmSetpoint.HATCH));
+    goToElevatorHeight.whenPressed(new SetElevatorAndArm());
     shifter.whenPressed(new ToggleShifter());
-    hatchCollect.whenPressed(new SetElevatorAndArm(ArmSide.FRONT, ElevatorHeight.LEVEL1HATCH, ArmSetpoint.HATCH));
     cargoCollect.whenPressed(new CollectCargo());
     place.whenPressed(new Place(1));
     elevatorManualUp.whileHeld(new ElevatorManual(0.4));
     elevatorManualDown.whileHeld(new ElevatorManual(-0.4));
-    armManualForward.whileHeld(new ArmManual(-0.4));
-    armManualBack.whileHeld(new ArmManual(0.4));
     cargoIntakeManualForward.whileHeld(new SetIntakePivotManual(0.4));
     cargoIntakeManualBack.whileHeld(new SetIntakePivotManual(-0.4));
 
     //Co-Driver buttons
     switchPotentialClawSide.whenPressed(new SetArmSide(ArmSide.FRONT));
     switchPotentialClawSide.whenReleased(new SetArmSide(ArmSide.BACK));
-    // level1HatchSet.whenPressed(new SetDesiredPosition(ElevatorHeight.LEVEL1HATCH, ArmSetpoint.HATCH));
-    // level2HatchSet.whenPressed(new SetDesiredPosition(ElevatorHeight.LEVEL2HATCH, ArmSetpoint.HATCH));
-    // cargoShipCargoSet.whenPressed(new SetDesiredPosition(ElevatorHeight.CARGOSHIP, ArmSetpoint.CARGOSHIP));
-    // level1CargoSet.whenPressed(new SetDesiredPosition(ElevatorHeight.LEVEL1CARGOROCKET, ArmSetpoint.CARGOROCKETLVL1));
-    // level2CargoSet.whenPressed(new SetDesiredPosition(ElevatorHeight.LEVEL2CARGOROCKET, ArmSetpoint.CARGOROCKETLVL2));
-    // loadingStationCargoSet.whenPressed(new SetDesiredPosition(ElevatorHeight.LOADINGSTATIONCARGO, ArmSetpoint.HATCH));
+    level1HatchSet.whenPressed(new SetRobotState(ElevatorHeight.LEVEL1HATCH, ArmSetpoint.HATCH));
+    level2HatchSet.whenPressed(new SetRobotState(ElevatorHeight.LEVEL2HATCH, ArmSetpoint.HATCH));
+    cargoShipCargoSet.whenPressed(new SetRobotState(ElevatorHeight.CARGOSHIP, ArmSetpoint.CARGOSHIP));
+    level1CargoSet.whenPressed(new SetRobotState(ElevatorHeight.LEVEL1CARGOROCKET, ArmSetpoint.CARGOROCKETLVL1));
+    level2CargoSet.whenPressed(new SetRobotState(ElevatorHeight.LEVEL2CARGOROCKET, ArmSetpoint.CARGOROCKETLVL2));
+    loadingStationCargoSet.whenPressed(new SetRobotState(ElevatorHeight.LOADINGSTATIONCARGO, ArmSetpoint.HATCH));
+    stopAll.whenPressed(new StopAll());
 
     //SmartDashboard puts
     SmartDashboard.putData("Front Hatch Place", new FrontHatchPlace());

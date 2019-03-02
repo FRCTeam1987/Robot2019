@@ -22,13 +22,13 @@ public class DriveToTarget extends Command {
     driveAdjust = 0;
     leftPercent = 0;
     rightPercent = 0;
-    Robot.vision.getLimelight().setLedMode(LedMode.ON);
+    Robot.vision.getActiveLimelight().setLedMode(LedMode.ON);
     Robot.drive.setLowGear();
   }
 
   @Override
   protected void execute() {
-    driveError = Robot.vision.getLimelight().getTy();
+    driveError = Robot.vision.getActiveLimelight().getTy();
 
     driveAdjust = kP * driveError;
 

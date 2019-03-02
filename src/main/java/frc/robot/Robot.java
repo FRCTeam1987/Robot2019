@@ -41,7 +41,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void disabledInit() {
-    Robot.vision.getLimelight().setLedMode(LedMode.OFF);
+    Robot.vision.getActiveLimelight().setLedMode(LedMode.OFF);
   }
 
   @Override
@@ -55,7 +55,6 @@ public class Robot extends TimedRobot {
 
     if (m_autonomousCommand != null) {
       m_autonomousCommand.start();
-      Robot.vision.getLimelight().setLedMode(LedMode.ON);
     }
   }
 
@@ -70,7 +69,6 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.cancel();
     }
 
-    Robot.vision.getLimelight().setLedMode(LedMode.OFF);
   }
 
   @Override

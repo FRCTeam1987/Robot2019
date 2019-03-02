@@ -33,9 +33,6 @@ public class Elevator extends Subsystem {
 
   public void configElevator(final WPI_TalonSRX motor) {
     elevator.configFactoryDefault();
-    // elevator.configMotionAcceleration(443); //change once we know gearing reduction
-    // elevator.configMotionCruiseVelocity(443); //this too
-
 
     elevator.setInverted(true);
     elevator.config_kF(0, 0.0);
@@ -59,7 +56,7 @@ public class Elevator extends Subsystem {
   }
 
   public void zeroElevatorAtHome() { //not tested
-    if (elevatorHome.get() && Util.isWithinTolerance(getInches(), RobotMap.elevatorHomeHeight, 0.2)) {  //double check and change to robot map
+    if (elevatorHome.get() && Util.isWithinTolerance(getInches(), RobotMap.elevatorHomeHeight, RobotMap.elevatorHomeTolerance)) {  //double check and change to robot map
       zeroElevator();
     }
   }
@@ -68,13 +65,12 @@ public class Elevator extends Subsystem {
     return elevatorMax.get();
   }
 
-  // public boolean isAtMin() {         //not tested
-  //   return elevatorMin.get();
-  // }
+  public boolean isAtMin() {         //not tested
+    return elevatorMin.get();
+  }
 
   public boolean isAtLimit() {
-    // return (isAtMax() || isAtMin()); 
-    return isAtMax(); //temp until we get min tach
+    return (isAtMax() || isAtMin()); 
   }
 
   public boolean isCurrentPositionOutOfRange() {
@@ -120,8 +116,10 @@ public class Elevator extends Subsystem {
   @Override
   public void periodic() {
     SmartDashboard.putNumber("Elevator Inches", getInches());
-    SmartDashboard.putString("Desired Elevator Height", getElevatorHeight().toString());
+    SmartDashboard.putString("Desired Elevator Height", getElevatorHeightState().toString());
     SmartDashboard.putBoolean("Max elevator tripped", elevatorMax.get());
+    SmartDashboard.putBoolean("Min Elevator Tripped", elevatorMin.get());
+    SmartDashboard.putBoolean("Home Elevator Tripped", elevatorHome.get());
     stopWhenOutOfRange();
     zeroElevatorAtHome();
   }
@@ -146,7 +144,7 @@ public class Elevator extends Subsystem {
     elevatorHeight = newElevatorHeight;
   }
 
-  public ElevatorHeight getElevatorHeight() {
+  public ElevatorHeight getElevatorHeightState() {
     return elevatorHeight;
   }
 }

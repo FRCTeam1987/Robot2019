@@ -27,9 +27,9 @@ public class SetElevatorAndArm extends CommandGroup {
   }
 
   public SetElevatorAndArm() {
-    m_desiredArmSide = Robot.arm.getArmSide();
-    m_elevatorHeight = Robot.elevator.getElevatorHeight();
-    m_armAngle = Robot.arm.getArmSetpoint();
+    m_desiredArmSide = Robot.arm.getArmSideState();
+    m_elevatorHeight = Robot.elevator.getElevatorHeightState();
+    m_armAngle = Robot.arm.getArmSetpointState();
 
     addSequential(new ShouldGoToFlipHeight());
     addSequential(new ShouldRollArm());
