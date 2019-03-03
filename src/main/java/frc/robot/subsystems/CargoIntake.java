@@ -28,11 +28,11 @@ public class CargoIntake extends Subsystem {
 
   public void configIntakePivot(final WPI_TalonSRX motor) {
     intakePivot.setNeutralMode(NeutralMode.Brake);
-
-    intakePivot.config_kF(0, 0.0);
-    intakePivot.config_kP(0, 2.0);
+    // zeroCargoIntakePivot();
+    intakePivot.config_kF(0, 0.3);
+    intakePivot.config_kP(0, 0.6); // 5.4
     intakePivot.config_kI(0, 0.0);
-    intakePivot.config_kD(0, 0.5);
+    intakePivot.config_kD(0, 0.0); // 0.4
 
     Util.configTalonSRXWithEncoder(motor, false);
   }
@@ -64,15 +64,15 @@ public class CargoIntake extends Subsystem {
   }
 
   public void zeroCargoIntakePivot() {
-    if (cargoHome.get()) {
+    if (isCargoHomed()) {
       intakePivot.setSelectedSensorPosition(0);
     }
   }
 
   public void periodic() {
     SmartDashboard.putNumber("Intake Pivot Degrees", Util.ticksToDegrees(getTicks())); 
-    zeroCargoIntakePivot();
     SmartDashboard.putBoolean("Is Cargo Homed?", isCargoHomed());
+    zeroCargoIntakePivot();
   }
 
   @Override

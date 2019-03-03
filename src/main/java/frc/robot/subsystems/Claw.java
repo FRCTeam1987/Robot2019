@@ -36,7 +36,7 @@ public class Claw extends Subsystem {
   }
 
   public boolean isHatchCollected() {
-    return hatchProx.get(); 
+    return !hatchProx.get(); 
   }
 
   public void releaseHatch() {

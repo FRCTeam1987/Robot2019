@@ -82,7 +82,7 @@ public class SetArmAngle extends Command {
 
   @Override
   protected void end() {
-    Robot.arm.setWristPercent(0);
+    // Robot.arm.setWristPercent(0);
   }
 
   @Override

@@ -10,31 +10,19 @@ import frc.robot.Robot;
 
 public class SetElevatorAndArm extends CommandGroup {
 
-  private final ArmSide m_desiredArmSide;
-  private final ElevatorHeight m_elevatorHeight;
-  private final ArmSetpoint m_armAngle;
-
   public SetElevatorAndArm(final ArmSide desiredArmSide, final ElevatorHeight elevatorHeight, final ArmSetpoint armAngle) {
-    m_desiredArmSide = desiredArmSide;
-    m_elevatorHeight = elevatorHeight;
-    m_armAngle = armAngle;
-
-    addSequential(new ShouldGoToFlipHeight(m_desiredArmSide));
-    addSequential(new ShouldRollArm(m_desiredArmSide));
-    addSequential(new SetArmSide(m_desiredArmSide));
-    addSequential(new SetArmAngle(m_armAngle, m_desiredArmSide));
-    addSequential(new GoToElevatorHeight(m_elevatorHeight));
+    addSequential(new ShouldGoToFlipHeight(desiredArmSide));
+    addSequential(new ShouldRollArm(desiredArmSide));
+    addSequential(new SetArmSide(desiredArmSide));
+    addSequential(new SetArmAngle(armAngle, desiredArmSide));
+    addSequential(new GoToElevatorHeight(elevatorHeight));
   }
 
   public SetElevatorAndArm() {
-    m_desiredArmSide = Robot.arm.getArmSideState();
-    m_elevatorHeight = Robot.elevator.getElevatorHeightState();
-    m_armAngle = Robot.arm.getArmSetpointState();
-
     addSequential(new ShouldGoToFlipHeight());
     addSequential(new ShouldRollArm());
     addSequential(new SetArmSide());
-    addSequential(new SetArmAngle());
+    addParallel(new SetArmAngle());
     addSequential(new GoToElevatorHeight());
   }
 }

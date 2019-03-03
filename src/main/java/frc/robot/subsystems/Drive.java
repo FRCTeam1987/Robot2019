@@ -18,8 +18,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 import frc.robot.util.Util;
 import jaci.pathfinder.Pathfinder;
-import jaci.pathfinder.PathfinderFRC;
+import jaci.pathfinder.Trajectory;
 import jaci.pathfinder.followers.EncoderFollower;
+import jaci.pathfinder.modifiers.TankModifier;
 import frc.robot.commands.drive.XboxDrive;
 
 public class Drive extends Subsystem {
@@ -35,6 +36,7 @@ public class Drive extends Subsystem {
   private final AHRS ahrs;
   private boolean isBrake;
 
+  private double lastGyroError;
   public Drive() {
     leftMaster = new WPI_TalonSRX(RobotMap.leftMasterID);
     leftSlave1 = new WPI_TalonSRX(RobotMap.leftSlave1ID);
@@ -78,7 +80,7 @@ public class Drive extends Subsystem {
       slave.configFactoryDefault();
       slave.follow(master);
     });
-
+    setCoast();
     Util.configTalonSRXWithEncoder(master, isEncoderInverted);
   }
 
@@ -171,11 +173,11 @@ public class Drive extends Subsystem {
     return rightMaster.getMotorOutputPercent();
   }
 
-  public double getLeftRawEncoderPosition() {
+  public int getLeftRawEncoderPosition() {
     return leftMaster.getSelectedSensorPosition(0);   
   }
 
-  public double getRightRawEncoderPosition() {
+  public int getRightRawEncoderPosition() {
     return rightMaster.getSelectedSensorPosition(0);
   }
 
@@ -200,25 +202,53 @@ public class Drive extends Subsystem {
     return master.getSelectedSensorPosition(0);
   }
 
-  // public void followPath(EncoderFollower left, EncoderFollower right, boolean isReversed) { //not finished
-  //   double l;
-  //   double r;
+  public EncoderFollower[] setupPath(Trajectory toFollow) {
+    EncoderFollower left = new EncoderFollower();
+    EncoderFollower right = new EncoderFollower();
+    TankModifier modifier = new TankModifier(toFollow).modify(RobotMap.wheelBaseDiameter);
+    left = new EncoderFollower(modifier.getLeftTrajectory());
+    right = new EncoderFollower(modifier.getRightTrajectory());
+    left.configureEncoder(getLeftRawEncoderPosition(), (int)RobotMap.ticksPerRotation, RobotMap.driveBaseWheelsDiameter);
+    right.configureEncoder(getRightRawEncoderPosition(), (int)RobotMap.ticksPerRotation, RobotMap.driveBaseWheelsDiameter);
+    left.configurePIDVA(RobotMap.pathHighGearKP, RobotMap.pathHighGearKI, RobotMap.pathHighGearKD, RobotMap.pathHighGearKV, RobotMap.pathHighGearKA);
+    right.configurePIDVA(RobotMap.pathHighGearKP, RobotMap.pathHighGearKI, RobotMap.pathHighGearKD, RobotMap.pathHighGearKV, RobotMap.pathHighGearKA);
+
+    return new EncoderFollower[] {
+      left,
+      right
+    };
+  }
+
+  public void followPath(EncoderFollower left, EncoderFollower right, boolean isReversed) { //not finished
+    double l;
+    double r;
     
-  //   if (!isReversed){
-  //     l = left.calculate(-leftMaster.getSelectedSensorPosition(0));
-  //     r = right.calculate(-rightMaster.getSelectedSensorPosition(0));
-  //   }
+    if (!isReversed){
+      l = left.calculate(-leftMaster.getSelectedSensorPosition(0));
+      r = right.calculate(-rightMaster.getSelectedSensorPosition(0));
+    }
 
-  //   else {
-  //     l = left.calculate(leftMaster.getSelectedSensorPosition(0));
-  //     r = right.calculate(rightMaster.getSelectedSensorPosition(0));
-  //   }
+    else {
+      l = left.calculate(leftMaster.getSelectedSensorPosition(0));
+      r = right.calculate(rightMaster.getSelectedSensorPosition(0));
+    }
   
-  //   double gyroHeading = getAngle();
-  //   double angleSetpoint = Pathfinder.r2d(left.getHeading());
-  //   double angleDifference = Pathfinder.boundHalfDegrees(angleSetpoint - gyroHeading);
+    double gyroHeading = getAngle();
+    double angleSetpoint = Pathfinder.r2d(left.getHeading());
+    double angleDifference = Pathfinder.boundHalfDegrees(angleSetpoint - gyroHeading);
 
-  // }
+    double turn = RobotMap.pathGP * angleDifference + (RobotMap.pathGD *
+    ((angleDifference - lastGyroError) / RobotMap.period));
+
+    lastGyroError = angleDifference;
+
+    if(!isReversed) {
+      this.tankDrive(l + turn, r - turn);
+    }
+    else {
+      this.tankDrive(-l + turn, -r - turn);
+    }
+  }
 
   @Override
   public void initDefaultCommand() {

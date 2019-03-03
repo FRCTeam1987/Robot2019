@@ -28,6 +28,6 @@ public class ShouldRollArm extends ConditionalCommand {
       m_desiredArmSide = Robot.arm.getArmSideState();
     }
     
-    return Robot.arm.getArmSideState() != m_desiredArmSide;
+    return Robot.arm.getArmSide() != m_desiredArmSide;
   }
 }

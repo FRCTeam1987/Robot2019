@@ -24,7 +24,8 @@ public class SetCameraPipeline extends InstantCommand {
 
   @Override
   protected void initialize() {
-    Robot.vision.limeFront.setPipeline(m_pipeline);;
+    Robot.vision.limeFront.setPipeline(m_pipeline);
+    Robot.vision.limeBack.setPipeline(m_pipeline);
 
   }
 

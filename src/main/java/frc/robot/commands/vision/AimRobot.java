@@ -3,6 +3,7 @@ package frc.robot.commands.vision;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
+import frc.robot.util.limelight.CameraMode;
 import frc.robot.util.limelight.LedMode;
 
 public class AimRobot extends Command {
@@ -26,6 +27,7 @@ public class AimRobot extends Command {
   protected void initialize() {
     leftPercent = 0.0;
     rightPercent = 0.0;
+    Robot.vision.getActiveLimelight().setCameraMode(CameraMode.VISION);
     Robot.vision.getActiveLimelight().setLedMode(LedMode.ON);
     Robot.drive.setLowGear();
   }

@@ -11,9 +11,10 @@ public class RobotMap {
     // public static int prepClimbButton = 5; //succ
     // public static int climbButton = 6;
     public static int armManualForwardButton = 5; //Temp buttons for systems test
-    public static int armManualBackButton;
+    public static int armManualBackButton = 6;
     public static int toggleShifterButton = 9; //left stick push
     public static int aimHatchButton = 10; 
+    public static int collectCargoFromLoadingStationButton = 2;
 
     //Co-driver Buttons
     public static int coDriverID = 1;
@@ -24,8 +25,22 @@ public class RobotMap {
     public static int level1CargoSetButton = 15;
     public static int level2CargoSetButton = 16;
     public static int loadingStationCargoSetButton = 10;
-    public static int homeSetButton; //add button
-    public static int stopAllButton = 18; //change ID
+    public static int homeSetButton = 17;
+    public static int stopAllButton = 11; //change ID
+
+    //Drive
+    public static double maxHighGearVelocity = 14;
+
+    //Path Turning Tuning
+    public static double pathGP = 0.037;
+    public static double pathGD = 0.0;
+    
+    //Drive PID
+    public static double pathHighGearKP = 0.9;
+    public static double pathHighGearKI = 0.0;
+    public static double pathHighGearKD = 0.0;
+    public static double pathHighGearKV = 1 / maxHighGearVelocity;
+    public static double pathHighGearKA = 0.0;
 
     
     //MotorIDs
@@ -54,7 +69,7 @@ public class RobotMap {
     public static int elevatorMinID = 6;
 
     public static int defaultTimeout = 10;
-    public static double ticksPerRotation = 4096.0;
+    public static double ticksPerRotation = 4096;
 
     //Pneumatics
     public static int highGearID = 0;
@@ -64,34 +79,36 @@ public class RobotMap {
 
     //Robot Dimensions
     public static double driveBaseWheelsDiameter = 5.0; //might need to be tweaked
+    public static double wheelBaseDiameter = 27.0;
 
     //Elevator Setpoints
-    public static double elevatorGroundCollectHeight = -1.5;
+    public static double elevatorGroundCollectHeight = -1.7;
     public static double elevatorHomeHeight = 0;
     public static double elevatorLevel1HatchHeight = -9.0;
     public static double elevatorLevel1CargoHeight = -0.6;
     public static double elevatorCargoShipHeight = 20;
     public static double elevatorLevel2HatchHeight = 21.1;
     public static double elevatorLevel2CargoHeight = 19.5;
-    public static double elevatorCargoLoadingStationHeight = 0;
+    public static double elevatorCargoLoadingStationHeight = 9.9;
     public static double elevatorFlipHeight = 15;
     public static double elevatorHatchCollectUp = -5.0;
     
     //Arm Setpoints
     public static double armHomeAngle = 0;
     public static double armHatchCollectedAngle = 70;
-    public static double armHatchAngle = 90;
-    public static double armCargoShipAngle = 105;
+    public static double armHatchAngle = 80;
+    public static double armCargoShipAngle = 90;
     public static double armRocketLevel1CargoAngle = 90;
     public static double armRocketLevel2CargoAngle = 73;
-    public static double armLoadingStationCargoAngle = 90;
-    public static double armFloorCollectCargoAngle = 125;
+    public static double armLoadingStationCargoAngle = 53;
+    public static double armFloorCollectCargoAngle = 123;
     public static double armFullSendCargoAngle = 30;
+    public static double wristTolerance = 5;
+
 
     //Cargo Intake Pivot Setpoints
-    public static double cargoIntakeAngle = 97;
+    public static double cargoIntakeAngle = 90;
     public static double cargoIntakeHomeAngle = 0;
-
     public static double cargoIntakeTolerance = 0.5;
 
 
@@ -103,5 +120,7 @@ public class RobotMap {
     public static double elevatorMin = -20.0;   //NEED TO DEFINE  
     public static double elevatorHomeTolerance = 0.2;
     
-    public static double wristTolerance = 5;
+
+    //Misc
+    public static double period = 0.02;
 }

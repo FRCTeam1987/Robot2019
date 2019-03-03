@@ -56,7 +56,8 @@ public class Elevator extends Subsystem {
   }
 
   public void zeroElevatorAtHome() { //not tested
-    if (elevatorHome.get() && Util.isWithinTolerance(getInches(), RobotMap.elevatorHomeHeight, RobotMap.elevatorHomeTolerance)) {  //double check and change to robot map
+    // if (elevatorHome.get() && Util.isWithinTolerance(getInches(), RobotMap.elevatorHomeHeight, RobotMap.elevatorHomeTolerance)) {  //double check and change to robot map
+    if (elevatorHome.get()) {  
       zeroElevator();
     }
   }
