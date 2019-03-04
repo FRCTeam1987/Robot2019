@@ -91,6 +91,8 @@ public class RobotMap {
     public static double elevatorLevel2CargoHeight = 19.5;
     public static double elevatorCargoLoadingStationHeight = 9.9;
     public static double elevatorFlipHeight = 15;
+    public static double elevatorQuickHatchFlipHeight = 1.0;
+    public static double elevatorQuickCargoFlipHeight = 12.5;
     public static double elevatorHatchCollectUp = -5.0;
     
     //Arm Setpoints

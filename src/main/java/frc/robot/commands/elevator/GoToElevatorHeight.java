@@ -65,6 +65,14 @@ public class GoToElevatorHeight extends Command {
         m_targetInches = RobotMap.elevatorFlipHeight;
         Robot.elevator.setElevatorAbsolute(m_targetInches);
         break;
+      case QUICKHATCHFLIP:
+        m_targetInches = RobotMap.elevatorQuickHatchFlipHeight;
+        Robot.elevator.setElevatorAbsolute(m_targetInches);
+        break;
+      case QUICKCARGOFLIP:
+        m_targetInches = RobotMap.elevatorQuickCargoFlipHeight;
+        Robot.elevator.setElevatorAbsolute(m_targetInches);
+        break;
       case HOME:
         m_targetInches = RobotMap.elevatorHomeHeight;
         Robot.elevator.setElevatorAbsolute(m_targetInches);

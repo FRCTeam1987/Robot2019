@@ -138,6 +138,8 @@ public class Elevator extends Subsystem {
     LEVEL2CARGOROCKET,
     LOADINGSTATIONCARGO,
     FLIP,
+    QUICKHATCHFLIP,
+    QUICKCARGOFLIP,
     HOME
   }
 

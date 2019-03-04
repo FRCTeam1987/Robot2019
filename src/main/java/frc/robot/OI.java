@@ -9,6 +9,7 @@ import frc.robot.commands.arm.ArmManual;
 import frc.robot.commands.arm.SetArmAngle;
 import frc.robot.commands.armavator.FrontHatchPlace;
 import frc.robot.commands.armavator.SetArmSide;
+import frc.robot.commands.armavator.QuickSet;
 // import frc.robot.commands.armavator.SetRobotState;
 import frc.robot.commands.armavator.SetElevatorAndArm;
 import frc.robot.commands.armavator.SetRobotState;
@@ -123,6 +124,7 @@ public class OI {
     // SmartDashboard.putData("Set Elevator out of Bounds", new SetElevatorAbsolute(22.1));
     SmartDashboard.putData("Set Arm Front Hatch Angle", new SetArmAngle(ArmSetpoint.HATCH, ArmSide.FRONT));
     SmartDashboard.putData("Set Arm Back Hatch Angle", new SetArmAngle(ArmSetpoint.HATCH, ArmSide.BACK));
+    SmartDashboard.putData("Quick Set Front", new QuickSet());
     SmartDashboard.putData("Intake Cargo", new IntakeCargo());
     SmartDashboard.putData("Vision adjust angle to target", new AimRobot());
     SmartDashboard.putData("Set to Vision Pipeline", new SetCameraPipeline(0));
