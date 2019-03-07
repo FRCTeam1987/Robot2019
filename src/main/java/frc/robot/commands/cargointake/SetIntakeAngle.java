@@ -9,7 +9,7 @@ public class SetIntakeAngle extends Command {
   
   public SetIntakeAngle(final double angle) {
     requires(Robot.cargoIntake);
-    setTimeout(1.5);
+    // setTimeout(3);
     m_angle = angle;
   }
 
@@ -24,12 +24,13 @@ public class SetIntakeAngle extends Command {
 
   @Override
   protected boolean isFinished() {
-    return Robot.cargoIntake.isWithinTolerance(m_angle) || isTimedOut();
+    return Robot.cargoIntake.isWithinTolerance(m_angle);
+    // || isTimedOut();
   }
 
   @Override
   protected void end() {
-    Robot.cargoIntake.setIntakePivotPercent(0);
+    // Robot.cargoIntake.setIntakePivot(m_angle);
   }
 
   @Override

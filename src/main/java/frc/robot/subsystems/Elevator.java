@@ -56,8 +56,8 @@ public class Elevator extends Subsystem {
   }
 
   public void zeroElevatorAtHome() { //not tested
-    // if (elevatorHome.get() && Util.isWithinTolerance(getInches(), RobotMap.elevatorHomeHeight, RobotMap.elevatorHomeTolerance)) {  //double check and change to robot map
-    if (elevatorHome.get()) {  
+    if (elevatorHome.get() && !Util.isWithinTolerance(Math.abs(getInches()), RobotMap.elevatorHomeHeight, RobotMap.elevatorHomeTolerance)) {
+    // if (elevatorHome.get()) {  
       zeroElevator();
     }
   }
@@ -123,6 +123,7 @@ public class Elevator extends Subsystem {
     SmartDashboard.putBoolean("Home Elevator Tripped", elevatorHome.get());
     stopWhenOutOfRange();
     zeroElevatorAtHome();
+    SmartDashboard.putNumber("Desired Elevator Inches", getElevatorHeightStateInches());
   }
 
   @Override
@@ -149,5 +150,47 @@ public class Elevator extends Subsystem {
 
   public ElevatorHeight getElevatorHeightState() {
     return elevatorHeight;
+  }
+
+  public double getElevatorHeightStateInches() {
+    double desiredElevatorInches = RobotMap.elevatorHomeHeight;
+
+    switch(elevatorHeight) {
+      case CARGOGROUNDCOLLECT:
+        desiredElevatorInches = RobotMap.elevatorGroundCollectHeight;
+        break;
+      case CARGOSHIP:
+        desiredElevatorInches = RobotMap.elevatorCargoShipHeight;
+        break;
+      case LEVEL1HATCH:
+        desiredElevatorInches = RobotMap.elevatorLevel1HatchHeight;
+        break;
+      case LEVEL1CARGOROCKET:
+        desiredElevatorInches = RobotMap.elevatorLevel1CargoHeight;
+        break;
+      case LEVEL2HATCH:
+        desiredElevatorInches = RobotMap.elevatorLevel2HatchHeight;
+        break;
+      case LEVEL2CARGOROCKET:
+        desiredElevatorInches = RobotMap.elevatorLevel2CargoHeight;
+        break;
+      case LOADINGSTATIONCARGO:
+        desiredElevatorInches = RobotMap.elevatorCargoLoadingStationHeight;
+        break;
+      case FLIP:
+        desiredElevatorInches = RobotMap.elevatorFlipHeight;
+        break;
+      case QUICKHATCHFLIP:
+        desiredElevatorInches = RobotMap.elevatorQuickHatchFlipHeight;
+        break;
+      case QUICKCARGOFLIP:
+        desiredElevatorInches = RobotMap.elevatorQuickCargoFlipHeight;
+        break;
+      case HOME:
+        desiredElevatorInches = RobotMap.elevatorHomeHeight;
+        break;
+    }
+
+    return desiredElevatorInches;
   }
 }

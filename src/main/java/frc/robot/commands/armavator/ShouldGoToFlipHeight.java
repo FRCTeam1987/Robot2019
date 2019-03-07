@@ -18,7 +18,7 @@ public class ShouldGoToFlipHeight extends ConditionalCommand {
   }
 
   public ShouldGoToFlipHeight() {
-    super(new GoToElevatorHeight(ElevatorHeight.FLIP));
+    super(new GoToElevatorHeight());
     m_isDefault = true;
   }
 

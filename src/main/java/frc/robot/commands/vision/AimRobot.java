@@ -1,67 +1,71 @@
 package frc.robot.commands.vision;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 import frc.robot.util.limelight.CameraMode;
 import frc.robot.util.limelight.LedMode;
 
 public class AimRobot extends Command {
   
-  private final double kP = -0.1;
+  private double m_limelightDrive;
+  private double m_limelightSteer;
 
-  private double leftPercent;
-  private double rightPercent;
-
-  //minimum motor percent
-  private final double minCommand = 0.2;
-  
   public AimRobot() {
     requires(Robot.vision);
     requires(Robot.drive);
-    leftPercent = 0.0;
-    rightPercent = 0.0;
+    m_limelightDrive = 0;
+    m_limelightSteer = 0;
+  }
+
+  protected void updateLimelightTracking() {
+    if (!Robot.vision.getActiveLimelight().hasTarget()) {
+      m_limelightDrive = 0;
+      m_limelightSteer = 0;
+      return;
+    }
+
+    double steer = Robot.vision.getActiveLimelight().getTx() * RobotMap.kLimelightSteer;
+    m_limelightSteer = steer;
+
+    // double drive = (RobotMap.limelightHatchTargetArea - Robot.vision.getActiveLimelight().getTa()) * RobotMap.kLimelightDrive;
+    double drive = Robot.vision.getActiveLimelight().getTy() * RobotMap.kLimelightDrive;
+
+
+    if (drive > RobotMap.limelightMaxDrive) {
+      drive = RobotMap.limelightMaxDrive;
+    }
+
+    m_limelightDrive = drive;
   }
 
   @Override
   protected void initialize() {
-    leftPercent = 0.0;
-    rightPercent = 0.0;
     Robot.vision.getActiveLimelight().setCameraMode(CameraMode.VISION);
+    Robot.vision.getActiveLimelight().setPipeline(0);
     Robot.vision.getActiveLimelight().setLedMode(LedMode.ON);
     Robot.drive.setLowGear();
   }
 
   @Override
   protected void execute() {
-    double steeringAdjust = 0.0;
-    double target = Robot.vision.getActiveLimelight().getTx();
-    double headingError = -target;
+    updateLimelightTracking();
 
-    if (target > 1.0) {
-      steeringAdjust = kP * headingError - minCommand;
+    if (Robot.vision.getActiveLimelight().hasTarget()) {
+      Robot.drive.arcadeDrive(m_limelightDrive, m_limelightSteer);
     }
-    else if (target < 1.0) {
-      steeringAdjust = kP * headingError + minCommand;
-    }
-
-    leftPercent += steeringAdjust;
-    rightPercent -= steeringAdjust;
-
-    Robot.drive.tankDrive(leftPercent, -rightPercent);
-
-    SmartDashboard.putNumber("Limelight Steering Adjust", steeringAdjust);
   }
 
   @Override
   protected boolean isFinished() {
-    return Robot.vision.isAimed();
+    return Robot.vision.isAimed() && Robot.vision.isInRange();
   }
 
   @Override
   protected void end() {
     Robot.drive.tankDrive(0, 0);
     Robot.vision.getActiveLimelight().setLedMode(LedMode.OFF);
+    Robot.vision.getActiveLimelight().setPipeline(9);
   }
 
   @Override

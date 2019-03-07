@@ -37,6 +37,7 @@ public class ArmManual extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    // Robot.arm.setWristAbsolute(Robot.arm.getArmAngle()); taken out while we finalize wrist zero tach
     Robot.arm.setWristPercent(0);
   }
 

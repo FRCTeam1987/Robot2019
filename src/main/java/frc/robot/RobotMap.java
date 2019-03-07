@@ -10,10 +10,10 @@ public class RobotMap {
     public static int placeButton = 4; //y
     // public static int prepClimbButton = 5; //succ
     // public static int climbButton = 6;
-    public static int armManualForwardButton = 5; //Temp buttons for systems test
+    public static int armManualForwardButton = 5;
     public static int armManualBackButton = 6;
     public static int toggleShifterButton = 9; //left stick push
-    public static int aimHatchButton = 10; 
+    public static int aimRobotButton = 10; 
     public static int collectCargoFromLoadingStationButton = 2;
 
     //Co-driver Buttons
@@ -27,16 +27,20 @@ public class RobotMap {
     public static int loadingStationCargoSetButton = 10;
     public static int homeSetButton = 17;
     public static int stopAllButton = 11; //change ID
+    public static int climberUpButton = 5;
+    public static int climberDownButton = 7;
 
     //Drive
-    public static double maxHighGearVelocity = 14;
+    public static double maxHighGearVelocity = 13;
+    public static double maxHighGearAcceleration = 8;
+    public static double maxHighGearJerk = 197;
 
     //Path Turning Tuning
-    public static double pathGP = 0.037;
+    public static double pathGP = 0.048;
     public static double pathGD = 0.0;
     
     //Drive PID
-    public static double pathHighGearKP = 0.9;
+    public static double pathHighGearKP = 0.4;
     public static double pathHighGearKI = 0.0;
     public static double pathHighGearKD = 0.0;
     public static double pathHighGearKV = 1 / maxHighGearVelocity;
@@ -78,8 +82,8 @@ public class RobotMap {
     public static int hatchReleaseID = 3;
 
     //Robot Dimensions
-    public static double driveBaseWheelsDiameter = 5.0; //might need to be tweaked
-    public static double wheelBaseDiameter = 27.0;
+    public static double driveBaseWheelsDiameter = 5.0 / 12.0; 
+    public static double wheelBaseDiameter = 1.875;
 
     //Elevator Setpoints
     public static double elevatorGroundCollectHeight = -1.7;
@@ -97,31 +101,36 @@ public class RobotMap {
     
     //Arm Setpoints
     public static double armHomeAngle = 0;
-    public static double armHatchCollectedAngle = 70;
-    public static double armHatchAngle = 80;
+    public static double armHatchCollectedAngle = 80;
+    public static double armHatchAngle = 78;
     public static double armCargoShipAngle = 90;
     public static double armRocketLevel1CargoAngle = 90;
     public static double armRocketLevel2CargoAngle = 73;
     public static double armLoadingStationCargoAngle = 53;
-    public static double armFloorCollectCargoAngle = 123;
+    public static double armFloorCollectCargoAngle = 105;
     public static double armFullSendCargoAngle = 30;
-    public static double wristTolerance = 5;
+    public static double wristTolerance = 1;
 
 
     //Cargo Intake Pivot Setpoints
-    public static double cargoIntakeAngle = 90;
+    public static double cargoIntakeAngle = 80;
     public static double cargoIntakeHomeAngle = 0;
     public static double cargoIntakeTolerance = 0.5;
 
 
     //Elevator Misc
     public static double elevatorPulleyDiameter = 1.506;   
-    public static double elevatorTolerance = 1;       
+    public static double elevatorTolerance = 0.25;       
     public static double setElevatorAbsoluteTimeout = 60.0; 
     public static double elevatorMax = 21.5;
     public static double elevatorMin = -20.0;   //NEED TO DEFINE  
-    public static double elevatorHomeTolerance = 0.2;
-    
+    public static double elevatorHomeTolerance = 0.25;
+
+    //Limelight Constants
+    public static double kLimelightSteer = 0.07; //how hard it turns towards target
+    public static double kLimelightDrive = 0.26; //how hard it drives fwd towards target
+    public static double limelightHatchTargetArea = 10.0; //Area of target when it is properly aimed
+    public static double limelightMaxDrive = 0.7; //max speed robot will drive forward
 
     //Misc
     public static double period = 0.02;

@@ -34,8 +34,7 @@ public class Robot extends TimedRobot {
     m_oi = new OI();
     SmartDashboard.putData("Auto mode", m_chooser);
     SmartDashboard.putString("Robot Status:", "OK");
-    Robot.vision.limeFront.setLedMode(LedMode.ON);
-    Robot.vision.limeBack.setLedMode(LedMode.ON);
+    Robot.drive.ahrsReset();
   }
 
   @Override
@@ -44,10 +43,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void disabledInit() {
-    // Robot.vision.limeFront.setLedMode(LedMode.OFF);
-    // Robot.vision.limeBack.setLedMode(LedMode.OFF);
-    Robot.vision.limeFront.setLedMode(LedMode.ON);
-    Robot.vision.limeBack.setLedMode(LedMode.ON);
+    Robot.vision.limeFront.setLedMode(LedMode.OFF);
+    Robot.vision.limeBack.setLedMode(LedMode.OFF);
   }
 
   @Override
@@ -62,6 +59,11 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.start();
     }
+
+    // Robot.vision.limeFront.setCameraMode(CameraMode.DRIVERCAMERA);
+    // Robot.vision.limeBack.setCameraMode(CameraMode.DRIVERCAMERA);
+    // Robot.vision.limeFront.setPipeline(9);
+    // Robot.vision.limeBack.setPipeline(9);
   }
 
   @Override
@@ -75,6 +77,9 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.cancel();
     }
 
+
+    Robot.vision.limeFront.setLedMode(LedMode.OFF);
+    Robot.vision.limeBack.setLedMode(LedMode.OFF);
     Robot.vision.limeFront.setCameraMode(CameraMode.DRIVERCAMERA);
     Robot.vision.limeBack.setCameraMode(CameraMode.DRIVERCAMERA);
     Robot.vision.limeFront.setPipeline(9);

@@ -1,7 +1,9 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 import frc.robot.subsystems.Arm.ArmSide;
 import frc.robot.util.Util;
 import frc.robot.util.limelight.Limelight;
@@ -17,7 +19,7 @@ public class Vision extends Subsystem {
   }
 
   public Limelight getActiveLimelight() {   //needs to be tested
-    if (Robot.arm.getArmSide() == ArmSide.FRONT) {
+    if (Robot.arm.getArmSideState() == ArmSide.FRONT) {
       return limeFront;
     }
     else {
@@ -25,16 +27,21 @@ public class Vision extends Subsystem {
     }
   }
 
+  public boolean isLimelightActive(final Limelight limelight) {
+    return getActiveLimelight() == limelight ? true : false;
+  }
+
   public boolean isAimed() {   
     return Util.isWithinTolerance(getActiveLimelight().getTx(), 0.0, 0.2);
   }
 
   public boolean isInRange() {
-    return Util.isWithinTolerance(getActiveLimelight().getTy(), 0.0, 0.1);
+    return Util.isWithinTolerance(getActiveLimelight().getTa(), RobotMap.limelightHatchTargetArea, 0.2);
   }
 
   @Override
   public void periodic() {
+    SmartDashboard.putBoolean("Has target", limeFront.hasTarget());
   }
 
   @Override

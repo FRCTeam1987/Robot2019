@@ -7,26 +7,18 @@
 
 package frc.robot.commands.vision;
 
-import edu.wpi.first.wpilibj.command.InstantCommand;
-import frc.robot.Robot;
+import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.WaitCommand;
+import frc.robot.commands.SetRumble;
 
-
-public class SetCameraPipeline extends InstantCommand {
-
-  private final int m_pipeline;
-
-  public SetCameraPipeline(final int pipline) {
-    super();
-    requires(Robot.vision);
-
-    m_pipeline = pipline;
+public class TeleAimRobot extends CommandGroup {
+  /**
+   * Add your docs here.
+   */
+  public TeleAimRobot() {
+    addSequential(new AimRobot());
+    addSequential(new SetRumble(0.8));
+    addSequential(new WaitCommand(1));
+    addSequential(new SetRumble(0));
   }
-
-  @Override
-  protected void initialize() {
-    Robot.vision.limeFront.setPipeline(m_pipeline);
-    Robot.vision.limeBack.setPipeline(m_pipeline);
-
-  }
-
 }

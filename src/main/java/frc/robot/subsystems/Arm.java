@@ -32,13 +32,13 @@ public class Arm extends Subsystem {
   }
 
   public void configWrist() {
-    // wrist.configMotionCruiseVelocity(443);
-    // wrist.configMotionAcceleration(443);
+    wrist.configMotionCruiseVelocity(400);
+    wrist.configMotionAcceleration(400);
     Util.configTalonSRXWithEncoder(wrist, false);
-    wrist.config_kF(0, 0.0, 0);
-    wrist.config_kP(0, 1.4, 0);
+    wrist.config_kF(0, 4.9, 0);
+    wrist.config_kP(0, 1, 0);
     wrist.config_kI(0, 0.0, 0);
-    wrist.config_kD(0, 0.2, 0);
+    wrist.config_kD(0, 0.1, 0);
     wrist.setInverted(true);
     setBrake();
   }
@@ -46,8 +46,8 @@ public class Arm extends Subsystem {
   public void setWristAbsolute(final double desiredDegrees) {
     final int ticksAbsolute = Util.degreesToTicks(desiredDegrees);
 
-    // wrist.set(ControlMode.MotionMagic, ticksAbsolute); 
-    wrist.set(ControlMode.Position, ticksAbsolute);
+    wrist.set(ControlMode.MotionMagic, ticksAbsolute); 
+    // wrist.set(ControlMode.Position, ticksAbsolute);
   }
 
   public void setWristPercent(final double percent) {
@@ -67,11 +67,11 @@ public class Arm extends Subsystem {
   }
 
   public void zeroWrist() {
-    wrist.setSelectedSensorPosition(0);
+    wrist.setSelectedSensorPosition(Util.degreesToTicks(-90));
   }
 
   private void zeroWristAtHome() {
-    if (wristHome.get()) {
+    if (wristHome.get() && !Util.isWithinTolerance(getArmAngle(), 0.0, 3)) {
       zeroWrist();
     }
   }

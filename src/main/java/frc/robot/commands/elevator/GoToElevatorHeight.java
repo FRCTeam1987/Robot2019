@@ -91,7 +91,6 @@ public class GoToElevatorHeight extends Command {
 
   @Override
   protected void end() {
-    Robot.elevator.setElevatorPercent(0);
   }
 
   @Override

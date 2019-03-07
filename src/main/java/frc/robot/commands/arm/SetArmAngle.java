@@ -18,13 +18,13 @@ public class SetArmAngle extends Command {
     m_setpoint = setpoint;
     m_targetAngle = 0;
     m_armSide = armSide;
-    setTimeout(1.5);
+    setTimeout(2.0);
     m_isDefault = false;
   }
 
   public SetArmAngle() {
     requires(Robot.arm);
-    setTimeout(1.5);
+    setTimeout(2.0);
     m_isDefault = true;
   }
 
@@ -82,7 +82,10 @@ public class SetArmAngle extends Command {
 
   @Override
   protected void end() {
-    // Robot.arm.setWristPercent(0);
+    Robot.arm.setWristAbsolute(m_targetAngle);
+    if (isTimedOut()) {
+      System.out.println("SetArmAngle timedout");
+    }
   }
 
   @Override

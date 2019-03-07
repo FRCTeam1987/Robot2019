@@ -37,6 +37,7 @@ public class Drive extends Subsystem {
   private boolean isBrake;
 
   private double lastGyroError;
+
   public Drive() {
     leftMaster = new WPI_TalonSRX(RobotMap.leftMasterID);
     leftSlave1 = new WPI_TalonSRX(RobotMap.leftSlave1ID);
@@ -95,45 +96,14 @@ public class Drive extends Subsystem {
     robotDrive.tankDrive(left, right);
   }
 
+  public void arcadeDrive(final double speed, final double rotation) {
+    robotDrive.arcadeDrive(speed, rotation);
+  }
+
   public void set(final ControlMode controlMode, final double left, final double right) {
     leftMaster.set(controlMode, left);
     rightMaster.set(controlMode, right);
   }
-
-  // public void setPID(DriveMode mode) {
-  //   double m_P;
-  //   double m_I;
-  //   double m_D;
-   
-  //   switch(mode) {
-  //     case STRAIGHT:
-  //       if(isHighGear()) {
-  //         m_P = RobotMap.driveStraightHighP;
-  //         m_I = RobotMap.driveStraightHighI;
-  //         m_D = RobotMap.driveStraightHighD;
-  //       }
-  //       else {
-  //         m_P = RobotMap.driveStraightLowP;
-  //         m_I = RobotMap.driveStraightLowI;
-  //         m_D = RobotMap.driveStraightLowD;
-  //       }
-  //       break;
-  //     case PIVOT:
-  //       if (isHighGear()) {
-  //         m_P = RobotMap.drivePivotHighP;
-  //         m_I = RobotMap.drivePivotHighI;
-  //         m_D = RobotMap.drivePivotHighD;
-  //       }
-  //       else {
-  //         m_P = RobotMap.drivePivotLowP;
-  //         m_I = RobotMap.drivePivotLowI;
-  //         m_D = RobotMap.drivePivotLowD;
-  //       }
-  //       break;
-  //     default:
-  //       return;
-  //   }     
-  // }
 
   public void setBrake() {
     leftMaster.setNeutralMode(NeutralMode.Brake);
@@ -155,10 +125,12 @@ public class Drive extends Subsystem {
 
   public void setHighGear() {
     shifter.set(Value.kForward);
+    setCoast();
   }
   
   public void setLowGear() {
     shifter.set(Value.kReverse);
+    setBrake();
   }
 
   public void ahrsReset() {
@@ -224,8 +196,8 @@ public class Drive extends Subsystem {
     double r;
     
     if (!isReversed){
-      l = left.calculate(-leftMaster.getSelectedSensorPosition(0));
-      r = right.calculate(-rightMaster.getSelectedSensorPosition(0));
+      l = left.calculate(leftMaster.getSelectedSensorPosition(0));
+      r = right.calculate(rightMaster.getSelectedSensorPosition(0));
     }
 
     else {
@@ -248,6 +220,8 @@ public class Drive extends Subsystem {
     else {
       this.tankDrive(-l + turn, -r - turn);
     }
+
+
   }
 
   @Override
@@ -256,7 +230,10 @@ public class Drive extends Subsystem {
   }
 
   public void periodic() {
-    SmartDashboard.putNumber("Left Drive Encoder Ticks", getEncoderTicks(leftMaster));
-    SmartDashboard.putNumber("Right Drive Encoder Ticks", getEncoderTicks(rightMaster));
+    // SmartDashboard.putNumber("Left Drive Encoder Ticks", getEncoderTicks(leftMaster));
+    // SmartDashboard.putNumber("Right Drive Encoder Ticks", getEncoderTicks(rightMaster));
+    SmartDashboard.putNumber("Left Drive Distance", getLeftEncoderDistance());
+    SmartDashboard.putNumber("Right Drive Distance", getRightEncoderDistance());
+    SmartDashboard.putNumber("Gyro Angle", getAngle());
   }
 }
