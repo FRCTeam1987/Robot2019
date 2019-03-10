@@ -86,14 +86,14 @@ public class RobotMap {
     public static double wheelBaseDiameter = 1.875;
 
     //Elevator Setpoints
-    public static double elevatorGroundCollectHeight = -1.7;
+    public static double elevatorGroundCollectHeight = -1.7;    
     public static double elevatorHomeHeight = 0;
     public static double elevatorLevel1HatchHeight = -9.0;
     public static double elevatorLevel1CargoHeight = -0.6;
     public static double elevatorCargoShipHeight = 20;
     public static double elevatorLevel2HatchHeight = 21.1;
     public static double elevatorLevel2CargoHeight = 19.5;
-    public static double elevatorCargoLoadingStationHeight = 9.9;
+    public static double elevatorCargoLoadingStationHeight = 8.4;
     public static double elevatorFlipHeight = 15;
     public static double elevatorQuickHatchFlipHeight = 1.0;
     public static double elevatorQuickCargoFlipHeight = 12.5;
@@ -103,19 +103,19 @@ public class RobotMap {
     public static double armHomeAngle = 0;
     public static double armHatchCollectedAngle = 80;
     public static double armHatchAngle = 78;
-    public static double armCargoShipAngle = 90;
+    public static double armCargoShipAngle = 105;                //was 90 degrees
     public static double armRocketLevel1CargoAngle = 90;
     public static double armRocketLevel2CargoAngle = 73;
-    public static double armLoadingStationCargoAngle = 53;
-    public static double armFloorCollectCargoAngle = 105;
+    public static double armLoadingStationCargoAngle = 63;      //was 53 degrees
+    public static double armFloorCollectCargoAngle = 125;
     public static double armFullSendCargoAngle = 30;
-    public static double wristTolerance = 1;
+    public static double wristTolerance = 2;
 
 
     //Cargo Intake Pivot Setpoints
-    public static double cargoIntakeAngle = 80;
-    public static double cargoIntakeHomeAngle = 0;
-    public static double cargoIntakeTolerance = 0.5;
+    public static double cargoIntakeAngle = 82;     
+    public static double cargoIntakeHomeAngle = -14.5;
+    public static double cargoIntakeTolerance = 1.5;
 
 
     //Elevator Misc

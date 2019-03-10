@@ -23,7 +23,7 @@ public class GoToElevatorHeight extends Command {
     m_elevatorHeight = ElevatorHeight.HOME;
     m_targetInches = 0;
     m_isDefault = true;
-    setTimeout(1.5);
+    setTimeout(1.5);     
   }
 
   @Override
@@ -91,6 +91,9 @@ public class GoToElevatorHeight extends Command {
 
   @Override
   protected void end() {
+    if (isTimedOut()) {
+      System.out.println("GoToElevatorHeight timedout");
+    }
   }
 
   @Override

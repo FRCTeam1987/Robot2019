@@ -6,8 +6,10 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 public class Claw extends Subsystem {
@@ -55,4 +57,9 @@ public class Claw extends Subsystem {
   @Override
   public void initDefaultCommand() {
   }
+
+  public void setRumble(final double power) {
+    Robot.m_oi.getDriver().setRumble(RumbleType.kLeftRumble, power);
+    Robot.m_oi.getDriver().setRumble(RumbleType.kRightRumble, power);
+}
 }

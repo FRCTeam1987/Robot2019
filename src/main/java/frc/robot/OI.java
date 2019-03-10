@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.StopAll;
 import frc.robot.commands.arm.ArmManual;
 import frc.robot.commands.arm.SetArmAngle;
+import frc.robot.commands.arm.SetArmAngleWithDegree;
 import frc.robot.commands.armavator.FrontHatchPlace;
 import frc.robot.commands.armavator.SetArmSide;
 import frc.robot.commands.armavator.QuickSet;
@@ -23,6 +24,7 @@ import frc.robot.commands.climber.ClimberManual;
 import frc.robot.commands.drive.DrivePath;
 import frc.robot.commands.drive.ToggleShifter;
 import frc.robot.commands.elevator.ElevatorManual;
+import frc.robot.commands.elevator.SetElevatorAbsolute;
 import frc.robot.commands.vision.AimRobot;
 import frc.robot.commands.vision.TeleAimRobot;
 import frc.robot.subsystems.Arm.ArmSetpoint;
@@ -104,8 +106,8 @@ public class OI {
     collectCargoFromLoadingStation.whenPressed(new ClawIntakeCargo(1));
     elevatorManualUp.whileHeld(new ElevatorManual(0.4));
     elevatorManualDown.whileHeld(new ElevatorManual(-0.4));
-    cargoIntakeManualForward.whileHeld(new SetIntakePivotManual(0.4));
-    cargoIntakeManualBack.whileHeld(new SetIntakePivotManual(-0.4));
+    cargoIntakeManualForward.whileHeld(new SetIntakePivotManual(0.9));    //was .4
+    cargoIntakeManualBack.whileHeld(new SetIntakePivotManual(-0.9));      //was -.4
 
     //Co-Driver buttons
     switchPotentialClawSide.whenPressed(new SetArmSide(ArmSide.FRONT));
@@ -119,18 +121,34 @@ public class OI {
     stopAll.whenPressed(new StopAll());
 
     //SmartDashboard puts
-    SmartDashboard.putData("Go to Intake Position", new SetIntakeAngle(RobotMap.cargoIntakeAngle));
-    SmartDashboard.putData("Go to Intake Home", new SetIntakeAngle(RobotMap.cargoIntakeHomeAngle));
+    // SmartDashboard.putData("Go to Intake Position", new SetIntakeAngle(RobotMap.cargoIntakeAngle));
+    // SmartDashboard.putData("Go to Intake Home", new SetIntakeAngle(RobotMap.cargoIntakeHomeAngle));
     // SmartDashboard.putData("Set Arm Front Hatch Angle", new SetArmAngle(ArmSetpoint.HATCH, ArmSide.FRONT));
     // SmartDashboard.putData("Set Arm Back Hatch Angle", new SetArmAngle(ArmSetpoint.HATCH, ArmSide.BACK));
     // SmartDashboard.putData("Aim Robot", new TeleAimRobot());
     // SmartDashboard.putData("Quick Set Front", new QuickSet());
     // SmartDashboard.putData("Intake Cargo", new IntakeCargo());
     // SmartDashboard.putData("Vision adjust angle to target", new AimRobot());
-    // SmartDashboard.putData("Climber Up", new ClimberManual(0.4));
-    // SmartDashboard.putData("Climber Down", new ClimberManual(-0.4));
+    // SmartDashboard.putData("Climber Up", new ClimberManual(0.75));
+    // SmartDashboard.putData("Climber Down", new ClimberManual(-0.75));
+    // SmartDashboard.putData("Climber Stop", new ClimberManual(0.0));
+    // SmartDashboard.putData("Set Elevator to 10", new SetElevatorAbsolute(10));
+    // SmartDashboard.putData("Set Elevator to -5", new SetElevatorAbsolute(-5));
+    // SmartDashboard.putData("Test Path", new DrivePath(AutoPaths.test, false));
+    // SmartDashboard.putData("Set arm -105", new SetArmAngleWithDegree(-105));
+    // SmartDashboard.putData("Set arm -100", new SetArmAngleWithDegree(-100));
+    // SmartDashboard.putData("Set arm -90", new SetArmAngleWithDegree(-90));
+    // SmartDashboard.putData("Set arm -75", new SetArmAngleWithDegree(-75));
+    // SmartDashboard.putData("Set arm -45", new SetArmAngleWithDegree(-45));
+    // SmartDashboard.putData("Set arm -20", new SetArmAngleWithDegree(-20));
 
-    SmartDashboard.putData("Test Path", new DrivePath(AutoPaths.test, false));
+    SmartDashboard.putData("Go to cargo stow angle", new SetIntakeAngle(-12));
+    // SmartDashboard.putData("Cargo collect -5", new SetIntakeAngle(-5));
+    // SmartDashboard.putData("Cargo collect 20", new SetIntakeAngle(20));
+    // SmartDashboard.putData("Cargo collect 50", new SetIntakeAngle(50));
+    SmartDashboard.putData("go to cargo collection angle", new SetIntakeAngle(85));
+    // SmartDashboard.putData("Cargo collect 85", new SetIntakeAngle(85));
+    // SmartDashboard.putData("Cargo collect 90", new SetIntakeAngle(90));
   }
 
   public XboxController getDriver() {

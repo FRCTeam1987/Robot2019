@@ -82,10 +82,12 @@ public class SetArmAngle extends Command {
 
   @Override
   protected void end() {
-    Robot.arm.setWristAbsolute(m_targetAngle);
     if (isTimedOut()) {
       System.out.println("SetArmAngle timedout");
     }
+    // else {
+    //   Robot.claw.setRumble(0.5);  //might need to change
+    // }
   }
 
   @Override

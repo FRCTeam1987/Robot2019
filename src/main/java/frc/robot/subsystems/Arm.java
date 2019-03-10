@@ -32,11 +32,11 @@ public class Arm extends Subsystem {
   }
 
   public void configWrist() {
-    wrist.configMotionCruiseVelocity(400);
-    wrist.configMotionAcceleration(400);
+    wrist.configMotionCruiseVelocity(450); //was 400  
+    wrist.configMotionAcceleration(450);   //was 400
     Util.configTalonSRXWithEncoder(wrist, false);
-    wrist.config_kF(0, 4.9, 0);
-    wrist.config_kP(0, 1, 0);
+    wrist.config_kF(0, 4.8, 0);   
+    wrist.config_kP(0, 4.7, 0);   
     wrist.config_kI(0, 0.0, 0);
     wrist.config_kD(0, 0.1, 0);
     wrist.setInverted(true);
