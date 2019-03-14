@@ -1,10 +1,6 @@
 package frc.robot.commands.drive;
 
 import java.io.File;
-import java.io.IOException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
@@ -15,7 +11,7 @@ import jaci.pathfinder.followers.EncoderFollower;
 
 public class DrivePath extends Command {
   
-  private Trajectory m_toFollow;
+  // private Trajectory m_toFollow;
   private EncoderFollower leftFollower;
   private EncoderFollower rightFollower;
   private boolean isReversed;

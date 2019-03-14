@@ -71,8 +71,9 @@ public class Arm extends Subsystem {
   }
 
   private void zeroWristAtHome() {
-    if (wristHome.get() && !Util.isWithinTolerance(getArmAngle(), 0.0, 3)) {
-      zeroWrist();
+    // if (wristHome.get() && !Util.isWithinTolerance(Math.abs(getArmAngle()), 0.0, 3)) {
+      if (wristHome.get()) {
+        zeroWrist();
     }
   }
 
@@ -114,6 +115,7 @@ public class Arm extends Subsystem {
     CARGOROCKETLVL2,
     CARGOCOLLECTFLOOR,
     CARGOLOADINGSTATION,
+    FULLSENDLVL2,
     HOME
   }
 

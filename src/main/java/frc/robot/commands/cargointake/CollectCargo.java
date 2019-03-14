@@ -19,6 +19,7 @@ public class CollectCargo extends CommandGroup {
     addSequential(new SetArmAngle(ArmSetpoint.CARGOCOLLECTFLOOR, ArmSide.FRONT));
     addSequential(new IntakeCargo());
     addSequential(new SetElevatorAndArm(ArmSide.FRONT, ElevatorHeight.CARGOSHIP, ArmSetpoint.CARGOSHIP));
+    // addSequential(new SetElevatorAndArm());
     addSequential(new SetIntakeAngle(RobotMap.cargoIntakeHomeAngle));
   }
 }

@@ -61,13 +61,16 @@ public class SetArmAngle extends Command {
         Robot.arm.setWristAbsolute(m_targetAngle);
         break;
       case CARGOROCKETLVL1:
-        m_targetAngle = RobotMap.armRocketLevel1CargoAngle;
-        Robot.arm.setWristAbsolute(m_targetAngle);
+        m_targetAngle = RobotMap.armRocketLevel1CargoAngle *  (m_armSide == ArmSide.FRONT ? 1 : -1);
+        Robot.arm.setWristAbsolute(m_targetAngle); 
         break;
       case CARGOROCKETLVL2:
-        m_targetAngle = RobotMap.armRocketLevel2CargoAngle;
+        m_targetAngle = RobotMap.armRocketLevel2CargoAngle *  (m_armSide == ArmSide.FRONT ? 1 : -1);
         Robot.arm.setWristAbsolute(m_targetAngle);
         break;
+      case FULLSENDLVL2:
+        m_targetAngle = RobotMap.armYeetHab;
+        Robot.arm.setWristAbsolute(m_targetAngle);
     }
   }
 

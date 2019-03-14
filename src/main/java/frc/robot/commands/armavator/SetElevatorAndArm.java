@@ -23,7 +23,6 @@ public class SetElevatorAndArm extends CommandGroup {
     addSequential(new ShouldGoToCargoFlipHeight());
     addSequential(new ShouldGoToHatchFlipHeight());
     addSequential(new ShouldRollArm());
-    addSequential(new SetArmSide());
     addSequential(new GoToElevatorHeight());
   }
 }

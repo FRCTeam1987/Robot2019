@@ -8,10 +8,9 @@ public class RobotMap {
     public static int elevatorToHeightButton = 1; //a
     public static int cargoCollectButton = 3; //x
     public static int placeButton = 4; //y
-    // public static int prepClimbButton = 5; //succ
-    // public static int climbButton = 6;
     public static int armManualForwardButton = 5;
     public static int armManualBackButton = 6;
+    public static int collectHatchButton = 8;
     public static int toggleShifterButton = 9; //left stick push
     public static int aimRobotButton = 10; 
     public static int collectCargoFromLoadingStationButton = 2;
@@ -25,10 +24,10 @@ public class RobotMap {
     public static int level1CargoSetButton = 15;
     public static int level2CargoSetButton = 16;
     public static int loadingStationCargoSetButton = 10;
-    public static int homeSetButton = 17;
+    public static int defenseSetButton = 5;
     public static int stopAllButton = 11; //change ID
-    public static int climberUpButton = 5;
-    public static int climberDownButton = 7;
+    public static int hasHatchButton = 19;
+    public static int yeetOntoHabButton = 17;
 
     //Drive
     public static double maxHighGearVelocity = 13;
@@ -66,6 +65,8 @@ public class RobotMap {
     //DIO IDs
     public static int clawCargoProxID = 1;
     public static int clawHatchProxID = 7;
+    public static int clawHatchSonarPingID = 8;
+    public static int clawHatchSonarEchoID = 9;
     public static int wristHomeID = 2;
     public static int cargoIntakeHomeID = 3;
     public static int elevatorMaxID = 4;
@@ -74,6 +75,9 @@ public class RobotMap {
 
     public static int defaultTimeout = 10;
     public static double ticksPerRotation = 4096;
+
+    //Analog IDs
+    // public static int clawCargoSonarID = 1;
 
     //Pneumatics
     public static int highGearID = 0;
@@ -88,28 +92,30 @@ public class RobotMap {
     //Elevator Setpoints
     public static double elevatorGroundCollectHeight = -1.7;    
     public static double elevatorHomeHeight = 0;
-    public static double elevatorLevel1HatchHeight = -9.0;
+    public static double elevatorCollectHatchHeight = -7.0;
+    public static double elevatorLevel1HatchHeight = -9.2;
     public static double elevatorLevel1CargoHeight = -0.6;
     public static double elevatorCargoShipHeight = 20;
     public static double elevatorLevel2HatchHeight = 21.1;
     public static double elevatorLevel2CargoHeight = 19.5;
-    public static double elevatorCargoLoadingStationHeight = 8.4;
+    public static double elevatorCargoLoadingStationHeight = 7.0;
     public static double elevatorFlipHeight = 15;
     public static double elevatorQuickHatchFlipHeight = 1.0;
     public static double elevatorQuickCargoFlipHeight = 12.5;
-    public static double elevatorHatchCollectUp = -5.0;
+    public static double elevatorYeetHab = 7.7;
     
     //Arm Setpoints
     public static double armHomeAngle = 0;
-    public static double armHatchCollectedAngle = 80;
-    public static double armHatchAngle = 78;
-    public static double armCargoShipAngle = 105;                //was 90 degrees
+    public static double armHatchCollectedAngle = 90;
+    public static double armHatchAngle = 86;
+    public static double armCargoShipAngle = 105;                
     public static double armRocketLevel1CargoAngle = 90;
-    public static double armRocketLevel2CargoAngle = 73;
-    public static double armLoadingStationCargoAngle = 63;      //was 53 degrees
+    public static double armRocketLevel2CargoAngle = 67;
+    public static double armLoadingStationCargoAngle = 63;      
     public static double armFloorCollectCargoAngle = 125;
     public static double armFullSendCargoAngle = 30;
-    public static double wristTolerance = 2;
+    public static double armYeetHab = 93;
+    public static double wristTolerance = 3;
 
 
     //Cargo Intake Pivot Setpoints
@@ -120,17 +126,17 @@ public class RobotMap {
 
     //Elevator Misc
     public static double elevatorPulleyDiameter = 1.506;   
-    public static double elevatorTolerance = 0.25;       
+    public static double elevatorTolerance = 0.4;       
     public static double setElevatorAbsoluteTimeout = 60.0; 
     public static double elevatorMax = 21.5;
-    public static double elevatorMin = -20.0;   //NEED TO DEFINE  
+    public static double elevatorMin = -20.0;   
     public static double elevatorHomeTolerance = 0.25;
 
     //Limelight Constants
-    public static double kLimelightSteer = 0.07; //how hard it turns towards target
+    public static double kLimelightSteer = 0.15; //how hard it turns towards target
     public static double kLimelightDrive = 0.26; //how hard it drives fwd towards target
     public static double limelightHatchTargetArea = 10.0; //Area of target when it is properly aimed
-    public static double limelightMaxDrive = 0.7; //max speed robot will drive forward
+    public static double limelightMaxDrive = 0.8; //max speed robot will drive forward
 
     //Misc
     public static double period = 0.02;

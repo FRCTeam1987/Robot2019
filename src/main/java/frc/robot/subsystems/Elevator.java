@@ -28,8 +28,7 @@ public class Elevator extends Subsystem {
     elevatorMin = new DigitalInput(RobotMap.elevatorMinID);
 
     configElevator(elevator);
-    zeroElevator();
-  }
+    }
 
   public void configElevator(final WPI_TalonSRX motor) {
     elevator.configFactoryDefault();
@@ -39,7 +38,7 @@ public class Elevator extends Subsystem {
     elevator.config_kP(0, 0.275);
     elevator.config_kI(0, 0.0);
     elevator.config_kD(0, 0.1);   
-
+    zeroElevator();
     Util.configTalonSRXWithEncoder(elevator, false);
   }
 
@@ -141,6 +140,7 @@ public class Elevator extends Subsystem {
     FLIP,
     QUICKHATCHFLIP,
     QUICKCARGOFLIP,
+    FULLSENDLVL2,
     HOME
   }
 
@@ -189,6 +189,8 @@ public class Elevator extends Subsystem {
       case HOME:
         desiredElevatorInches = RobotMap.elevatorHomeHeight;
         break;
+      case FULLSENDLVL2:
+        desiredElevatorInches = RobotMap.elevatorYeetHab;
     }
 
     return desiredElevatorInches;

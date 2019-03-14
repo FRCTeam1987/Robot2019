@@ -7,12 +7,12 @@ import frc.robot.subsystems.Arm.ArmSetpoint;
 import frc.robot.subsystems.Arm.ArmSide;
 import frc.robot.subsystems.Elevator.ElevatorHeight;
 
-public class FrontHatchPlace extends CommandGroup {
+public class BackHatchPlace extends CommandGroup {
 
-  public FrontHatchPlace() {
-    addSequential(new GoToElevatorHeight(ElevatorHeight.FLIP));
-    addSequential(new SetArmAngle(ArmSetpoint.HATCH, ArmSide.FRONT));
-    addSequential(new SetArmSide(ArmSide.FRONT));
+  public BackHatchPlace() {
+    addSequential(new GoToElevatorHeight(ElevatorHeight.QUICKHATCHFLIP));
+    addSequential(new SetArmAngle(ArmSetpoint.HATCH, ArmSide.BACK));
+    addSequential(new SetArmSide(ArmSide.BACK));
     addSequential(new GoToElevatorHeight(ElevatorHeight.LEVEL1HATCH));
   }
 }

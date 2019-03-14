@@ -20,8 +20,8 @@ public class SetRobotState extends InstantCommand {
 
   @Override
   protected void initialize() {
-    // m_armSide = Robot.arm.getArmSideState();
-    // Robot.arm.setArmSide(m_armSide);
+    m_armSide = Robot.arm.getArmSideState();
+    Robot.arm.setArmSide(m_armSide);
     Robot.arm.setArmSetpoint(m_armSetpoint);
     Robot.elevator.setElevatorHeight(m_elevatorHeight);
   }

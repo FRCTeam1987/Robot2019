@@ -15,16 +15,8 @@ public class Place extends Command {
 
   @Override
   protected void initialize() {
-    if (Robot.claw.isCargoCollected()) {
-      Robot.claw.setWheels(-m_percent);
-    }
-    // else if (Robot.claw.isHatchCollected()) {
-    //   Robot.claw.releaseHatch();
-    // }
-    else {
       Robot.claw.setWheels(-m_percent);
       Robot.claw.releaseHatch();
-    }
   }
 
   @Override
@@ -33,7 +25,6 @@ public class Place extends Command {
 
   @Override
   protected boolean isFinished() {
-    // return !Robot.claw.isCargoCollected() || isTimedOut(); this would only pulse the motors once the ball is slightly out of the claw
     return isTimedOut();
   }
 

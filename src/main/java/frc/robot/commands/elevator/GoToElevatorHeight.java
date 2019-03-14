@@ -15,7 +15,7 @@ public class GoToElevatorHeight extends Command {
     requires(Robot.elevator);
     m_elevatorHeight = elevatorHeight;
     m_targetInches = 0;
-    setTimeout(1.5);
+    setTimeout(1);
     m_isDefault = false;
   }
 
@@ -23,7 +23,7 @@ public class GoToElevatorHeight extends Command {
     m_elevatorHeight = ElevatorHeight.HOME;
     m_targetInches = 0;
     m_isDefault = true;
-    setTimeout(1.5);     
+    setTimeout(1);     
   }
 
   @Override
@@ -77,6 +77,9 @@ public class GoToElevatorHeight extends Command {
         m_targetInches = RobotMap.elevatorHomeHeight;
         Robot.elevator.setElevatorAbsolute(m_targetInches);
         break;
+      case FULLSENDLVL2:
+        m_targetInches = RobotMap.elevatorYeetHab;
+        Robot.elevator.setElevatorAbsolute(m_targetInches);
     }
   }
 

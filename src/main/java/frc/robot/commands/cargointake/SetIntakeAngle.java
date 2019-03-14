@@ -2,6 +2,7 @@ package frc.robot.commands.cargointake;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 public class SetIntakeAngle extends Command {
 
@@ -36,5 +37,6 @@ public class SetIntakeAngle extends Command {
 
   @Override
   protected void interrupted() {
+    Robot.cargoIntake.setIntakePivot(RobotMap.cargoIntakeHomeAngle);
   }
 }

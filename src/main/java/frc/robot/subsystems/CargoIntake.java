@@ -64,7 +64,7 @@ public class CargoIntake extends Subsystem {
   }
 
   public void zeroCargoIntakePivot() {
-    if (isCargoHomed()) {
+    if (isCargoHomed() && !Util.isWithinTolerance(Math.abs(Util.ticksToDegrees(getTicks())), 0.0, 0.5)) {
       intakePivot.setSelectedSensorPosition(0);
     }
   }

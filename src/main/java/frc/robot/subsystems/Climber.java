@@ -33,6 +33,10 @@ public class Climber extends Subsystem {
     master.configNominalOutputReverse(nominalPercent);
     master.setNeutralMode(NeutralMode.Brake); // might change to coast
     master.configOpenloopRamp(secondsFromNeutralToFull);
+    master.configContinuousCurrentLimit(25);
+    master.configPeakCurrentLimit(30);
+    master.configPeakCurrentDuration(1);
+    master.enableCurrentLimit(true);
 
     slave.configFactoryDefault();
     slave.follow(master);
