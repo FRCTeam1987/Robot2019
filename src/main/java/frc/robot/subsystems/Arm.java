@@ -23,7 +23,7 @@ public class Arm extends Subsystem {
     wrist = new WPI_TalonSRX(RobotMap.armMotorID);
     wrist.setName("Arm", "wrist");
     configWrist();
-    zeroWrist();
+    // zeroWrist();
 
     wristHome = new DigitalInput(RobotMap.wristHomeID);
 
@@ -75,6 +75,10 @@ public class Arm extends Subsystem {
       if (wristHome.get()) {
         zeroWrist();
     }
+  }
+
+  public boolean getWristHome() {
+    return wristHome.get();
   }
 
   public double getArmAngle() {
@@ -134,5 +138,5 @@ public class Arm extends Subsystem {
     SmartDashboard.putString("Desired Arm Side", getArmSideState().toString());
     zeroWristAtHome();
     SmartDashboard.putBoolean("Wrist Home", wristHome.get());
-  }
+    }
 }

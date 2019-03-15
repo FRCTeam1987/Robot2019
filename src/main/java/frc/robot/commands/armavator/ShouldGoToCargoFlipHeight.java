@@ -10,11 +10,10 @@ public class ShouldGoToCargoFlipHeight extends ConditionalCommand {
 
     public ShouldGoToCargoFlipHeight() {
         super(new GoToElevatorHeight(ElevatorHeight.QUICKCARGOFLIP));
-
     }
 
     @Override
     protected boolean condition() {
-        return Robot.claw.isCargoCollected() && (Robot.elevator.getElevatorHeightStateInches() < RobotMap.elevatorQuickCargoFlipHeight);
+        return Robot.claw.isCargoCollected() && (Robot.elevator.getElevatorHeightStateInches() < RobotMap.elevatorQuickCargoFlipHeight) && Robot.arm.getArmSide() != Robot.arm.getArmSideState();
     }
 }

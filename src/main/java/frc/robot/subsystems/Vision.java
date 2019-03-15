@@ -1,7 +1,6 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.subsystems.Arm.ArmSide;
@@ -41,7 +40,7 @@ public class Vision extends Subsystem {
 
   @Override
   public void periodic() {
-    SmartDashboard.putBoolean("Has target", limeFront.hasTarget());
+    // SmartDashboard.putBoolean("Has target", limeFront.hasTarget());
   }
 
   @Override

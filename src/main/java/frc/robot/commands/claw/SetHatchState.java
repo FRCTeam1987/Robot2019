@@ -24,6 +24,5 @@ public class SetHatchState extends InstantCommand {
   @Override
   protected void initialize() {
     Robot.claw.setHatchCollected(m_hasHatch);
-    Robot.elevator.setElevatorAbsolute(RobotMap.elevatorCollectHatchHeight);
   }
 }

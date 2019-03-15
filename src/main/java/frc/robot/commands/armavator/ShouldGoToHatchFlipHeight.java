@@ -14,6 +14,6 @@ public class ShouldGoToHatchFlipHeight extends ConditionalCommand {
 
     @Override
     protected boolean condition() {
-        return Robot.claw.isHatchCollected() && (Robot.elevator.getElevatorHeightStateInches() < RobotMap.elevatorQuickHatchFlipHeight);
+        return Robot.claw.isHatchCollected() && (Robot.elevator.getElevatorHeightStateInches() < RobotMap.elevatorQuickHatchFlipHeight) && Robot.arm.getArmSide() != Robot.arm.getArmSideState();
     }
 }

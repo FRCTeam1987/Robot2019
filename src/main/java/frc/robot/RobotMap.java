@@ -65,8 +65,8 @@ public class RobotMap {
     //DIO IDs
     public static int clawCargoProxID = 1;
     public static int clawHatchProxID = 7;
-    public static int clawHatchSonarPingID = 8;
-    public static int clawHatchSonarEchoID = 9;
+    // public static int clawHatchSonarPingID = 8;
+    // public static int clawHatchSonarEchoID = 9;
     public static int wristHomeID = 2;
     public static int cargoIntakeHomeID = 3;
     public static int elevatorMaxID = 4;
@@ -93,12 +93,12 @@ public class RobotMap {
     public static double elevatorGroundCollectHeight = -1.7;    
     public static double elevatorHomeHeight = 0;
     public static double elevatorCollectHatchHeight = -7.0;
-    public static double elevatorLevel1HatchHeight = -9.2;
-    public static double elevatorLevel1CargoHeight = -0.6;
+    public static double elevatorLevel1HatchHeight = -9;
+    public static double elevatorLevel1CargoHeight = 1.0; //Change when we are on the field
     public static double elevatorCargoShipHeight = 20;
     public static double elevatorLevel2HatchHeight = 21.1;
     public static double elevatorLevel2CargoHeight = 19.5;
-    public static double elevatorCargoLoadingStationHeight = 7.0;
+    public static double elevatorCargoLoadingStationHeight = 7.0; //
     public static double elevatorFlipHeight = 15;
     public static double elevatorQuickHatchFlipHeight = 1.0;
     public static double elevatorQuickCargoFlipHeight = 12.5;
@@ -126,7 +126,7 @@ public class RobotMap {
 
     //Elevator Misc
     public static double elevatorPulleyDiameter = 1.506;   
-    public static double elevatorTolerance = 0.4;       
+    public static double elevatorTolerance = 0.2;       
     public static double setElevatorAbsoluteTimeout = 60.0; 
     public static double elevatorMax = 21.5;
     public static double elevatorMin = -20.0;   
