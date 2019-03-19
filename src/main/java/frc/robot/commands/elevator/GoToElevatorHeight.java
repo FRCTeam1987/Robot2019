@@ -80,6 +80,11 @@ public class GoToElevatorHeight extends Command {
       case FULLSENDLVL2:
         m_targetInches = RobotMap.elevatorYeetHab;
         Robot.elevator.setElevatorAbsolute(m_targetInches);
+        break;
+      case HABLEVEL2:
+        m_targetInches = RobotMap.elevatorHabLevel2;
+        Robot.elevator.setElevatorAbsolute(m_targetInches);
+        break;
     }
   }
 

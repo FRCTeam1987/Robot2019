@@ -92,34 +92,35 @@ public class RobotMap {
     //Elevator Setpoints
     public static double elevatorGroundCollectHeight = -1.7;    
     public static double elevatorHomeHeight = 0;
-    public static double elevatorCollectHatchHeight = -7.0;
+    public static double elevatorCollectHatchHeight = -3.0;
     public static double elevatorLevel1HatchHeight = -9;
-    public static double elevatorLevel1CargoHeight = 1.0; //Change when we are on the field
+    public static double elevatorLevel1CargoHeight = 1.0; 
     public static double elevatorCargoShipHeight = 20;
     public static double elevatorLevel2HatchHeight = 21.1;
     public static double elevatorLevel2CargoHeight = 19.5;
-    public static double elevatorCargoLoadingStationHeight = 7.0; //
+    public static double elevatorCargoLoadingStationHeight = 7.0; 
     public static double elevatorFlipHeight = 15;
     public static double elevatorQuickHatchFlipHeight = 1.0;
     public static double elevatorQuickCargoFlipHeight = 12.5;
-    public static double elevatorYeetHab = 7.7;
+    public static double elevatorYeetHab = 4;
+    public static double elevatorHabLevel2 = 5;
     
     //Arm Setpoints
     public static double armHomeAngle = 0;
     public static double armHatchCollectedAngle = 90;
     public static double armHatchAngle = 86;
     public static double armCargoShipAngle = 105;                
-    public static double armRocketLevel1CargoAngle = 90;
+    public static double armRocketLevel1CargoAngle = 75;
     public static double armRocketLevel2CargoAngle = 67;
     public static double armLoadingStationCargoAngle = 63;      
     public static double armFloorCollectCargoAngle = 125;
     public static double armFullSendCargoAngle = 30;
-    public static double armYeetHab = 93;
+    public static double armYeetHab = 8;
     public static double wristTolerance = 3;
 
 
     //Cargo Intake Pivot Setpoints
-    public static double cargoIntakeAngle = 82;     
+    public static double cargoIntakeAngle = 77;     
     public static double cargoIntakeHomeAngle = -14.5;
     public static double cargoIntakeTolerance = 1.5;
 

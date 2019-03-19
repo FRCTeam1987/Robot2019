@@ -12,6 +12,7 @@ import frc.robot.commands.armavator.SetArmSide;
 import frc.robot.commands.armavator.SetElevatorAndArm;
 import frc.robot.commands.armavator.SetRobotState;
 import frc.robot.commands.cargointake.CollectCargo;
+import frc.robot.commands.cargointake.IntakeCargo;
 import frc.robot.commands.cargointake.SetIntakePivotManual;
 import frc.robot.commands.claw.ClawIntakeCargo;
 import frc.robot.commands.claw.Place;
@@ -130,8 +131,8 @@ public class OI {
     SmartDashboard.putData("Re-zero Arm: Below Zero Sensor", new RezeroArm(ArmSide.BACK));
 
     SmartDashboard.putData("Set Arm Angle Hatch", new SetArmAngle(ArmSetpoint.HATCH, ArmSide.FRONT));
-
     SmartDashboard.putData("Set Elevator Hatch Height", new GoToElevatorHeight(ElevatorHeight.LEVEL1HATCH));
+    SmartDashboard.putData("Intake Cargo", new IntakeCargo());
   }
 
   public XboxController getDriver() {

@@ -35,7 +35,7 @@ public class Elevator extends Subsystem {
 
     elevator.setInverted(true);
     elevator.config_kF(0, 0.0);
-    elevator.config_kP(0, 0.3);
+    elevator.config_kP(0, 0.325);
     elevator.config_kI(0, 0.0);
     elevator.config_kD(0, 0.1);   
     // zeroElevator();
@@ -141,7 +141,8 @@ public class Elevator extends Subsystem {
     QUICKHATCHFLIP,
     QUICKCARGOFLIP,
     FULLSENDLVL2,
-    HOME
+    HOME,
+    HABLEVEL2
   }
 
   public void setElevatorHeight(final ElevatorHeight newElevatorHeight) {
