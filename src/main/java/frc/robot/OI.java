@@ -1,6 +1,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -14,16 +15,16 @@ import frc.robot.commands.armavator.SetRobotState;
 import frc.robot.commands.cargointake.CollectCargo;
 import frc.robot.commands.cargointake.IntakeCargo;
 import frc.robot.commands.cargointake.SetIntakePivotManual;
-import frc.robot.commands.claw.ClawIntakeCargo;
 import frc.robot.commands.claw.Place;
 import frc.robot.commands.claw.SetHatchFalse;
-import frc.robot.commands.claw.SetHatchState;
 import frc.robot.commands.claw.SetHatchTrue;
 import frc.robot.commands.drive.ToggleShifter;
 import frc.robot.commands.elevator.ElevatorManual;
 import frc.robot.commands.elevator.GoToElevatorHeight;
 import frc.robot.commands.elevator.SetElevatorAbsolute;
-import frc.robot.commands.vision.TeleAimRobot;
+import frc.robot.commands.vision.AutoAimbot;
+import frc.robot.commands.vision.DriveByAssist;
+import frc.robot.commands.vision.DriveByAssistNew;
 import frc.robot.subsystems.Arm.ArmSetpoint;
 import frc.robot.subsystems.Arm.ArmSide;
 import frc.robot.subsystems.Elevator.ElevatorHeight;
@@ -42,7 +43,6 @@ public class OI {
   private final Button place;
   private final Button armManualForward;
   private final Button armManualBack;
-  private final Button collectCargoFromLoadingStation;
   private final Button aimRobot;
   private final Button collectHatch;
   private final XboxDPad elevatorManualUp;
@@ -68,7 +68,6 @@ public class OI {
     //Driver
     driver = new XboxController(RobotMap.driverID);
     goToElevatorHeight = new JoystickButton(driver, RobotMap.elevatorToHeightButton);
-    collectCargoFromLoadingStation = new JoystickButton(driver, RobotMap.collectCargoFromLoadingStationButton);
     cargoCollect = new JoystickButton(driver, RobotMap.cargoCollectButton);
     place = new JoystickButton(driver, RobotMap.placeButton);
     armManualForward = new JoystickButton(driver, RobotMap.armManualForwardButton);
@@ -102,8 +101,7 @@ public class OI {
     place.whenPressed(new Place(1));
     armManualForward.whileHeld(new ArmManual(0.4));
     armManualBack.whileHeld(new ArmManual(-0.4));
-    aimRobot.whileHeld(new TeleAimRobot());
-    collectCargoFromLoadingStation.whenPressed(new ClawIntakeCargo(1));
+    aimRobot.whileHeld(new DriveByAssist());
     collectHatch.whenPressed(new SetElevatorAbsolute(RobotMap.elevatorCollectHatchHeight));
     elevatorManualUp.whileHeld(new ElevatorManual(0.4));
     elevatorManualDown.whileHeld(new ElevatorManual(-0.4));
@@ -127,11 +125,12 @@ public class OI {
 
 
     //SmartDashboard puts
-    SmartDashboard.putData("Re-zero Arm: Above Zero Sensor", new RezeroArm(ArmSide.FRONT));
-    SmartDashboard.putData("Re-zero Arm: Below Zero Sensor", new RezeroArm(ArmSide.BACK));
+    // SmartDashboard.putData("Re-zero Arm: Above Zero Sensor", new RezeroArm(ArmSide.FRONT));
+    // SmartDashboard.putData("Re-zero Arm: Below Zero Sensor", new RezeroArm(ArmSide.BACK));
 
-    SmartDashboard.putData("Set Arm Angle Hatch", new SetArmAngle(ArmSetpoint.HATCH, ArmSide.FRONT));
-    SmartDashboard.putData("Set Elevator Hatch Height", new GoToElevatorHeight(ElevatorHeight.LEVEL1HATCH));
+    // SmartDashboard.putData("Set Arm Angle Hatch", new SetArmAngle(ArmSetpoint.HATCH, ArmSide.FRONT));
+    // SmartDashboard.putData("Set Elevator Hatch Height", new GoToElevatorHeight(ElevatorHeight.LEVEL1HATCH));
+    SmartDashboard.putData("Aim Robot Automagically", new AutoAimbot());
     SmartDashboard.putData("Intake Cargo", new IntakeCargo());
   }
 
@@ -141,5 +140,9 @@ public class OI {
   
   public XboxController getCoDriver() {
     return coDriver;
+  }
+
+  public double getThrottle() {
+    return driver.getTriggerAxis(Hand.kRight);
   }
 }

@@ -23,6 +23,7 @@ public class StopAll extends InstantCommand {
     Robot.claw.setWheels(0);
     Robot.climber.setWinchMotor(0);
     Robot.elevator.setElevatorPercent(0);
+    Robot.drive.tankDrive(0, 0);
   }
 
 }

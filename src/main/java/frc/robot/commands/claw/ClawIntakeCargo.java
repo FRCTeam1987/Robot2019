@@ -29,7 +29,6 @@ public class ClawIntakeCargo extends Command {
   @Override
   protected void end() {
     Robot.claw.setWheels(0);
-    // Robot.claw.setRumble(0.5);  //might need to change
   }
 
   @Override

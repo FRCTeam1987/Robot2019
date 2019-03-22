@@ -1,10 +1,7 @@
 package frc.robot.commands.armavator;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import frc.robot.commands.arm.SetArmAngle;
 import frc.robot.commands.elevator.GoToElevatorHeight;
-import frc.robot.subsystems.Arm.ArmSetpoint;
-import frc.robot.subsystems.Arm.ArmSide;
 import frc.robot.subsystems.Elevator.ElevatorHeight;
 
 public class Level2HatchPlace extends CommandGroup {

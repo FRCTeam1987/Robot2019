@@ -6,14 +6,13 @@ public class RobotMap {
     //Driver Buttons
     public static int driverID = 0;
     public static int elevatorToHeightButton = 1; //a
+    public static int collectHatchButton = 2;
     public static int cargoCollectButton = 3; //x
     public static int placeButton = 4; //y
     public static int armManualForwardButton = 5;
     public static int armManualBackButton = 6;
-    public static int collectHatchButton = 8;
     public static int toggleShifterButton = 9; //left stick push
     public static int aimRobotButton = 10; 
-    public static int collectCargoFromLoadingStationButton = 2;
 
     //Co-driver Buttons
     public static int coDriverID = 1;
@@ -134,8 +133,8 @@ public class RobotMap {
     public static double elevatorHomeTolerance = 0.25;
 
     //Limelight Constants
-    public static double kLimelightSteer = 0.15; //how hard it turns towards target
-    public static double kLimelightDrive = 0.26; //how hard it drives fwd towards target
+    public static double kLimelightSteer = 0.1; //how hard it turns towards target
+    public static double kLimelightDrive = 0.75; //how hard it drives fwd towards target
     public static double limelightHatchTargetArea = 10.0; //Area of target when it is properly aimed
     public static double limelightMaxDrive = 0.8; //max speed robot will drive forward
 

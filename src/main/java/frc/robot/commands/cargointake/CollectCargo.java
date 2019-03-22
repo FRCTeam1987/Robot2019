@@ -1,25 +1,16 @@
 package frc.robot.commands.cargointake;
 
-import edu.wpi.first.wpilibj.command.CommandGroup;
-import frc.robot.RobotMap;
-import frc.robot.commands.arm.SetArmAngle;
-import frc.robot.commands.cargointake.IsArmInTheWay;
-import frc.robot.commands.armavator.SetElevatorAndArm;
-import frc.robot.commands.elevator.GoToElevatorHeight;
-import frc.robot.subsystems.Arm.ArmSetpoint;
-import frc.robot.subsystems.Arm.ArmSide;
+import edu.wpi.first.wpilibj.command.ConditionalCommand;
+import frc.robot.Robot;
 import frc.robot.subsystems.Elevator.ElevatorHeight;
 
-public class CollectCargo extends CommandGroup {
+public class CollectCargo extends ConditionalCommand {
 
-  public CollectCargo() {
-    addSequential(new IsArmInTheWay());
-    addSequential(new SetIntakeAngle(RobotMap.cargoIntakeAngle));
-    addSequential(new GoToElevatorHeight(ElevatorHeight.CARGOGROUNDCOLLECT));
-    addSequential(new SetArmAngle(ArmSetpoint.CARGOCOLLECTFLOOR, ArmSide.FRONT));
-    addSequential(new IntakeCargo());
-    addSequential(new SetElevatorAndArm(ArmSide.FRONT, ElevatorHeight.CARGOSHIP, ArmSetpoint.CARGOSHIP));
-    // addSequential(new SetElevatorAndArm());
-    addSequential(new SetIntakeAngle(RobotMap.cargoIntakeHomeAngle));
-  }
+    public CollectCargo() {
+        super(new CollectCargoFromLoadingStation(), new CollectCargoFromGround());
+    }
+
+    protected boolean condition() {
+        return Robot.elevator.getElevatorHeightState() == ElevatorHeight.LOADINGSTATIONCARGO;
+    }
 }

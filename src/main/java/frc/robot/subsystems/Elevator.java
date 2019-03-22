@@ -163,6 +163,8 @@ public class Elevator extends Subsystem {
       case CARGOSHIP:
         desiredElevatorInches = RobotMap.elevatorCargoShipHeight;
         break;
+      case HABLEVEL2:
+        desiredElevatorInches = RobotMap.elevatorHabLevel2;
       case LEVEL1HATCH:
         desiredElevatorInches = RobotMap.elevatorLevel1HatchHeight;
         break;

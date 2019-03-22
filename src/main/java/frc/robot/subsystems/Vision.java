@@ -5,6 +5,8 @@ import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.subsystems.Arm.ArmSide;
 import frc.robot.util.Util;
+import frc.robot.util.limelight.CameraMode;
+import frc.robot.util.limelight.LedMode;
 import frc.robot.util.limelight.Limelight;
 
 public class Vision extends Subsystem {
@@ -17,7 +19,7 @@ public class Vision extends Subsystem {
     limeBack = new Limelight("back");
   }
 
-  public Limelight getActiveLimelight() {   //needs to be tested
+  public Limelight getActiveLimelight() {
     if (Robot.arm.getArmSideState() == ArmSide.FRONT) {
       return limeFront;
     }
@@ -30,8 +32,20 @@ public class Vision extends Subsystem {
     return getActiveLimelight() == limelight ? true : false;
   }
 
+  public void setDriverCameraMode() {
+    Robot.vision.getActiveLimelight().setCameraMode(CameraMode.DRIVERCAMERA);
+    Robot.vision.getActiveLimelight().setPipeline(9);
+    Robot.vision.getActiveLimelight().setLedMode(LedMode.OFF);
+  }
+
+  public void setVisionMode() {
+    Robot.vision.getActiveLimelight().setCameraMode(CameraMode.VISION);
+    Robot.vision.getActiveLimelight().setPipeline(0);
+    Robot.vision.getActiveLimelight().setLedMode(LedMode.ON);
+  }
+
   public boolean isAimed() {   
-    return Util.isWithinTolerance(getActiveLimelight().getTx(), 0.0, 0.2);
+    return Util.isWithinTolerance(getActiveLimelight().getTx(), 0.0, 0.2) && this.getActiveLimelight().hasTarget();
   }
 
   public boolean isInRange() {

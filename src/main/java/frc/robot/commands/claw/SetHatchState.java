@@ -9,7 +9,6 @@ package frc.robot.commands.claw;
 
 import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
-import frc.robot.RobotMap;
 
 
 public class SetHatchState extends InstantCommand {

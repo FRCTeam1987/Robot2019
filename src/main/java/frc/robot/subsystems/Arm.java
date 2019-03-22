@@ -34,6 +34,7 @@ public class Arm extends Subsystem {
   public void configWrist() {
     wrist.configMotionCruiseVelocity(450); //was 400  
     wrist.configMotionAcceleration(450);   //was 400
+    wrist.configMotionSCurveStrength(5); //adjust
     Util.configTalonSRXWithEncoder(wrist, false);
     wrist.config_kF(0, 4.8, 0);   
     wrist.config_kP(0, 4.7, 0);   
