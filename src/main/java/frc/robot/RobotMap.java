@@ -11,7 +11,7 @@ public class RobotMap {
     public static int placeButton = 4; //y
     public static int armManualForwardButton = 5;
     public static int armManualBackButton = 6;
-    public static int toggleShifterButton = 9; //left stick push
+    public static int toggleShifterButton = 7; //left stick push
     public static int aimRobotButton = 10; 
 
     //Co-driver Buttons
@@ -134,7 +134,7 @@ public class RobotMap {
 
     //Limelight Constants
     public static double kLimelightSteer = 0.1; //how hard it turns towards target
-    public static double kLimelightDrive = 0.75; //how hard it drives fwd towards target
+    public static double kLimelightDrive = 0.035; //how hard it drives fwd towards target
     public static double limelightHatchTargetArea = 10.0; //Area of target when it is properly aimed
     public static double limelightMaxDrive = 0.8; //max speed robot will drive forward
 

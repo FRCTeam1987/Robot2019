@@ -130,7 +130,7 @@ public class OI {
 
     // SmartDashboard.putData("Set Arm Angle Hatch", new SetArmAngle(ArmSetpoint.HATCH, ArmSide.FRONT));
     // SmartDashboard.putData("Set Elevator Hatch Height", new GoToElevatorHeight(ElevatorHeight.LEVEL1HATCH));
-    SmartDashboard.putData("Aim Robot Automagically", new AutoAimbot());
+    SmartDashboard.putData("Aim Robot Automagically", new AutoAimbot(120));
     SmartDashboard.putData("Intake Cargo", new IntakeCargo());
   }
 

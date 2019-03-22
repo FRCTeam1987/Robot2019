@@ -45,11 +45,15 @@ public class Vision extends Subsystem {
   }
 
   public boolean isAimed() {   
-    return Util.isWithinTolerance(getActiveLimelight().getTx(), 0.0, 0.2) && this.getActiveLimelight().hasTarget();
+    return Util.isWithinTolerance(getActiveLimelight().getTx(), 0.0, 2) && this.getActiveLimelight().hasTarget();
+  }
+
+  public boolean isInAreaRange() {
+    return Util.isWithinTolerance(getActiveLimelight().getTa(), RobotMap.limelightHatchTargetArea, 0.2);
   }
 
   public boolean isInRange() {
-    return Util.isWithinTolerance(getActiveLimelight().getTa(), RobotMap.limelightHatchTargetArea, 0.2);
+    return Util.isWithinTolerance(getActiveLimelight().getTy(), 0.0, 5);
   }
 
   @Override
