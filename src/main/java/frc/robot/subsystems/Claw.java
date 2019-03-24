@@ -5,6 +5,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -16,7 +17,7 @@ public class Claw extends Subsystem {
   
   private final WPI_TalonSRX clawIntake;
   private final DigitalInput cargoProx;
-  private final DoubleSolenoid hatchRelease;
+  private final Solenoid hatchFingers;
 
   public boolean m_hasHatch;
 
@@ -26,11 +27,10 @@ public class Claw extends Subsystem {
     cargoProx = new DigitalInput(RobotMap.clawCargoProxID);
     // hatchProx = new DigitalInput(RobotMap.clawHatchProxID);  
     // hatchSonar = new Ultrasonic(RobotMap.clawHatchSonarPingID, RobotMap.clawHatchSonarEchoID, Unit.kInches);    
-    hatchRelease = new DoubleSolenoid(RobotMap.hatchRetractID, RobotMap.hatchReleaseID);
-    hatchRelease.setName("Claw", "hatch-release");
+    hatchFingers = new Solenoid(RobotMap.hatchRetractID);
+    hatchFingers.setName("Claw", "hatch-release");
 
     m_hasHatch = false;
-    retractHatchPistons();
   }
 
   public void setWheels(final double percent) {
@@ -50,11 +50,11 @@ public class Claw extends Subsystem {
   }
 
   public void releaseHatch() {
-    hatchRelease.set(Value.kReverse);
+    hatchFingers.set(true);
   }
 
-  public void retractHatchPistons() {
-    hatchRelease.set(Value.kForward);
+  public void collectHatch() {
+    hatchFingers.set(false);
   }
 
   public void periodic() {

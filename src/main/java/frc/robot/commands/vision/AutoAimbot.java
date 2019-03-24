@@ -23,7 +23,7 @@ public class AutoAimbot extends Command {
     setTimeout(timeout);
   }
 
-  protected void updateLimelightTracking() {
+  protected void updateLimelightTracking() { //implement lose target functionality
     if (!Robot.vision.getActiveLimelight().hasTarget()) {
       m_steer = 0;
       return;

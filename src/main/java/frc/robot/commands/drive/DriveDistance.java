@@ -10,6 +10,7 @@ package frc.robot.commands.drive;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.DriveMode;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.util.Util;
@@ -17,15 +18,16 @@ import frc.robot.util.Util;
 public class DriveDistance extends Command {
 
   private final double targetDistance;
-  private final double tolerance = 1.0; //arbitrary
+  private final double tolerance = 1 / 12;
   private boolean isBrake;
   private boolean isHighGear;
 
-  public DriveDistance(final double targetDistance) {
+  public DriveDistance(final double feet) {
     requires(Robot.drive);
-    this.targetDistance = targetDistance;
+    this.targetDistance = feet;
     isBrake = false;
     isHighGear = true;
+    Robot.drive.setPID(DriveMode.STRAIGHT);
   }
 
   @Override
@@ -36,7 +38,6 @@ public class DriveDistance extends Command {
     Robot.drive.zeroDriveEncoders();
     Robot.drive.setLowGear();
     Robot.drive.setBrake();
-    // Robot.drive.setPID(DriveMode.straight);
 
     final double distanceTicks = Util.distanceToTicks(targetDistance, RobotMap.driveBaseWheelsDiameter);
 
@@ -65,5 +66,6 @@ public class DriveDistance extends Command {
 
   @Override
   protected void interrupted() {
+    end();
   }
 }

@@ -7,24 +7,22 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.StopAll;
 import frc.robot.commands.arm.ArmManual;
-import frc.robot.commands.arm.RezeroArm;
-import frc.robot.commands.arm.SetArmAngle;
 import frc.robot.commands.armavator.SetArmSide;
 import frc.robot.commands.armavator.SetElevatorAndArm;
 import frc.robot.commands.armavator.SetRobotState;
 import frc.robot.commands.cargointake.CollectCargo;
 import frc.robot.commands.cargointake.IntakeCargo;
 import frc.robot.commands.cargointake.SetIntakePivotManual;
+import frc.robot.commands.claw.CollectHatch;
 import frc.robot.commands.claw.Place;
 import frc.robot.commands.claw.SetHatchFalse;
 import frc.robot.commands.claw.SetHatchTrue;
+import frc.robot.commands.drive.DriveDistance;
+import frc.robot.commands.drive.DrivePivot;
 import frc.robot.commands.drive.ToggleShifter;
 import frc.robot.commands.elevator.ElevatorManual;
-import frc.robot.commands.elevator.GoToElevatorHeight;
-import frc.robot.commands.elevator.SetElevatorAbsolute;
 import frc.robot.commands.vision.AutoAimbot;
 import frc.robot.commands.vision.DriveByAssist;
-import frc.robot.commands.vision.DriveByAssistNew;
 import frc.robot.subsystems.Arm.ArmSetpoint;
 import frc.robot.subsystems.Arm.ArmSide;
 import frc.robot.subsystems.Elevator.ElevatorHeight;
@@ -96,13 +94,13 @@ public class OI {
 
     //Driver Buttons
     goToElevatorHeight.whenPressed(new SetElevatorAndArm());
+    collectHatch.whileHeld(new CollectHatch());
     shifter.whenPressed(new ToggleShifter());
     cargoCollect.whenPressed(new CollectCargo());
     place.whenPressed(new Place(1));
     armManualForward.whileHeld(new ArmManual(0.4));
     armManualBack.whileHeld(new ArmManual(-0.4));
     aimRobot.whileHeld(new DriveByAssist());
-    collectHatch.whenPressed(new SetElevatorAbsolute(RobotMap.elevatorCollectHatchHeight));
     elevatorManualUp.whileHeld(new ElevatorManual(0.4));
     elevatorManualDown.whileHeld(new ElevatorManual(-0.4));
     cargoIntakeManualForward.whileHeld(new SetIntakePivotManual(0.9));    //was .4
@@ -132,6 +130,8 @@ public class OI {
     // SmartDashboard.putData("Set Elevator Hatch Height", new GoToElevatorHeight(ElevatorHeight.LEVEL1HATCH));
     SmartDashboard.putData("Aim Robot Automagically", new AutoAimbot(120));
     SmartDashboard.putData("Intake Cargo", new IntakeCargo());
+    SmartDashboard.putData("Pivot 90 Degrees", new DrivePivot(90));
+    SmartDashboard.putData("Drive 1 Foot", new DriveDistance(1));
   }
 
   public XboxController getDriver() {

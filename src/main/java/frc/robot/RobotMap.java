@@ -11,8 +11,8 @@ public class RobotMap {
     public static int placeButton = 4; //y
     public static int armManualForwardButton = 5;
     public static int armManualBackButton = 6;
-    public static int toggleShifterButton = 7; //left stick push
-    public static int aimRobotButton = 10; 
+    public static int toggleShifterButton = 9; //left stick push
+    public static int aimRobotButton = 7; 
 
     //Co-driver Buttons
     public static int coDriverID = 1;
@@ -43,6 +43,22 @@ public class RobotMap {
     public static double pathHighGearKD = 0.0;
     public static double pathHighGearKV = 1 / maxHighGearVelocity;
     public static double pathHighGearKA = 0.0;
+
+    public static double driveStraightHighKP = 1.0;
+    public static double driveStraightHighKD = 0.0;
+
+    public static double drivePivotHighKP = 0.7;
+    public static double drivePivotHighKD = 0.0;
+
+    
+    public static double driveStraightLowKP = 1.3;
+    public static double driveStraightLowKD = 0.0;
+
+    public static double drivePivotLowKP = 1.0;
+    public static double drivePivotLowKD = 0.0;
+
+
+
 
     
     //MotorIDs

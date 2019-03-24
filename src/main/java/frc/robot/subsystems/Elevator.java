@@ -194,6 +194,7 @@ public class Elevator extends Subsystem {
         break;
       case FULLSENDLVL2:
         desiredElevatorInches = RobotMap.elevatorYeetHab;
+        break;
     }
 
     return desiredElevatorInches;

@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.DriveMode;
 import frc.robot.RobotMap;
 import frc.robot.util.Util;
 import jaci.pathfinder.Pathfinder;
@@ -76,12 +77,16 @@ public class Drive extends Subsystem {
     master.configNominalOutputReverse(nominalPercent);
     master.setNeutralMode(NeutralMode.Brake);
     master.configOpenloopRamp(secondsFromNeutralToFull);
+    
+    master.setSafetyEnabled(false);
 
     Arrays.asList(slaves).forEach(slave -> {
       slave.configFactoryDefault();
       slave.follow(master);
     });
     setCoast();
+
+    setPID(DriveMode.STRAIGHT);
     Util.configTalonSRXWithEncoder(master, isEncoderInverted);
   }
 
@@ -108,11 +113,13 @@ public class Drive extends Subsystem {
   public void setBrake() {
     leftMaster.setNeutralMode(NeutralMode.Brake);
     rightMaster.setNeutralMode(NeutralMode.Brake);
+    isBrake = true;
   }
 
   public void setCoast() {
 		leftMaster.setNeutralMode(NeutralMode.Coast);
-		rightMaster.setNeutralMode(NeutralMode.Coast);
+    rightMaster.setNeutralMode(NeutralMode.Coast);
+    isBrake = false;
   }
 
   public boolean isBrake() {
@@ -165,6 +172,10 @@ public class Drive extends Subsystem {
     return ahrs.getAngle();
   }
 
+  public double getGyroRate() {
+		return ahrs.getRate();
+	}
+
   public void zeroDriveEncoders() {
     leftMaster.setSelectedSensorPosition(0);
     rightMaster.setSelectedSensorPosition(0);
@@ -172,6 +183,59 @@ public class Drive extends Subsystem {
 
   public int getEncoderTicks(final WPI_TalonSRX master) {
     return master.getSelectedSensorPosition(0);
+  }
+
+  public void setPID(final DriveMode driveMode) {
+    if (isHighGear()) {
+      switch (driveMode) {
+      case STRAIGHT:
+        leftMaster.config_kP(0, RobotMap.driveStraightHighKP, 0);
+        leftMaster.config_kI(0, 0, 0);
+        leftMaster.config_kD(0, RobotMap.driveStraightHighKD, 0);
+        rightMaster.config_kP(0, RobotMap.driveStraightHighKP, 0);
+        rightMaster.config_kI(0, 0, 0);
+        rightMaster.config_kD(0, RobotMap.driveStraightHighKD, 0);
+        System.out.println("High Gear Straight");
+        leftMaster.configMotionCruiseVelocity(1100);
+        rightMaster.configMotionCruiseVelocity(1100);
+        leftMaster.configMotionAcceleration(1100);
+        rightMaster.configMotionAcceleration(1100);
+        break;
+      case PIVOT:
+        leftMaster.config_kP(0, RobotMap.drivePivotHighKP, 0);
+        leftMaster.config_kI(0, 0, 0);
+        leftMaster.config_kD(0, RobotMap.drivePivotHighKD, 0);
+        rightMaster.config_kP(0, RobotMap.drivePivotHighKP, 0);
+        rightMaster.config_kI(0, 0, 0);
+        rightMaster.config_kD(0, RobotMap.drivePivotHighKD, 0);
+        break;
+      }
+
+    } else {
+      switch (driveMode) {
+        case STRAIGHT:
+          leftMaster.config_kP(0, RobotMap.driveStraightLowKP, 0);
+          leftMaster.config_kI(0, 0, 0);
+          leftMaster.config_kD(0, RobotMap.driveStraightLowKD, 0);
+          rightMaster.config_kP(0, RobotMap.driveStraightLowKP, 0);
+          rightMaster.config_kI(0, 0, 0);
+          rightMaster.config_kD(0, RobotMap.driveStraightLowKD, 0);
+          System.out.println("Low Gear Straight");
+          leftMaster.configMotionCruiseVelocity(1100);
+          rightMaster.configMotionCruiseVelocity(1100);
+          leftMaster.configMotionAcceleration(1100);
+          rightMaster.configMotionAcceleration(1100);
+          break;
+        case PIVOT:
+          leftMaster.config_kP(0, RobotMap.drivePivotLowKP, 0);
+          leftMaster.config_kI(0, 0, 0);
+          leftMaster.config_kD(0, RobotMap.drivePivotLowKD, 0);
+          rightMaster.config_kP(0, RobotMap.drivePivotLowKP, 0);
+          rightMaster.config_kI(0, 0, 0);
+          rightMaster.config_kD(0, RobotMap.drivePivotLowKD, 0);
+          break;
+      }
+    }
   }
 
   public EncoderFollower[] setupPath(Trajectory toFollow) {

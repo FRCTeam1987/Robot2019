@@ -15,8 +15,12 @@ public class Place extends Command {
 
   @Override
   protected void initialize() {
+    if (Robot.claw.isCargoCollected()) {
       Robot.claw.setWheels(-m_percent);
+    }
+    else {
       Robot.claw.releaseHatch();
+    }
   }
 
   @Override
@@ -31,7 +35,7 @@ public class Place extends Command {
   @Override
   protected void end() {
     Robot.claw.setWheels(0);
-    Robot.claw.retractHatchPistons();
+    Robot.claw.collectHatch();
   }
 
   @Override

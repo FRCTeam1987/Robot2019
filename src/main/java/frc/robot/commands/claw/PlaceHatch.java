@@ -26,7 +26,7 @@ public class PlaceHatch extends Command {
 
   @Override
   protected void end() {
-    Robot.claw.retractHatchPistons();
+    Robot.claw.collectHatch();
   }
 
   @Override
