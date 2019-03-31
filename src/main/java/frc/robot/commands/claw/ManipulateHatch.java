@@ -7,25 +7,16 @@
 
 package frc.robot.commands.claw;
 
-import edu.wpi.first.wpilibj.command.InstantCommand;
+import edu.wpi.first.wpilibj.command.ConditionalCommand;
 import frc.robot.Robot;
 
-/**
- * Add your docs here.
- */
-public class CollectHatch extends InstantCommand {
-  /**
-   * Add your docs here.
-   */
-  public CollectHatch() {
-    super();
-    requires(Robot.claw);
+public class ManipulateHatch extends ConditionalCommand {
+  public ManipulateHatch() {
+    super(new NewPlaceHatch(), new NewCollectHatch());
   }
 
-  // Called once when the command executes
   @Override
-  protected void initialize() {
-    Robot.claw.collectHatch();
-  }
-
+    protected boolean condition() {
+      return Robot.claw.isHatchCollected();
+    }
 }

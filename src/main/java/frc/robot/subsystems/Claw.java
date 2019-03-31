@@ -5,7 +5,6 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -17,20 +16,16 @@ public class Claw extends Subsystem {
   
   private final WPI_TalonSRX clawIntake;
   private final DigitalInput cargoProx;
-  private final Solenoid hatchFingers;
-
-  public boolean m_hasHatch;
+  private final DigitalInput hatchProx;
+  private final DoubleSolenoid hatchFingers;
 
   public Claw() {
     clawIntake = new WPI_TalonSRX(RobotMap.clawIntakeMotorID);
     clawIntake.setName("Claw", "intake");
     cargoProx = new DigitalInput(RobotMap.clawCargoProxID);
-    // hatchProx = new DigitalInput(RobotMap.clawHatchProxID);  
-    // hatchSonar = new Ultrasonic(RobotMap.clawHatchSonarPingID, RobotMap.clawHatchSonarEchoID, Unit.kInches);    
-    hatchFingers = new Solenoid(RobotMap.hatchRetractID);
+    hatchProx = new DigitalInput(RobotMap.clawHatchProxID);
+    hatchFingers = new DoubleSolenoid(RobotMap.hatchFingersOutID, RobotMap.hatchFingersInID);
     hatchFingers.setName("Claw", "hatch-release");
-
-    m_hasHatch = false;
   }
 
   public void setWheels(final double percent) {
@@ -42,23 +37,24 @@ public class Claw extends Subsystem {
   }
 
   public boolean isHatchCollected() {
-    return m_hasHatch;
+    return !hatchProx.get();
   }
 
   public void setHatchCollected(final boolean hasHatch) {
-    this.m_hasHatch = hasHatch;
+    // this.m_hasHatch = hasHatch;
   }
 
   public void releaseHatch() {
-    hatchFingers.set(true);
+    hatchFingers.set(Value.kReverse);
   }
 
   public void collectHatch() {
-    hatchFingers.set(false);
+    hatchFingers.set(Value.kForward);
   }
 
   public void periodic() {
     SmartDashboard.putBoolean("Cargo Collected", isCargoCollected());
+    SmartDashboard.putBoolean("Hatch Collected", isHatchCollected());
   }
 
   @Override

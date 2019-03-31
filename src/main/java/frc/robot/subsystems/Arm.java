@@ -40,7 +40,8 @@ public class Arm extends Subsystem {
     wrist.config_kP(0, 4.7, 0);   
     wrist.config_kI(0, 0.0, 0);
     wrist.config_kD(0, 0.1, 0);
-    wrist.setInverted(true);
+    // wrist.setInverted(true);
+    wrist.setSensorPhase(true);
     setBrake();
   }
 
@@ -68,7 +69,7 @@ public class Arm extends Subsystem {
   }
 
   public void zeroWrist() {
-    wrist.setSelectedSensorPosition(Util.degreesToTicks(-90));
+    wrist.setSelectedSensorPosition(Util.degreesToTicks(90)); // was -90 but changed due to climber mod
   }
 
   private void zeroWristAtHome() {
@@ -104,7 +105,7 @@ public class Arm extends Subsystem {
     armSide = newArmSide;
   }
 
-  public ArmSide getArmSide() { // might not be needed
+  public ArmSide getArmSide() { 
     return (getArmAngle() >= 0) ? ArmSide.FRONT : ArmSide.BACK;
   }
 

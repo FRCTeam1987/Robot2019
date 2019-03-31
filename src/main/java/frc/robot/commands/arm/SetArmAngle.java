@@ -37,7 +37,7 @@ public class SetArmAngle extends Command {
     
     switch(m_setpoint) {
       case HATCH:
-        m_targetAngle = RobotMap.armHatchAngle * (m_armSide == ArmSide.FRONT ? 1 : -1);
+        m_targetAngle = RobotMap.armHatchAngle;
         Robot.arm.setWristAbsolute(m_targetAngle);
         break;
       case CARGOCOLLECTFLOOR:
@@ -45,7 +45,7 @@ public class SetArmAngle extends Command {
         Robot.arm.setWristAbsolute(m_targetAngle);
         break;
       case CARGOLOADINGSTATION:
-        m_targetAngle = RobotMap.armLoadingStationCargoAngle * (m_armSide == ArmSide.FRONT ? 1 : -1);
+        m_targetAngle = RobotMap.armLoadingStationCargoAngle;
         Robot.arm.setWristAbsolute(m_targetAngle);
         break;
       case HOME:
@@ -61,7 +61,7 @@ public class SetArmAngle extends Command {
         Robot.arm.setWristAbsolute(m_targetAngle);
         break;
       case CARGOROCKETLVL1:
-        m_targetAngle = RobotMap.armRocketLevel1CargoAngle *  (m_armSide == ArmSide.FRONT ? 1 : -1);
+        m_targetAngle = RobotMap.armRocketLevel1CargoAngle;
         Robot.arm.setWristAbsolute(m_targetAngle); 
         break;
       case CARGOROCKETLVL2:
@@ -91,6 +91,8 @@ public class SetArmAngle extends Command {
     // else {
     //   Robot.claw.setRumble(0.5);  //might need to change
     // }
+
+    System.out.println("SetArmAngle ended");
   }
 
   @Override

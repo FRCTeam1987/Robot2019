@@ -29,7 +29,6 @@ public class IntakeCargo extends Command {
   protected void end() {
     Robot.cargoIntake.setRoller(0.0);
     Robot.claw.setWheels(0.0);
-    // Robot.cargoIntake.setIntakePivot(0.0);
   }
 
   @Override

@@ -97,8 +97,9 @@ public class RobotMap {
     //Pneumatics
     public static int highGearID = 0;
     public static int lowGearID = 1;
-    public static int hatchRetractID = 2;
-    public static int hatchReleaseID = 3;
+    public static int hatchFingersOutID = 2;
+    public static int hatchFingersInID = 3;
+    public static int venturiID = 4;
 
     //Robot Dimensions
     public static double driveBaseWheelsDiameter = 5.0 / 12.0; 
@@ -123,7 +124,7 @@ public class RobotMap {
     //Arm Setpoints
     public static double armHomeAngle = 0;
     public static double armHatchCollectedAngle = 90;
-    public static double armHatchAngle = 86;
+    public static double armHatchAngle = 90;
     public static double armCargoShipAngle = 105;                
     public static double armRocketLevel1CargoAngle = 75;
     public static double armRocketLevel2CargoAngle = 67;
@@ -135,8 +136,10 @@ public class RobotMap {
 
 
     //Cargo Intake Pivot Setpoints
-    public static double cargoIntakeAngle = 77;     
-    public static double cargoIntakeHomeAngle = -14.5;
+    public static double practiceBotCargoAngleOffset = -15;
+    public static double cargoIntakeAngle = 81;
+    // public static double cargoIntakeHomeAngle = -14.5;
+    public static double cargoIntakeHomeAngle = -7;
     public static double cargoIntakeTolerance = 1.5;
 
 

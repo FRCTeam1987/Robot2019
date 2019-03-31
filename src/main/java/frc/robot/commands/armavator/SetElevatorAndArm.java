@@ -18,10 +18,10 @@ public class SetElevatorAndArm extends CommandGroup {
   }
 
   public SetElevatorAndArm() {
-    addSequential(new ShouldRunThroughElevator());
     addSequential(new ShouldGoToCargoFlipHeight());
     addSequential(new ShouldGoToHatchFlipHeight());
     addSequential(new ShouldRollArm());
+    addSequential(new SetArmAngle());
     addSequential(new GoToElevatorHeight());
   }
 }

@@ -12,5 +12,9 @@ package frc.robot;
  */
 public enum DriveMode {
         STRAIGHT,
-        PIVOT
+        PIVOT,
+	TRAJECTORY,
+	DRIVEPATHLOW,
+	DRIVEPATHSTRAIGHT,
+	DRIVEPATHTURNS
 }

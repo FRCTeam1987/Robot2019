@@ -5,40 +5,30 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.arm;
+package frc.robot.commands.claw;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class ArmManual extends Command {
-  
-  private double m_percent;
-  public ArmManual(final double percent) {
-    requires(Robot.arm);
-    m_percent = percent;
+public class NewPlaceHatch extends Command {
+  public NewPlaceHatch() {
+    requires(Robot.claw);
+    setTimeout(0.5);
   }
 
+  // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.arm.setWristPercent(m_percent);
+    Robot.claw.releaseHatch();
   }
 
-  @Override
-  protected void execute() {
-  }
-
+  // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
-  }
-
-  @Override
-  protected void end() {
-    Robot.arm.setWristAbsolute(Robot.arm.getArmAngle());
+    return isTimedOut();
   }
 
   @Override
   protected void interrupted() {
-    end();
   }
 }

@@ -4,18 +4,21 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
 public class Climber extends Subsystem {
   private final WPI_TalonSRX winchMaster;
   private final WPI_TalonSRX winchSlave;
+  private final Solenoid venturi;
 
   public Climber() {
     winchMaster = new WPI_TalonSRX(RobotMap.winchMasterID);
     winchMaster.setName("Climber", "winch-master");
     winchSlave = new WPI_TalonSRX(RobotMap.winchSlaveID);
     winchSlave.setName("Climber", "winch-slave");
+    venturi = new Solenoid(RobotMap.venturiID);
 
     configWinch(winchMaster, winchSlave);
   }
@@ -40,6 +43,7 @@ public class Climber extends Subsystem {
 
     slave.configFactoryDefault();
     slave.follow(master);
+    slave.setNeutralMode(NeutralMode.Brake);
   }
 
   public void setWinchMotor(final double percent) {
