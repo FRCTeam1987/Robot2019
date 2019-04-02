@@ -52,6 +52,10 @@ public class Claw extends Subsystem {
     hatchFingers.set(Value.kForward);
   }
 
+  public boolean isInReleaseHatchPosition() {
+    return hatchFingers.get() == Value.kReverse;
+  }
+
   public void periodic() {
     SmartDashboard.putBoolean("Cargo Collected", isCargoCollected());
     SmartDashboard.putBoolean("Hatch Collected", isHatchCollected());

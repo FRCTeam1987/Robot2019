@@ -17,6 +17,7 @@ import frc.robot.commands.cargointake.SetIntakeAngle;
 import frc.robot.commands.cargointake.SetIntakePivotManual;
 import frc.robot.commands.claw.CollectHatch;
 import frc.robot.commands.claw.ManipulateHatch;
+import frc.robot.commands.claw.ToggleHatchManipulator;
 import frc.robot.commands.claw.NewCollectHatch;
 import frc.robot.commands.claw.NewPlaceHatch;
 import frc.robot.commands.claw.Place;
@@ -99,7 +100,8 @@ public class OI {
 
     // Driver Buttons
     goToElevatorHeight.whenPressed(new SetElevatorAndArm());
-    collectHatch.whenPressed(new ManipulateHatch());
+    // collectHatch.whenPressed(new ManipulateHatch());
+    collectHatch.whenPressed(new ToggleHatchManipulator());
     shifter.whenPressed(new ToggleShifter());
     // cargoCollect.whenPressed(new ManipulateHatch());
     cargoCollect.whenPressed(new CollectCargo());
