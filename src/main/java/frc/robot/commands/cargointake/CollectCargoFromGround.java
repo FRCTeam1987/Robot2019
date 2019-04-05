@@ -2,6 +2,7 @@ package frc.robot.commands.cargointake;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.RobotMap;
+import frc.robot.commands.SetRumble;
 import frc.robot.commands.arm.SetArmAngle;
 import frc.robot.commands.cargointake.IsArmInTheWay;
 import frc.robot.commands.claw.CollectHatch;
@@ -19,7 +20,7 @@ public class CollectCargoFromGround extends CommandGroup {
     addSequential(new GoToElevatorHeight(ElevatorHeight.CARGOGROUNDCOLLECT));
     addSequential(new SetArmAngle(ArmSetpoint.CARGOCOLLECTFLOOR, ArmSide.FRONT));
     addSequential(new IntakeCargo());
-    // addSequential(new SetElevatorAndArm(ElevatorHeight.CARGOSHIP, ArmSetpoint.CARGOSHIP));
+    addParallel(new SetRumble(1));
     addSequential(new GoToElevatorHeight(ElevatorHeight.CARGOSHIP));
     addSequential(new SetArmAngle(ArmSetpoint.CARGOSHIP, ArmSide.FRONT));
     addSequential(new SetIntakeAngle(RobotMap.cargoIntakeHomeAngle));

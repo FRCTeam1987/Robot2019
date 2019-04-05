@@ -32,6 +32,6 @@ public class ClimberManual extends Command {
 
   @Override
   protected void interrupted() {
-    Robot.climber.setWinchMotor(0);
+    end();
   }
 }

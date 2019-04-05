@@ -2,6 +2,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -23,7 +24,11 @@ import frc.robot.commands.claw.Place;
 import frc.robot.commands.claw.PlaceHatch;
 import frc.robot.commands.claw.SetHatchFalse;
 import frc.robot.commands.claw.SetHatchTrue;
+import frc.robot.commands.claw.TeleCollectHatch;
+import frc.robot.commands.climber.Climb;
 import frc.robot.commands.climber.ClimberManual;
+import frc.robot.commands.climber.EngageVacuum;
+import frc.robot.commands.climber.ServoValve;
 import frc.robot.commands.drive.DriveDistance;
 import frc.robot.commands.drive.DrivePivot;
 import frc.robot.commands.drive.ToggleShifter;
@@ -66,6 +71,9 @@ public class OI {
   private final Button stopAll;
   private final Button hasHatch;
   private final Button yeetOntoHab;
+  private final Button deployClimber;
+  private final Button climb;
+  private final Button engageSuction;
 
   public OI() {
     // Driver
@@ -96,10 +104,13 @@ public class OI {
     stopAll = new JoystickButton(coDriver, RobotMap.stopAllButton);
     hasHatch = new JoystickButton(coDriver, RobotMap.hasHatchButton);
     yeetOntoHab = new JoystickButton(coDriver, RobotMap.yeetOntoHabButton);
+    deployClimber = new JoystickButton(coDriver, RobotMap.deployClimberButton);
+    climb = new JoystickButton(coDriver, RobotMap.climbButton);
+    engageSuction = new JoystickButton(coDriver, RobotMap.engageSuctionButton);
 
     // Driver Buttons
     goToElevatorHeight.whenPressed(new SetElevatorAndArm());
-    collectHatch.whenPressed(new ManipulateHatch());
+    collectHatch.toggleWhenPressed(new TeleCollectHatch());
     shifter.whenPressed(new ToggleShifter());
     // cargoCollect.whenPressed(new ManipulateHatch());
     cargoCollect.whenPressed(new CollectCargo());
@@ -107,8 +118,8 @@ public class OI {
     armManualForward.whileHeld(new ArmManual(0.4));
     armManualBack.whileHeld(new ArmManual(-0.4));
     aimRobot.whileHeld(new DriveByAssist());
-    elevatorManualUp.whileHeld(new ElevatorManual(0.4));
-    elevatorManualDown.whileHeld(new ElevatorManual(-0.4));
+    elevatorManualUp.whileHeld(new ElevatorManual(0.7));
+    elevatorManualDown.whileHeld(new ElevatorManual(-0.7));
     cargoIntakeManualForward.whileHeld(new SetIntakePivotManual(0.6)); // was .4
     cargoIntakeManualBack.whileHeld(new SetIntakePivotManual(-0.6)); // was -.4
 
@@ -122,11 +133,13 @@ public class OI {
     cargoShipCargoSet.whenPressed(new SetRobotState(ElevatorHeight.CARGOSHIP, ArmSetpoint.CARGOSHIP));
     level1CargoSet.whenPressed(new SetRobotState(ElevatorHeight.LEVEL1CARGOROCKET, ArmSetpoint.CARGOROCKETLVL1));
     level2CargoSet.whenPressed(new SetRobotState(ElevatorHeight.LEVEL2CARGOROCKET, ArmSetpoint.CARGOROCKETLVL2));
-    loadingStationCargoSet
-        .whenPressed(new SetRobotState(ElevatorHeight.LOADINGSTATIONCARGO, ArmSetpoint.CARGOLOADINGSTATION));
+    loadingStationCargoSet.whenPressed(new SetRobotState(ElevatorHeight.LOADINGSTATIONCARGO, ArmSetpoint.CARGOLOADINGSTATION));
     defenseSet.whenPressed(new SetRobotState(ElevatorHeight.HOME, ArmSetpoint.HOME));
     yeetOntoHab.whenPressed(new SetRobotState(ElevatorHeight.FULLSENDLVL2, ArmSetpoint.FULLSENDLVL2));
     stopAll.whenPressed(new StopAll());
+    deployClimber.whileHeld(new ClimberManual(1));
+    climb.whileHeld(new ClimberManual(-1.0));    
+    engageSuction.whenPressed(new EngageVacuum());
 
     // SmartDashboard puts
     // SmartDashboard.putData("Re-zero Arm: Above Zero Sensor", new
@@ -163,6 +176,18 @@ public class OI {
     SmartDashboard.putData("Set Intake Out", new SetIntakeAngle(RobotMap.cargoIntakeAngle));
     SmartDashboard.putData("Intake Cargo", new IntakeCargo());
 
+    // SmartDashboard.putData("Move Servo 180", new ServoValve(180));
+    // SmartDashboard.putData("Move Servo 0", new ServoValve(0));
+    // SmartDashboard.putData("Move Servo 90", new ServoValve(90));
+    SmartDashboard.putData("Move Servo 60", new ServoValve(60));
+    SmartDashboard.putData("Move Servo 120", new ServoValve(120));
+    SmartDashboard.putData("Move Servo 30", new ServoValve(30));
+
+    SmartDashboard.putData("Engage Venturi",new EngageVacuum());
+    
+
+
+
   }
 
   public XboxController getDriver() {
@@ -175,5 +200,10 @@ public class OI {
 
   public double getThrottle() {
     return driver.getTriggerAxis(Hand.kRight);
+  }
+
+  public void rumbleDriver(final int shouldRumble) {
+    driver.setRumble(RumbleType.kLeftRumble, shouldRumble);
+    driver.setRumble(RumbleType.kRightRumble, shouldRumble);
   }
 }

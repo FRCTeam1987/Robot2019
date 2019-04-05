@@ -23,7 +23,6 @@ public class Arm extends Subsystem {
     wrist = new WPI_TalonSRX(RobotMap.armMotorID);
     wrist.setName("Arm", "wrist");
     configWrist();
-    // zeroWrist();
 
     wristHome = new DigitalInput(RobotMap.wristHomeID);
 
@@ -34,7 +33,7 @@ public class Arm extends Subsystem {
   public void configWrist() {
     wrist.configMotionCruiseVelocity(450); //was 400  
     wrist.configMotionAcceleration(450);   //was 400
-    wrist.configMotionSCurveStrength(5); //adjust
+    wrist.configMotionSCurveStrength(3); //adjust
     Util.configTalonSRXWithEncoder(wrist, false);
     wrist.config_kF(0, 4.8, 0);   
     wrist.config_kP(0, 4.7, 0);   

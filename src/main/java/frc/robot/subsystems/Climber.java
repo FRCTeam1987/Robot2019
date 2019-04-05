@@ -4,21 +4,30 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 
 public class Climber extends Subsystem {
   private final WPI_TalonSRX winchMaster;
   private final WPI_TalonSRX winchSlave;
+  // private final DoubleSolenoid venturi;
   private final Solenoid venturi;
+  private final Servo suctionValve;
 
   public Climber() {
     winchMaster = new WPI_TalonSRX(RobotMap.winchMasterID);
     winchMaster.setName("Climber", "winch-master");
     winchSlave = new WPI_TalonSRX(RobotMap.winchSlaveID);
     winchSlave.setName("Climber", "winch-slave");
-    venturi = new Solenoid(RobotMap.venturiID);
+    // venturi = new DoubleSolenoid(RobotMap.venturiOFFID, RobotMap.venturiONID);
+    venturi = new Solenoid(RobotMap.venturiOFFID);
+
+    suctionValve = new Servo(RobotMap.suctionValveID);
 
     configWinch(winchMaster, winchSlave);
   }
@@ -50,8 +59,32 @@ public class Climber extends Subsystem {
     winchMaster.set(ControlMode.PercentOutput, percent);
   }
 
+  public void setValve(final boolean open) {
+    if (open) {
+      suctionValve.set(.5);
+    }
+    else {
+      suctionValve.set(0);
+    }
+  }
+
+  public void setValve(final double position) {
+    suctionValve.set(position);
+  }
+
+  public void setVenturi(final boolean open) {
+    if (open) {
+      // venturi.set(Value.kReverse);
+    }
+    else {
+      // venturi.set(Value.kForward);
+    }
+    venturi.set(open);
+  }
+
   @Override
   public void periodic() {
+    SmartDashboard.putNumber("Servo Position", suctionValve.getAngle());
   }
 
   @Override

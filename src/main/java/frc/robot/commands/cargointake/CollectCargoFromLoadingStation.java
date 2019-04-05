@@ -11,6 +11,7 @@ import frc.robot.subsystems.Elevator.ElevatorHeight;
 public class CollectCargoFromLoadingStation extends CommandGroup {
 
   public CollectCargoFromLoadingStation() {
+    addSequential(new CollectHatch());
     addParallel(new SetElevatorAndArm());
     addParallel(new CollectHatch());
     addSequential(new ClawIntakeCargo(0.9));

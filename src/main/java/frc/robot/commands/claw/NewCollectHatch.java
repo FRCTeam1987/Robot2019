@@ -8,14 +8,16 @@
 package frc.robot.commands.claw;
 
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.util.DigitalDebouncer;
 
 public class NewCollectHatch extends Command {
 
-  private final double secondsUntilActuateFingers = 1;
+  private final double secondsUntilActuateFingers = 0.5;
   private final double secondsForFingerActuation = 0.25;
+  private final double secondsForRumble = secondsForFingerActuation / 2;
   private DigitalDebouncer isHatchReadyToCollect;
   private double timeActuated;
 
@@ -37,10 +39,12 @@ public class NewCollectHatch extends Command {
   @Override
   protected void execute() {
     final boolean isHatchSensed = Robot.claw.isHatchCollected();
+    final double currentTime = Timer.getFPGATimestamp();
     isHatchReadyToCollect.periodic(isHatchSensed);
     if (timeActuated < 0.0 && isHatchReadyToCollect.get()) {
+      Robot.m_oi.rumbleDriver(1);
       Robot.claw.collectHatch();
-      timeActuated = Timer.getFPGATimestamp();
+      timeActuated = currentTime;
     } else if (timeActuated > 0.0 && !isHatchSensed) {
       timeActuated = -1.0;
     }
@@ -55,6 +59,7 @@ public class NewCollectHatch extends Command {
   @Override
   protected void end() {
     Robot.arm.setWristAbsolute(Robot.arm.getArmAngle());
+    Robot.m_oi.rumbleDriver(0);
   }
 
   @Override

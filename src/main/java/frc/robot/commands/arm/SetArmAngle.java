@@ -18,7 +18,7 @@ public class SetArmAngle extends Command {
     m_setpoint = setpoint;
     m_targetAngle = 0;
     m_armSide = armSide;
-    setTimeout(2.0);
+    setTimeout(1.5);
     m_isDefault = false;
   }
 

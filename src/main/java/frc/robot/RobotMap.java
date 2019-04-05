@@ -27,6 +27,9 @@ public class RobotMap {
     public static int stopAllButton = 11; //change ID
     public static int hasHatchButton = 19;
     public static int yeetOntoHabButton = 17;
+    public static int deployClimberButton = 5;
+    public static int climbButton = 17;
+    public static int engageSuctionButton = 7;
 
     //Drive
     public static double maxHighGearVelocity = 13;
@@ -50,17 +53,12 @@ public class RobotMap {
     public static double drivePivotHighKP = 0.7;
     public static double drivePivotHighKD = 0.0;
 
-    
     public static double driveStraightLowKP = 1.3;
     public static double driveStraightLowKD = 0.0;
 
     public static double drivePivotLowKP = 1.0;
     public static double drivePivotLowKD = 0.0;
 
-
-
-
-    
     //MotorIDs
     public static int leftMasterID = 1;         //Yellow
 	public static int leftSlave1ID = 2;         //Grey
@@ -99,7 +97,11 @@ public class RobotMap {
     public static int lowGearID = 1;
     public static int hatchFingersOutID = 2;
     public static int hatchFingersInID = 3;
-    public static int venturiID = 4;
+    public static int venturiOFFID = 4;
+    public static int venturiONID = 5;
+
+    //Servo PWM
+    public static int suctionValveID = 0;
 
     //Robot Dimensions
     public static double driveBaseWheelsDiameter = 5.0 / 12.0; 
@@ -109,11 +111,11 @@ public class RobotMap {
     public static double elevatorGroundCollectHeight = -1.7;    
     public static double elevatorHomeHeight = 0;
     public static double elevatorCollectHatchHeight = -3.0;
-    public static double elevatorLevel1HatchHeight = -9;
-    public static double elevatorLevel1CargoHeight = 1.0; 
+    public static double elevatorLevel1HatchHeight = -7.4;
+    public static double elevatorLevel1CargoHeight = -3.6; 
     public static double elevatorCargoShipHeight = 20;
     public static double elevatorLevel2HatchHeight = 21.1;
-    public static double elevatorLevel2CargoHeight = 19.5;
+    public static double elevatorLevel2CargoHeight = 20.5;
     public static double elevatorCargoLoadingStationHeight = 7.0; 
     public static double elevatorFlipHeight = 15;
     public static double elevatorQuickHatchFlipHeight = 1.0;
@@ -126,8 +128,8 @@ public class RobotMap {
     public static double armHatchCollectedAngle = 90;
     public static double armHatchAngle = 90;
     public static double armCargoShipAngle = 105;                
-    public static double armRocketLevel1CargoAngle = 75;
-    public static double armRocketLevel2CargoAngle = 67;
+    public static double armRocketLevel1CargoAngle = 87;
+    public static double armRocketLevel2CargoAngle = 80;
     public static double armLoadingStationCargoAngle = 63;      
     public static double armFloorCollectCargoAngle = 125;
     public static double armFullSendCargoAngle = 30;
@@ -137,8 +139,8 @@ public class RobotMap {
 
     //Cargo Intake Pivot Setpoints
     public static double practiceBotCargoAngleOffset = -15;
-    public static double cargoIntakeAngle = 81;
-    // public static double cargoIntakeHomeAngle = -14.5;
+    public static double cargoIntakeAngle = 83; //comp 77
+    // public static double cargoIntakeHomeAngle = -14.5; //comp
     public static double cargoIntakeHomeAngle = -7;
     public static double cargoIntakeTolerance = 1.5;
 
