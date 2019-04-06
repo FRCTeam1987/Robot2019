@@ -288,6 +288,16 @@ public class Drive extends Subsystem {
 
   }
 
+  public void log() {
+    final double pitch = ahrs.getPitch();
+    final double roll = ahrs.getRoll();
+    final double yaw = ahrs.getYaw();
+    SmartDashboard.putNumber("climber-pitch", pitch);
+    SmartDashboard.putNumber("climber-roll", roll);
+    SmartDashboard.putNumber("climber-yaw", yaw);
+    System.out.println("climber - pitch: " + pitch + ", roll: " + roll + ", yaw: " + yaw);
+  }
+
   @Override
   public void initDefaultCommand() {
     setDefaultCommand(new XboxDrive());

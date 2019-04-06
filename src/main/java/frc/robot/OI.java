@@ -13,6 +13,7 @@ import frc.robot.commands.armavator.SetArmSide;
 import frc.robot.commands.armavator.SetElevatorAndArm;
 import frc.robot.commands.armavator.SetRobotState;
 import frc.robot.commands.cargointake.CollectCargo;
+import frc.robot.commands.cargointake.CollectCargoFromGround;
 import frc.robot.commands.cargointake.IntakeCargo;
 import frc.robot.commands.cargointake.SetIntakeAngle;
 import frc.robot.commands.cargointake.SetIntakePivotManual;
@@ -153,8 +154,8 @@ public class OI {
     // SetArmAngle(ArmSetpoint.HATCH, ArmSide.FRONT));
     // SmartDashboard.putData("Set Elevator Hatch Height", new
     // GoToElevatorHeight(ElevatorHeight.LEVEL1HATCH));
-    // SmartDashboard.putData("Bring Climber Carraige Up", new ClimberManual(0.8));
-    // SmartDashboard.putData("Bring Climber Carraige Down", new ClimberManual(-0.8));
+    SmartDashboard.putData("Bring Climber Carraige Up", new ClimberManual(0.8));
+    SmartDashboard.putData("Bring Climber Carraige Down", new ClimberManual(-0.8));
     // SmartDashboard.putData("Aim Robot Automagically", new AutoAimbot(120));
     // SmartDashboard.putData("Intake Cargo", new IntakeCargo());
     // SmartDashboard.putData("Pivot 90 Degrees", new DrivePivot(90));
@@ -170,13 +171,13 @@ public class OI {
     // SmartDashboard.putData("cargo-intake-collect", new SetIntakeAngle(RobotMap.cargoIntakeAngle));
     // SmartDashboard.putData("cargo-intake-home", new SetIntakeAngle(RobotMap.cargoIntakeHomeAngle));
 
-    SmartDashboard.putData("claw-new-place-hatch", new NewPlaceHatch());
-    SmartDashboard.putData("claw-new-collect-hatch", new NewCollectHatch());
-    SmartDashboard.putData("claw-manipulate-hatch", new ManipulateHatch());
+    // SmartDashboard.putData("claw-new-place-hatch", new NewPlaceHatch());
+    // SmartDashboard.putData("claw-new-collect-hatch", new NewCollectHatch());
+    // SmartDashboard.putData("claw-manipulate-hatch", new ManipulateHatch());
 
-    SmartDashboard.putData("Set Intake to Home", new SetIntakeAngle(RobotMap.cargoIntakeHomeAngle));
-    SmartDashboard.putData("Set Intake Out", new SetIntakeAngle(RobotMap.cargoIntakeAngle));
-    SmartDashboard.putData("Intake Cargo", new IntakeCargo());
+    // SmartDashboard.putData("Set Intake to Home", new SetIntakeAngle(RobotMap.cargoIntakeHomeAngle));
+    // SmartDashboard.putData("Set Intake Out", new SetIntakeAngle(RobotMap.cargoIntakeAngle));
+    // SmartDashboard.putData("Intake Cargo", new IntakeCargo());
 
     // SmartDashboard.putData("Move Servo 180", new ServoValve(180));
     // SmartDashboard.putData("Move Servo 0", new ServoValve(0));
@@ -186,6 +187,8 @@ public class OI {
     SmartDashboard.putData("Move Servo 30", new ServoValve(30));
 
     SmartDashboard.putData("Engage Venturi",new EngageVacuum());
+
+    SmartDashboard.putData("cargo-intake-off-floor", new CollectCargoFromGround());
     
 
 

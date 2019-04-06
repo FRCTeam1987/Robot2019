@@ -30,6 +30,7 @@ public class Climber extends Subsystem {
     suctionValve = new Servo(RobotMap.suctionValveID);
 
     configWinch(winchMaster, winchSlave);
+    setVenturi(false);
   }
   
   public void configWinch(final WPI_TalonSRX master, final WPI_TalonSRX slave) {
@@ -73,12 +74,12 @@ public class Climber extends Subsystem {
   }
 
   public void setVenturi(final boolean open) {
-    if (open) {
+    // if (open) {
       // venturi.set(Value.kReverse);
-    }
-    else {
+    // }
+    // else {
       // venturi.set(Value.kForward);
-    }
+    // }
     venturi.set(open);
   }
 

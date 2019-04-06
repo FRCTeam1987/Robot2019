@@ -1,6 +1,7 @@
 package frc.robot.commands.climber;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 
 public class ClimberManual extends Command {
@@ -18,6 +19,7 @@ public class ClimberManual extends Command {
 
   @Override
   protected void execute() {
+    Robot.drive.log();
   }
 
   @Override
@@ -28,6 +30,7 @@ public class ClimberManual extends Command {
   @Override
   protected void end() {
     Robot.climber.setWinchMotor(0);
+    Robot.drive.log();
   }
 
   @Override
