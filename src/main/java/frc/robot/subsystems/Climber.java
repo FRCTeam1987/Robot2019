@@ -16,7 +16,7 @@ public class Climber extends Subsystem {
   private final WPI_TalonSRX winchMaster;
   private final WPI_TalonSRX winchSlave;
   // private final DoubleSolenoid venturi;
-  private final Solenoid venturi;
+  private final DoubleSolenoid venturi;
   private final Servo suctionValve;
 
   public Climber() {
@@ -25,7 +25,7 @@ public class Climber extends Subsystem {
     winchSlave = new WPI_TalonSRX(RobotMap.winchSlaveID);
     winchSlave.setName("Climber", "winch-slave");
     // venturi = new DoubleSolenoid(RobotMap.venturiOFFID, RobotMap.venturiONID);
-    venturi = new Solenoid(RobotMap.venturiOFFID);
+    venturi = new DoubleSolenoid(RobotMap.venturiOFFID, RobotMap.venturiONID);
 
     suctionValve = new Servo(RobotMap.suctionValveID);
 
@@ -62,10 +62,10 @@ public class Climber extends Subsystem {
 
   public void setValve(final boolean open) {
     if (open) {
-      suctionValve.set(.5);
+      suctionValve.set(1);
     }
     else {
-      suctionValve.set(0);
+      suctionValve.set(0.5);
     }
   }
 
@@ -74,13 +74,12 @@ public class Climber extends Subsystem {
   }
 
   public void setVenturi(final boolean open) {
-    // if (open) {
-      // venturi.set(Value.kReverse);
-    // }
-    // else {
-      // venturi.set(Value.kForward);
-    // }
-    venturi.set(open);
+    if (open) {
+      venturi.set(Value.kReverse);
+    }
+    else {
+      venturi.set(Value.kForward);
+    }
   }
 
   @Override

@@ -139,9 +139,9 @@ public class RobotMap {
 
     //Cargo Intake Pivot Setpoints
     public static double practiceBotCargoAngleOffset = -15;
-    public static double cargoIntakeAngle = 83; //comp 77
+    public static double cargoIntakeAngle = 74; //comp 77
     // public static double cargoIntakeHomeAngle = -14.5; //comp
-    public static double cargoIntakeHomeAngle = -7;
+    public static double cargoIntakeHomeAngle = -14.5;
     public static double cargoIntakeTolerance = 1.5;
 
 

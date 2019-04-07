@@ -12,7 +12,7 @@ public class IntakeCargo extends Command {
 
   @Override
   protected void initialize() {
-    Robot.cargoIntake.setRoller(-0.5);
+    Robot.cargoIntake.setRoller(-0.8);
     Robot.claw.setWheels(0.7);
   }
   

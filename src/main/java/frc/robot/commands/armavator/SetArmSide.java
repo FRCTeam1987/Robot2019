@@ -1,6 +1,5 @@
 package frc.robot.commands.armavator;
 
-import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
 import frc.robot.subsystems.Arm.ArmSide;
@@ -26,12 +25,7 @@ public class SetArmSide extends InstantCommand {
       m_armSide = Robot.arm.getArmSideState();
     } 
 
-    if (m_armSide == ArmSide.FRONT) {
-      CameraServer.getInstance().addSwitchedCamera("limelight-front");
-    }
-    else {
-      CameraServer.getInstance().addSwitchedCamera("limelight-back");
-    }
+
 
     Robot.arm.setArmSide(m_armSide);
   }

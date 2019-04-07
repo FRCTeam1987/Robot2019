@@ -182,9 +182,9 @@ public class OI {
     // SmartDashboard.putData("Move Servo 180", new ServoValve(180));
     // SmartDashboard.putData("Move Servo 0", new ServoValve(0));
     // SmartDashboard.putData("Move Servo 90", new ServoValve(90));
-    SmartDashboard.putData("Move Servo 60", new ServoValve(60));
-    SmartDashboard.putData("Move Servo 120", new ServoValve(120));
-    SmartDashboard.putData("Move Servo 30", new ServoValve(30));
+    SmartDashboard.putData("Move Servo 0.5", new ServoValve(0.5));
+    SmartDashboard.putData("Move Servo 0", new ServoValve(0));
+    SmartDashboard.putData("Move Servo 1", new ServoValve(1));
 
     SmartDashboard.putData("Engage Venturi",new EngageVacuum());
 
