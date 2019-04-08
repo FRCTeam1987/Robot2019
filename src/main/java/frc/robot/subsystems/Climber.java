@@ -84,7 +84,7 @@ public class Climber extends Subsystem {
 
   @Override
   public void periodic() {
-    SmartDashboard.putNumber("Servo Position", suctionValve.getAngle());
+    // SmartDashboard.putNumber("Servo Position", suctionValve.getAngle());
   }
 
   @Override

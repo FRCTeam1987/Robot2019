@@ -117,8 +117,8 @@ public class Elevator extends Subsystem {
   public void periodic() {
     SmartDashboard.putNumber("Elevator Inches", getInches());
     SmartDashboard.putString("Desired Elevator Height", getElevatorHeightState().toString());
-    SmartDashboard.putBoolean("Max elevator tripped", elevatorMax.get());
-    SmartDashboard.putBoolean("Min Elevator Tripped", elevatorMin.get());
+    // SmartDashboard.putBoolean("Max elevator tripped", elevatorMax.get());
+    // SmartDashboard.putBoolean("Min Elevator Tripped", elevatorMin.get());
     SmartDashboard.putBoolean("Home Elevator Tripped", elevatorHome.get());
     stopWhenOutOfRange();
     zeroElevatorAtHome();

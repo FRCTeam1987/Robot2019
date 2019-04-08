@@ -53,7 +53,7 @@ public class AutoAimbot extends Command {
       double drive = (Robot.vision.getActiveLimelight().getTy() * RobotMap.kLimelightDrive);
       m_drive = drive;
 
-      SmartDashboard.putNumber("Aimbot Drive Percentage", m_drive);
+      // SmartDashboard.putNumber("Aimbot Drive Percentage", m_drive);
 
       if (drive > m_maxDrive)
         {

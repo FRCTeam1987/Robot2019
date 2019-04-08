@@ -111,7 +111,7 @@ public class RobotMap {
     public static double elevatorGroundCollectHeight = -1.7;    
     public static double elevatorHomeHeight = 0;
     public static double elevatorCollectHatchHeight = -3.0;
-    public static double elevatorLevel1HatchHeight = -7.4;
+    public static double elevatorLevel1HatchHeight = -6.2;
     public static double elevatorLevel1CargoHeight = -3.6; 
     public static double elevatorCargoShipHeight = 20;
     public static double elevatorLevel2HatchHeight = 21.1;

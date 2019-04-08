@@ -58,7 +58,6 @@ public class Claw extends Subsystem {
 
   public void periodic() {
     SmartDashboard.putBoolean("Cargo Collected", isCargoCollected());
-    SmartDashboard.putBoolean("Hatch Collected", isHatchCollected());
   }
 
   @Override

@@ -140,8 +140,8 @@ public class OI {
     defenseSet.whenPressed(new SetRobotState(ElevatorHeight.HOME, ArmSetpoint.HOME));
     yeetOntoHab.whenPressed(new SetRobotState(ElevatorHeight.FULLSENDLVL2, ArmSetpoint.FULLSENDLVL2));
     stopAll.whenPressed(new StopAll());
-    deployClimber.whileHeld(new ClimberManual(1));
-    climb.whileHeld(new ClimberManual(-1.0));    
+    deployClimber.whileHeld(new ClimberManual(-1));
+    climb.whileHeld(new ClimberManual(1.0));    
     engageSuction.whenPressed(new EngageVacuum());
 
     // SmartDashboard puts
@@ -182,13 +182,10 @@ public class OI {
     // SmartDashboard.putData("Move Servo 180", new ServoValve(180));
     // SmartDashboard.putData("Move Servo 0", new ServoValve(0));
     // SmartDashboard.putData("Move Servo 90", new ServoValve(90));
-    SmartDashboard.putData("Move Servo 0.5", new ServoValve(0.5));
-    SmartDashboard.putData("Move Servo 0", new ServoValve(0));
-    SmartDashboard.putData("Move Servo 1", new ServoValve(1));
 
     SmartDashboard.putData("Engage Venturi",new EngageVacuum());
 
-    SmartDashboard.putData("cargo-intake-off-floor", new CollectCargoFromGround());
+    // SmartDashboard.putData("cargo-intake-off-floor", new CollectCargoFromGround());
     
 
 
