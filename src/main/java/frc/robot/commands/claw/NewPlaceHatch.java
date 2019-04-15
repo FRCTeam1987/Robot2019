@@ -13,7 +13,7 @@ import frc.robot.Robot;
 public class NewPlaceHatch extends Command {
   public NewPlaceHatch() {
     requires(Robot.claw);
-    setTimeout(0.5);
+    setTimeout(2);
   }
 
   // Called just before this Command runs the first time

@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.auto.SandstormHatch;
+import frc.robot.commands.drive.DriveDistance;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.CargoIntake;
 import frc.robot.subsystems.Claw;
@@ -35,6 +36,7 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     m_oi = new OI();
     m_chooser.setDefaultOption("Level 2 Hatch Place", new SandstormHatch());
+    m_chooser.addOption("Drive Forward 5 feet", new DriveDistance(5));
     m_chooser.addOption("Nothing! (for rezeroing)", null);
     SmartDashboard.putData("Auto mode", m_chooser);
     Robot.drive.ahrsReset();

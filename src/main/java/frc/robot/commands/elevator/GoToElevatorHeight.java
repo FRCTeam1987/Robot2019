@@ -2,7 +2,6 @@ package frc.robot.commands.elevator;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.RobotMap;
 import frc.robot.subsystems.Elevator.ElevatorHeight;
 
 public class GoToElevatorHeight extends Command {
@@ -30,62 +29,68 @@ public class GoToElevatorHeight extends Command {
   protected void initialize() {
     if (m_isDefault) {
       m_elevatorHeight = Robot.elevator.getElevatorHeightState();
+      m_targetInches = Robot.elevator.getElevatorHeightStateInches();
+      Robot.elevator.setElevatorAbsolute(m_targetInches);
     }
-    
-    switch(m_elevatorHeight) {
-      case CARGOGROUNDCOLLECT:
-        m_targetInches = RobotMap.elevatorGroundCollectHeight;
-        Robot.elevator.setElevatorAbsolute(m_targetInches);
-        break;
-      case CARGOSHIP:
-        m_targetInches = RobotMap.elevatorCargoShipHeight;
-        Robot.elevator.setElevatorAbsolute(m_targetInches);
-        break;
-      case LEVEL1HATCH:
-        m_targetInches = RobotMap.elevatorLevel1HatchHeight;
-        Robot.elevator.setElevatorAbsolute(m_targetInches);
-        break;
-      case LEVEL1CARGOROCKET:
-        m_targetInches = RobotMap.elevatorLevel1CargoHeight;
-        Robot.elevator.setElevatorAbsolute(m_targetInches);
-        break;
-      case LEVEL2HATCH:
-        m_targetInches = RobotMap.elevatorLevel2HatchHeight;
-        Robot.elevator.setElevatorAbsolute(m_targetInches);
-        break;
-      case LEVEL2CARGOROCKET:
-        m_targetInches = RobotMap.elevatorLevel2CargoHeight;
-        Robot.elevator.setElevatorAbsolute(m_targetInches);
-        break;
-      case LOADINGSTATIONCARGO:
-        m_targetInches = RobotMap.elevatorCargoLoadingStationHeight;
-        Robot.elevator.setElevatorAbsolute(m_targetInches);
-        break;
-      case FLIP:
-        m_targetInches = RobotMap.elevatorFlipHeight;
-        Robot.elevator.setElevatorAbsolute(m_targetInches);
-        break;
-      case QUICKHATCHFLIP:
-        m_targetInches = RobotMap.elevatorQuickHatchFlipHeight;
-        Robot.elevator.setElevatorAbsolute(m_targetInches);
-        break;
-      case QUICKCARGOFLIP:
-        m_targetInches = RobotMap.elevatorQuickCargoFlipHeight;
-        Robot.elevator.setElevatorAbsolute(m_targetInches);
-        break;
-      case HOME:
-        m_targetInches = RobotMap.elevatorHomeHeight;
-        Robot.elevator.setElevatorAbsolute(m_targetInches);
-        break;
-      case FULLSENDLVL2:
-        m_targetInches = RobotMap.elevatorYeetHab;
-        Robot.elevator.setElevatorAbsolute(m_targetInches);
-        break;
-      case HABLEVEL2:
-        m_targetInches = RobotMap.elevatorHabLevel2;
-        Robot.elevator.setElevatorAbsolute(m_targetInches);
-        break;
+    else {
+      m_targetInches = Robot.elevator.getElevatorHeightInches(m_elevatorHeight);
+      Robot.elevator.setElevatorAbsolute(m_targetInches);
     }
+
+    // switch(m_elevatorHeight) {
+    //   case CARGOGROUNDCOLLECT:
+    //     m_targetInches = RobotMap.elevatorGroundCollectHeight;
+    //     Robot.elevator.setElevatorAbsolute(m_targetInches);
+    //     break;
+    //   case CARGOSHIP:
+    //     m_targetInches = RobotMap.elevatorCargoShipHeight;
+    //     Robot.elevator.setElevatorAbsolute(m_targetInches);
+    //     break;
+    //   case LEVEL1HATCH:
+    //     m_targetInches = RobotMap.elevatorLevel1HatchHeight;
+    //     Robot.elevator.setElevatorAbsolute(m_targetInches);
+    //     break;
+    //   case LEVEL1CARGOROCKET:
+    //     m_targetInches = RobotMap.elevatorLevel1CargoHeight;
+    //     Robot.elevator.setElevatorAbsolute(m_targetInches);
+    //     break;
+    //   case LEVEL2HATCH:
+    //     m_targetInches = RobotMap.elevatorLevel2HatchHeight;
+    //     Robot.elevator.setElevatorAbsolute(m_targetInches);
+    //     break;
+    //   case LEVEL2CARGOROCKET:
+    //     m_targetInches = RobotMap.elevatorLevel2CargoHeight;
+    //     Robot.elevator.setElevatorAbsolute(m_targetInches);
+    //     break;
+    //   case LOADINGSTATIONCARGO:
+    //     m_targetInches = RobotMap.elevatorCargoLoadingStationHeight;
+    //     Robot.elevator.setElevatorAbsolute(m_targetInches);
+    //     break;
+    //   case FLIP:
+    //     m_targetInches = RobotMap.elevatorFlipHeight;
+    //     Robot.elevator.setElevatorAbsolute(m_targetInches);
+    //     break;
+    //   case QUICKHATCHFLIP:
+    //     m_targetInches = RobotMap.elevatorQuickHatchFlipHeight;
+    //     Robot.elevator.setElevatorAbsolute(m_targetInches);
+    //     break;
+    //   case QUICKCARGOFLIP:
+    //     m_targetInches = RobotMap.elevatorQuickCargoFlipHeight;
+    //     Robot.elevator.setElevatorAbsolute(m_targetInches);
+    //     break;
+    //   case HOME:
+    //     m_targetInches = RobotMap.elevatorHomeHeight;
+    //     Robot.elevator.setElevatorAbsolute(m_targetInches);
+    //     break;
+    //   case FULLSENDLVL2:
+    //     m_targetInches = RobotMap.elevatorYeetHab;
+    //     Robot.elevator.setElevatorAbsolute(m_targetInches);
+    //     break;
+    //   case HABLEVEL2:
+    //     m_targetInches = RobotMap.elevatorHabLevel2;
+    //     Robot.elevator.setElevatorAbsolute(m_targetInches);
+    //     break;
+    // }
   }
 
   @Override

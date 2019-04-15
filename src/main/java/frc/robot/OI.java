@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commands.SetRumble;
 import frc.robot.commands.StopAll;
 import frc.robot.commands.arm.ArmManual;
 import frc.robot.commands.arm.SetArmAngleWithDegree;
@@ -17,6 +18,7 @@ import frc.robot.commands.cargointake.CollectCargoFromGround;
 import frc.robot.commands.cargointake.IntakeCargo;
 import frc.robot.commands.cargointake.SetIntakeAngle;
 import frc.robot.commands.cargointake.SetIntakePivotManual;
+import frc.robot.commands.claw.ClawIntakeCargo;
 import frc.robot.commands.claw.CollectHatch;
 import frc.robot.commands.claw.ManipulateHatch;
 import frc.robot.commands.claw.ToggleHatchManipulator;
@@ -24,9 +26,6 @@ import frc.robot.commands.claw.NewCollectHatch;
 import frc.robot.commands.claw.NewPlaceHatch;
 import frc.robot.commands.claw.Place;
 import frc.robot.commands.claw.PlaceHatch;
-import frc.robot.commands.claw.SetHatchFalse;
-import frc.robot.commands.claw.SetHatchTrue;
-import frc.robot.commands.claw.TeleCollectHatch;
 import frc.robot.commands.climber.Climb;
 import frc.robot.commands.climber.ClimberManual;
 import frc.robot.commands.climber.EngageVacuum;
@@ -129,8 +128,6 @@ public class OI {
     // Co-Driver buttons
     switchPotentialClawSide.whenPressed(new SetArmSide(ArmSide.FRONT));
     switchPotentialClawSide.whenReleased(new SetArmSide(ArmSide.BACK));
-    hasHatch.whenPressed(new SetHatchTrue());
-    hasHatch.whenReleased(new SetHatchFalse());
     level1HatchSet.whenPressed(new SetRobotState(ElevatorHeight.LEVEL1HATCH, ArmSetpoint.HATCH));
     level2HatchSet.whenPressed(new SetRobotState(ElevatorHeight.LEVEL2HATCH, ArmSetpoint.HATCH));
     cargoShipCargoSet.whenPressed(new SetRobotState(ElevatorHeight.CARGOSHIP, ArmSetpoint.CARGOSHIP));
@@ -157,7 +154,7 @@ public class OI {
     SmartDashboard.putData("Bring Climber Carraige Up", new ClimberManual(0.8));
     SmartDashboard.putData("Bring Climber Carraige Down", new ClimberManual(-0.8));
     // SmartDashboard.putData("Aim Robot Automagically", new AutoAimbot(120));
-    // SmartDashboard.putData("Intake Cargo", new IntakeCargo());
+    SmartDashboard.putData("Intake Cargo", new IntakeCargo());
     // SmartDashboard.putData("Pivot 90 Degrees", new DrivePivot(90));
     // SmartDashboard.putData("Drive 1 Foot", new DriveDistance(1));
 
@@ -177,7 +174,7 @@ public class OI {
 
     // SmartDashboard.putData("Set Intake to Home", new SetIntakeAngle(RobotMap.cargoIntakeHomeAngle));
     // SmartDashboard.putData("Set Intake Out", new SetIntakeAngle(RobotMap.cargoIntakeAngle));
-    // SmartDashboard.putData("Intake Cargo", new IntakeCargo());
+    SmartDashboard.putData("Intake Cargo", new ClawIntakeCargo(1));
 
     // SmartDashboard.putData("Move Servo 180", new ServoValve(180));
     // SmartDashboard.putData("Move Servo 0", new ServoValve(0));
@@ -186,6 +183,7 @@ public class OI {
     SmartDashboard.putData("Engage Venturi",new EngageVacuum());
 
     // SmartDashboard.putData("cargo-intake-off-floor", new CollectCargoFromGround());
+    SmartDashboard.putData("Rumble Controller", new SetRumble(2));
     
 
 

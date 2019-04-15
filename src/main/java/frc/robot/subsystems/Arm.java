@@ -26,17 +26,17 @@ public class Arm extends Subsystem {
 
     wristHome = new DigitalInput(RobotMap.wristHomeID);
 
-    armSetpoint = ArmSetpoint.HOME;
+    armSetpoint = ArmSetpoint.HATCH;
     armSide = ArmSide.FRONT;
   }
 
   public void configWrist() {
     wrist.configMotionCruiseVelocity(450); //was 400  
     wrist.configMotionAcceleration(450);   //was 400
-    wrist.configMotionSCurveStrength(3); //adjust
+    wrist.configMotionSCurveStrength(1); //adjust
     Util.configTalonSRXWithEncoder(wrist, false);
-    wrist.config_kF(0, 4.8, 0);   
-    wrist.config_kP(0, 4.7, 0);   
+    wrist.config_kF(0, 5, 0);   
+    wrist.config_kP(0, 4.9, 0);   
     wrist.config_kI(0, 0.0, 0);
     wrist.config_kD(0, 0.1, 0);
     // wrist.setInverted(true);
@@ -72,8 +72,8 @@ public class Arm extends Subsystem {
   }
 
   private void zeroWristAtHome() {
-    // if (wristHome.get() && !Util.isWithinTolerance(Math.abs(getArmAngle()), 0.0, 3)) {
-      if (wristHome.get()) {
+    if (wristHome.get() && !Util.isWithinTolerance(Math.abs(getArmAngle()), 90, 3)) {
+      // if (wristHome.get()) {
         zeroWrist();
     }
   }

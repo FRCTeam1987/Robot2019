@@ -5,23 +5,18 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.claw;
+package frc.robot.commands.cargointake;
 
-import edu.wpi.first.wpilibj.command.InstantCommand;
-import frc.robot.Robot;
+import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.WaitCommand;
+import frc.robot.RobotMap;
 
-
-public class SetHatchState extends InstantCommand {
-
-  private boolean m_hasHatch;
-
-  public SetHatchState(final boolean hasHatch) {
-    super();
-    m_hasHatch = hasHatch;
-  }
-
-  @Override
-  protected void initialize() {
-    Robot.claw.setHatchCollected(m_hasHatch);
+public class DelaySetIntakeAngle extends CommandGroup {
+  /**
+   * Add your docs here.
+   */
+  public DelaySetIntakeAngle(final double delay, final double setpoint) {
+    addSequential(new WaitCommand(delay));
+    addSequential(new SetIntakeAngle(RobotMap.cargoIntakeAngle));
   }
 }

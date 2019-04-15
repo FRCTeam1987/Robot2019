@@ -25,21 +25,23 @@ public class DriveByAssist extends Command {
 
     m_area = Robot.vision.getActiveLimelight().getTa();
       
-      if (m_area < 2 && m_area > 0) {
-        kPSteer = 0.05;
-      }
-      else if (m_area > 2 && m_area < 3) {
-        kPSteer = 0.06;
-      }
-      else if (m_area > 3 && m_area < 6) {
-        kPSteer = 0.09;
-      }
-      else if (m_area > 6) {
-        kPSteer = 0.125;
-      }
-      else {
-        kPSteer = RobotMap.kLimelightSteer;
-      }
+      // if (m_area < 2 && m_area > 0) {
+      //   kPSteer = 0.05;
+      // }
+      // else if (m_area > 2 && m_area < 3) {
+      //   kPSteer = 0.06;
+      // }
+      // else if (m_area > 3 && m_area < 6) {
+      //   kPSteer = 0.04;
+      // }
+      // else if (m_area > 6) {
+      //   kPSteer = 0.04;
+      // }
+      // else {
+      //   kPSteer = RobotMap.kLimelightSteer;
+      // }
+
+      kPSteer = 0.06;
        
       double steer = Robot.vision.getActiveLimelight().getTx() * kPSteer;
       m_steer = steer;
@@ -52,7 +54,6 @@ public class DriveByAssist extends Command {
   @Override
   protected void initialize() {
     Robot.vision.setVisionMode();
-    Robot.drive.setLowGear();
     m_drive = 0;
     m_steer = 0;
   }
@@ -72,8 +73,6 @@ public class DriveByAssist extends Command {
   protected void end() {
     Robot.vision.setDriverCameraMode();
     Robot.drive.tankDrive(0, 0);
-    Robot.drive.setHighGear();
-    System.out.println("DriveByAssist end");
   }
 
   @Override

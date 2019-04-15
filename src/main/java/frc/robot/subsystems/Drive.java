@@ -49,11 +49,19 @@ public class Drive extends Subsystem {
     leftMaster.setName("Drive", "left-master");
     leftSlave1.setName("Drive", "left-slave1");
     leftSlave2.setName("Drive", "left-slave2");
+    // leftMaster.setSafetyEnabled(false);
+    // leftSlave1.setSafetyEnabled(false);
+    // leftSlave2.setSafetyEnabled(false);
+    // rightMaster.setSafetyEnabled(false);
+    // rightSlave1.setSafetyEnabled(false);
+    // rightSlave2.setSafetyEnabled(false);
     rightMaster.setName("Drive", "right-master");
     rightSlave1.setName("Drive", "right-slave1");
     rightSlave2.setName("Drive", "right-slave2");
 
+
     robotDrive = new DifferentialDrive(leftMaster, rightMaster);
+    robotDrive.setSafetyEnabled(false);
     ahrs = new AHRS(SPI.Port.kMXP);
     shifter = new DoubleSolenoid(RobotMap.highGearID, RobotMap.lowGearID);
 
@@ -209,6 +217,13 @@ public class Drive extends Subsystem {
         rightMaster.config_kI(0, 0, 0);
         rightMaster.config_kD(0, RobotMap.drivePivotHighKD, 0);
         break;
+      case TRAJECTORY:
+        leftMaster.config_kP(0, RobotMap.pathHighGearKP, 0);
+        leftMaster.config_kI(0, RobotMap.pathHighGearKI, 0);
+        leftMaster.config_kD(0, RobotMap.pathHighGearKD, 0);
+        rightMaster.config_kP(0, RobotMap.pathHighGearKP, 0);
+        rightMaster.config_kI(0, RobotMap.pathHighGearKI, 0);
+        rightMaster.config_kD(0, RobotMap.pathHighGearKD, 0);
       }
 
     } else {

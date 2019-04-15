@@ -4,7 +4,6 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.RobotMap;
 import frc.robot.commands.SetRumble;
 import frc.robot.commands.arm.SetArmAngle;
-import frc.robot.commands.cargointake.IsArmInTheWay;
 import frc.robot.commands.claw.CollectHatch;
 import frc.robot.commands.elevator.GoToElevatorHeight;
 import frc.robot.subsystems.Arm.ArmSetpoint;
@@ -15,14 +14,13 @@ public class CollectCargoFromGround extends CommandGroup {
 
   public CollectCargoFromGround() {
     addSequential(new CollectHatch());
-    addSequential(new IsArmInTheWay());
-    addSequential(new SetIntakeAngle(RobotMap.cargoIntakeAngle));
-    addSequential(new GoToElevatorHeight(ElevatorHeight.CARGOGROUNDCOLLECT));
-    addSequential(new SetArmAngle(ArmSetpoint.CARGOCOLLECTFLOOR, ArmSide.FRONT));
+    addParallel(new GoToElevatorHeight(ElevatorHeight.PREPFLOORCARGO));
+    addSequential(new DelaySetIntakeAngle(0.5, RobotMap.cargoIntakeAngle));
+    addParallel(new GoToElevatorHeight(ElevatorHeight.CARGOGROUNDCOLLECT));
+    addParallel(new SetArmAngle(ArmSetpoint.CARGOCOLLECTFLOOR, ArmSide.FRONT));
     addSequential(new IntakeCargo());
-    addParallel(new SetRumble(1));
     addSequential(new GoToElevatorHeight(ElevatorHeight.CARGOSHIP));
-    addSequential(new SetArmAngle(ArmSetpoint.CARGOSHIP, ArmSide.FRONT));
-    addSequential(new SetIntakeAngle(RobotMap.cargoIntakeHomeAngle));
+    addParallel(new SetArmAngle(ArmSetpoint.CARGOSHIP, ArmSide.FRONT));
+    addParallel(new SetIntakeAngle(RobotMap.cargoIntakeHomeAngle));
   }
 }

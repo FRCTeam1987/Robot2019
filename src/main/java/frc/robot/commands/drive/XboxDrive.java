@@ -34,9 +34,11 @@ public class XboxDrive extends Command {
 
   @Override
   protected void end() {
+    Robot.drive.tankDrive(0, 0);
   }
 
   @Override
   protected void interrupted() {
+    end();
   }
 }

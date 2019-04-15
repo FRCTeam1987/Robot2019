@@ -8,14 +8,13 @@
 package frc.robot.commands.claw;
 
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.util.DigitalDebouncer;
 
 public class NewCollectHatch extends Command {
 
-  private final double secondsUntilActuateFingers = 0.5;
+  private final double secondsUntilActuateFingers = 0.25;
   private final double secondsForFingerActuation = 0.25;
   private final double secondsForRumble = secondsForFingerActuation / 2;
   private DigitalDebouncer isHatchReadyToCollect;

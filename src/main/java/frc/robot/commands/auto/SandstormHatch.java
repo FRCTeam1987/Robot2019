@@ -14,10 +14,10 @@ public class SandstormHatch extends CommandGroup {
 
   public SandstormHatch() {
     addSequential(new CollectHatch());
-    addSequential(new WaitCommand(1));
+    // addSequential(new WaitCommand(1));
     addSequential(new GoToElevatorHeight(ElevatorHeight.FLIP));
-    addSequential(new SetArmAngle(ArmSetpoint.HATCH, ArmSide.FRONT));
-    addSequential(new GoToElevatorHeight(ElevatorHeight.LEVEL1HATCH));
+    addParallel(new SetArmAngle(ArmSetpoint.HATCH, ArmSide.FRONT));
+    addParallel(new GoToElevatorHeight(ElevatorHeight.LEVEL1HATCH));
     addSequential(new SetArmSide(ArmSide.FRONT));
 
   }

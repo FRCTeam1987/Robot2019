@@ -14,7 +14,7 @@ public class CollectCargoFromLoadingStation extends CommandGroup {
     addSequential(new CollectHatch());
     addParallel(new SetElevatorAndArm());
     addParallel(new CollectHatch());
-    addSequential(new ClawIntakeCargo(0.9));
+    addSequential(new ClawIntakeCargo(1));
     addParallel(new SetRumble(1));
     addParallel(new SetElevatorAndArm(ElevatorHeight.CARGOSHIP, ArmSetpoint.CARGOSHIP));
   }

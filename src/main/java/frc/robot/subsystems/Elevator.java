@@ -21,7 +21,7 @@ public class Elevator extends Subsystem {
     elevator = new WPI_TalonSRX(RobotMap.elevatorMotorID);
     elevator.setName("Elevator", "winch");
    
-    elevatorHeight = ElevatorHeight.HOME;
+    elevatorHeight = ElevatorHeight.LEVEL1HATCH;
 
     elevatorHome = new DigitalInput(RobotMap.elevatorHomeID);
     elevatorMax = new DigitalInput(RobotMap.elevatorMaxID);
@@ -35,7 +35,7 @@ public class Elevator extends Subsystem {
 
     elevator.setInverted(true);
     elevator.config_kF(0, 0.0);
-    elevator.config_kP(0, 0.325);
+    elevator.config_kP(0, 0.375);
     elevator.config_kI(0, 0.0);
     elevator.config_kD(0, 0.1);   
     // zeroElevator();
@@ -142,7 +142,8 @@ public class Elevator extends Subsystem {
     QUICKCARGOFLIP,
     FULLSENDLVL2,
     HOME,
-    HABLEVEL2
+    HABLEVEL2,
+    PREPFLOORCARGO
   }
 
   public void setElevatorHeight(final ElevatorHeight newElevatorHeight) {
@@ -154,7 +155,7 @@ public class Elevator extends Subsystem {
   }
 
   public double getElevatorHeightStateInches() {
-    double desiredElevatorInches = RobotMap.elevatorHomeHeight;
+    double desiredElevatorInches = RobotMap.elevatorLevel1HatchHeight;
 
     switch(elevatorHeight) {
       case CARGOGROUNDCOLLECT:
@@ -195,8 +196,62 @@ public class Elevator extends Subsystem {
       case FULLSENDLVL2:
         desiredElevatorInches = RobotMap.elevatorYeetHab;
         break;
+      case PREPFLOORCARGO:
+        desiredElevatorInches = RobotMap.elevatorPrepCargoFloor;
+        break;
     }
 
     return desiredElevatorInches;
   }
+
+  public double getElevatorHeightInches(final ElevatorHeight elevatorHeight) {
+    double desiredElevatorInches = RobotMap.elevatorLevel1HatchHeight;
+
+    switch(elevatorHeight) {
+      case CARGOGROUNDCOLLECT:
+        desiredElevatorInches = RobotMap.elevatorGroundCollectHeight;
+        break;
+      case CARGOSHIP:
+        desiredElevatorInches = RobotMap.elevatorCargoShipHeight;
+        break;
+      case HABLEVEL2:
+        desiredElevatorInches = RobotMap.elevatorHabLevel2;
+      case LEVEL1HATCH:
+        desiredElevatorInches = RobotMap.elevatorLevel1HatchHeight;
+        break;
+      case LEVEL1CARGOROCKET:
+        desiredElevatorInches = RobotMap.elevatorLevel1CargoHeight;
+        break;
+      case LEVEL2HATCH:
+        desiredElevatorInches = RobotMap.elevatorLevel2HatchHeight;
+        break;
+      case LEVEL2CARGOROCKET:
+        desiredElevatorInches = RobotMap.elevatorLevel2CargoHeight;
+        break;
+      case LOADINGSTATIONCARGO:
+        desiredElevatorInches = RobotMap.elevatorCargoLoadingStationHeight;
+        break;
+      case FLIP:
+        desiredElevatorInches = RobotMap.elevatorFlipHeight;
+        break;
+      case QUICKHATCHFLIP:
+        desiredElevatorInches = RobotMap.elevatorQuickHatchFlipHeight;
+        break;
+      case QUICKCARGOFLIP:
+        desiredElevatorInches = RobotMap.elevatorQuickCargoFlipHeight;
+        break;
+      case HOME:
+        desiredElevatorInches = RobotMap.elevatorHomeHeight;
+        break;
+      case FULLSENDLVL2:
+        desiredElevatorInches = RobotMap.elevatorYeetHab;
+        break;
+      case PREPFLOORCARGO:
+        desiredElevatorInches = RobotMap.elevatorPrepCargoFloor;
+        break;
+    }
+
+    return desiredElevatorInches;
+  }
+
 }

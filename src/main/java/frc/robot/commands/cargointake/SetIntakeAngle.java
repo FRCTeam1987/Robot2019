@@ -10,8 +10,6 @@ public class SetIntakeAngle extends Command {
   
   public SetIntakeAngle(final double angle) {
     requires(Robot.cargoIntake);
-    requires(Robot.arm);
-    requires(Robot.elevator);
     setTimeout(3);
     // m_angle = angle + RobotMap.practiceBotCargoAngleOffset; //=~=~ Remove for comp bot
     m_angle = angle;

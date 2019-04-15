@@ -16,14 +16,16 @@ public class Claw extends Subsystem {
   
   private final WPI_TalonSRX clawIntake;
   private final DigitalInput cargoProx;
-  private final DigitalInput hatchProx;
+  private final DigitalInput topHatchSwitch;
+  private final DigitalInput bottomHatchSwitch;
   private final DoubleSolenoid hatchFingers;
 
   public Claw() {
     clawIntake = new WPI_TalonSRX(RobotMap.clawIntakeMotorID);
     clawIntake.setName("Claw", "intake");
     cargoProx = new DigitalInput(RobotMap.clawCargoProxID);
-    hatchProx = new DigitalInput(RobotMap.clawHatchProxID);
+    topHatchSwitch = new DigitalInput(RobotMap.clawTopHatchSwitchID);
+    bottomHatchSwitch = new DigitalInput(RobotMap.clawBottomHatchSwitchID);
     hatchFingers = new DoubleSolenoid(RobotMap.hatchFingersOutID, RobotMap.hatchFingersInID);
     hatchFingers.setName("Claw", "hatch-release");
   }
@@ -37,7 +39,7 @@ public class Claw extends Subsystem {
   }
 
   public boolean isHatchCollected() {
-    return !hatchProx.get();
+    return !topHatchSwitch.get();
   }
 
   public void setHatchCollected(final boolean hasHatch) {
@@ -58,14 +60,11 @@ public class Claw extends Subsystem {
 
   public void periodic() {
     SmartDashboard.putBoolean("Cargo Collected", isCargoCollected());
+    SmartDashboard.putBoolean("Both Hatch Collected", isHatchCollected());
+
   }
 
   @Override
   public void initDefaultCommand() {
-  }
-
-  public void setRumble(final double power) {
-    Robot.m_oi.getDriver().setRumble(RumbleType.kLeftRumble, power);
-    Robot.m_oi.getDriver().setRumble(RumbleType.kRightRumble, power);
   }
 }

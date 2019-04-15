@@ -15,8 +15,8 @@ public class Vision extends Subsystem {
   public Limelight limeBack;
 
   public Vision() {
-    limeFront = new Limelight("back");
-    limeBack = new Limelight("front");
+    limeFront = new Limelight("front");
+    limeBack = new Limelight("back");
   }
 
   public Limelight getActiveLimelight() {

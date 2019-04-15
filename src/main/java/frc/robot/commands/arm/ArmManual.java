@@ -35,6 +35,7 @@ public class ArmManual extends Command {
   @Override
   protected void end() {
     Robot.arm.setWristAbsolute(Robot.arm.getArmAngle());
+    // Robot.arm.setWristPercent(0);
   }
 
   @Override

@@ -1,10 +1,3 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package frc.robot.commands.drive;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -36,7 +29,7 @@ public class DriveDistance extends Command {
     isHighGear = Robot.drive.isHighGear();
     
     Robot.drive.zeroDriveEncoders();
-    Robot.drive.setLowGear();
+    Robot.drive.setHighGear();
     Robot.drive.setBrake();
 
     final double distanceTicks = Util.distanceToTicks(targetDistance, RobotMap.driveBaseWheelsDiameter);

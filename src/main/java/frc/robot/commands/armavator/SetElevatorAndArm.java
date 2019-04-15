@@ -10,18 +10,18 @@ public class SetElevatorAndArm extends CommandGroup {
 
   public SetElevatorAndArm(final ElevatorHeight elevatorHeight, final ArmSetpoint armAngle) {
     addSequential(new SetRobotState(elevatorHeight, armAngle));
-    addSequential(new ShouldGoToFlipHeight());
-    addSequential(new ShouldRollArm());
+    // addSequential(new ShouldGoToFlipHeight());
+    // addSequential(new ShouldRollArm());
     addSequential(new SetArmSide());
-    addSequential(new SetArmAngle());
-    addSequential(new GoToElevatorHeight());
+    addParallel(new SetArmAngle());
+    addParallel(new GoToElevatorHeight());
   }
 
   public SetElevatorAndArm() {
-    addSequential(new ShouldGoToCargoFlipHeight());
-    addSequential(new ShouldGoToHatchFlipHeight());
-    addSequential(new ShouldRollArm());
-    addSequential(new SetArmAngle());
-    addSequential(new GoToElevatorHeight());
+    // addSequential(new ShouldGoToCargoFlipHeight());
+    // addSequential(new ShouldGoToHatchFlipHeight());
+    // addSequential(new ShouldRollArm());
+    addParallel(new SetArmAngle());
+    addParallel(new GoToElevatorHeight());
   }
 }

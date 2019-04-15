@@ -77,7 +77,6 @@ public class RobotMap {
 
     //DIO IDs
     public static int clawCargoProxID = 1;
-    public static int clawHatchProxID = 7;
     // public static int clawHatchSonarPingID = 8;
     // public static int clawHatchSonarEchoID = 9;
     public static int wristHomeID = 2;
@@ -85,6 +84,10 @@ public class RobotMap {
     public static int elevatorMaxID = 4;
     public static int elevatorHomeID = 5;
     public static int elevatorMinID = 6;
+    public static int clawTopHatchSwitchID = 7;
+    public static int clawBottomHatchSwitchID = 8;
+
+
 
     public static int defaultTimeout = 10;
     public static double ticksPerRotation = 4096;
@@ -111,9 +114,10 @@ public class RobotMap {
     public static double elevatorGroundCollectHeight = -1.7;    
     public static double elevatorHomeHeight = 0;
     public static double elevatorCollectHatchHeight = -3.0;
-    public static double elevatorLevel1HatchHeight = -6.2;
+    public static double elevatorLevel1HatchHeight = -8;
     public static double elevatorLevel1CargoHeight = -3.6; 
-    public static double elevatorCargoShipHeight = 20;
+    public static double elevatorCargoShipHeight = 19; //19
+    public static double elevatorFrontCargoShipHeight = 1.4; //15
     public static double elevatorLevel2HatchHeight = 21.1;
     public static double elevatorLevel2CargoHeight = 20.5;
     public static double elevatorCargoLoadingStationHeight = 7.0; 
@@ -122,24 +126,26 @@ public class RobotMap {
     public static double elevatorQuickCargoFlipHeight = 12.5;
     public static double elevatorYeetHab = 4;
     public static double elevatorHabLevel2 = 5;
+    public static double elevatorPrepCargoFloor = 8;
     
     //Arm Setpoints
     public static double armHomeAngle = 0;
     public static double armHatchCollectedAngle = 90;
     public static double armHatchAngle = 90;
-    public static double armCargoShipAngle = 105;                
-    public static double armRocketLevel1CargoAngle = 87;
-    public static double armRocketLevel2CargoAngle = 80;
+    public static double armFrontCargoShipAngle = 60;     //105           
+    public static double armCargoShipAngle = 105;     //105           
+    public static double armRocketLevel1CargoAngle = 85;
+    public static double armRocketLevel2CargoAngle = 73;
     public static double armLoadingStationCargoAngle = 63;      
     public static double armFloorCollectCargoAngle = 125;
     public static double armFullSendCargoAngle = 30;
     public static double armYeetHab = 8;
-    public static double wristTolerance = 3;
+    public static double wristTolerance = 1;
 
 
     //Cargo Intake Pivot Setpoints
     public static double practiceBotCargoAngleOffset = -15;
-    public static double cargoIntakeAngle = 74; //comp 77
+    public static double cargoIntakeAngle = 78; //comp 77
     // public static double cargoIntakeHomeAngle = -14.5; //comp
     public static double cargoIntakeHomeAngle = -14.5;
     public static double cargoIntakeTolerance = 1.5;
