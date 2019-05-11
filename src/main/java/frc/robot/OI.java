@@ -10,6 +10,7 @@ import frc.robot.commands.SetRumble;
 import frc.robot.commands.StopAll;
 import frc.robot.commands.arm.ArmManual;
 import frc.robot.commands.arm.SetArmAngleWithDegree;
+import frc.robot.commands.armavator.GoToDefense;
 import frc.robot.commands.armavator.SetArmSide;
 import frc.robot.commands.armavator.SetElevatorAndArm;
 import frc.robot.commands.armavator.SetRobotState;
@@ -75,6 +76,7 @@ public class OI {
   private final Button deployClimber;
   private final Button climb;
   private final Button engageSuction;
+  private final Button goToDefense;
 
   public OI() {
     // Driver
@@ -108,6 +110,7 @@ public class OI {
     deployClimber = new JoystickButton(coDriver, RobotMap.deployClimberButton);
     climb = new JoystickButton(coDriver, RobotMap.climbButton);
     engageSuction = new JoystickButton(coDriver, RobotMap.engageSuctionButton);
+    goToDefense = new JoystickButton(coDriver, RobotMap.goToDefenseButton);
 
     // Driver Buttons
     goToElevatorHeight.whenPressed(new SetElevatorAndArm());
@@ -140,6 +143,7 @@ public class OI {
     deployClimber.whileHeld(new ClimberManual(-1));
     climb.whileHeld(new ClimberManual(1.0));    
     engageSuction.whenPressed(new EngageVacuum());
+    goToDefense.whenPressed(new GoToDefense());
 
     // SmartDashboard puts
     // SmartDashboard.putData("Re-zero Arm: Above Zero Sensor", new
@@ -174,7 +178,6 @@ public class OI {
 
     // SmartDashboard.putData("Set Intake to Home", new SetIntakeAngle(RobotMap.cargoIntakeHomeAngle));
     // SmartDashboard.putData("Set Intake Out", new SetIntakeAngle(RobotMap.cargoIntakeAngle));
-    SmartDashboard.putData("Intake Cargo", new ClawIntakeCargo(1));
 
     // SmartDashboard.putData("Move Servo 180", new ServoValve(180));
     // SmartDashboard.putData("Move Servo 0", new ServoValve(0));

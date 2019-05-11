@@ -30,6 +30,7 @@ public class RobotMap {
     public static int deployClimberButton = 5;
     public static int climbButton = 17;
     public static int engageSuctionButton = 7;
+    public static int goToDefenseButton = 20;
 
     //Drive
     public static double maxHighGearVelocity = 13;
@@ -111,7 +112,7 @@ public class RobotMap {
     public static double wheelBaseDiameter = 1.875;
 
     //Elevator Setpoints
-    public static double elevatorGroundCollectHeight = -1.7;    
+    public static double elevatorGroundCollectHeight = -0.8;  //-3.2    
     public static double elevatorHomeHeight = 0;
     public static double elevatorCollectHatchHeight = -3.0;
     public static double elevatorLevel1HatchHeight = -8;
@@ -127,27 +128,29 @@ public class RobotMap {
     public static double elevatorYeetHab = 4;
     public static double elevatorHabLevel2 = 5;
     public static double elevatorPrepCargoFloor = 8;
+    public static double elevatorDefense = 0;
     
     //Arm Setpoints
     public static double armHomeAngle = 0;
     public static double armHatchCollectedAngle = 90;
-    public static double armHatchAngle = 90;
+    public static double armHatchAngle = 91;
     public static double armFrontCargoShipAngle = 60;     //105           
     public static double armCargoShipAngle = 105;     //105           
     public static double armRocketLevel1CargoAngle = 85;
     public static double armRocketLevel2CargoAngle = 73;
     public static double armLoadingStationCargoAngle = 63;      
-    public static double armFloorCollectCargoAngle = 125;
+    public static double armFloorCollectCargoAngle = 139;
     public static double armFullSendCargoAngle = 30;
     public static double armYeetHab = 8;
+    public static double armDefense = 8;
     public static double wristTolerance = 1;
 
 
     //Cargo Intake Pivot Setpoints
     public static double practiceBotCargoAngleOffset = -15;
-    public static double cargoIntakeAngle = 78; //comp 77
+    public static double cargoIntakeAngle = 82; //comp 77
     // public static double cargoIntakeHomeAngle = -14.5; //comp
-    public static double cargoIntakeHomeAngle = -14.5;
+    public static double cargoIntakeHomeAngle = 0;
     public static double cargoIntakeTolerance = 1.5;
 
 

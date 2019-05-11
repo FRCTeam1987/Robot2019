@@ -6,10 +6,8 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Servo;
-import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 
 public class Climber extends Subsystem {
@@ -44,7 +42,7 @@ public class Climber extends Subsystem {
     master.configPeakOutputReverse(peakReversePercent);
     master.configNominalOutputForward(nominalPercent);
     master.configNominalOutputReverse(nominalPercent);
-    master.setNeutralMode(NeutralMode.Brake); // might change to coast
+    master.setNeutralMode(NeutralMode.Brake);
     master.configOpenloopRamp(secondsFromNeutralToFull);
     master.configContinuousCurrentLimit(25);
     master.configPeakCurrentLimit(30);
