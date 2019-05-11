@@ -18,12 +18,12 @@ public class DriveByAssist extends Command {
   }
 
   protected void updateLimelightTracking() {
-    if (!Robot.vision.getActiveLimelight().hasTarget()) {
+    if (!Robot.vision.limeFront.hasTarget()) {
       m_steer = 0;
       return;
     }
 
-    m_area = Robot.vision.getActiveLimelight().getTa();
+    m_area = Robot.vision.limeFront.getTa();
       
       // if (m_area < 2 && m_area > 0) {
       //   kPSteer = 0.05;
@@ -41,9 +41,9 @@ public class DriveByAssist extends Command {
       //   kPSteer = RobotMap.kLimelightSteer;
       // }
 
-      kPSteer = 0.06;
+      kPSteer = 0.04;
        
-      double steer = Robot.vision.getActiveLimelight().getTx() * kPSteer;
+      double steer = Robot.vision.limeFront.getTx() * kPSteer;
       m_steer = steer;
     
       double drive = Robot.m_oi.getThrottle() * 0.75;

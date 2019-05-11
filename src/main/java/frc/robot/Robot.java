@@ -6,7 +6,6 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.auto.SandstormHatch;
-import frc.robot.commands.drive.DriveDistance;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.CargoIntake;
 import frc.robot.subsystems.Claw;
@@ -14,7 +13,6 @@ import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Vision;
-import frc.robot.util.limelight.CameraMode;
 import frc.robot.util.limelight.LedMode;
 
 
@@ -36,7 +34,7 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     m_oi = new OI();
     m_chooser.setDefaultOption("Level 2 Hatch Place", new SandstormHatch());
-    m_chooser.addOption("Drive Forward 5 feet", new DriveDistance(5));
+    // m_chooser.addOption("Drive Forward 5 feet", new DriveDistance(5));
     m_chooser.addOption("Nothing! (for rezeroing)", null);
     SmartDashboard.putData("Auto mode", m_chooser);
     Robot.drive.ahrsReset();
@@ -48,9 +46,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void disabledInit() {
-    Robot.vision.limeBack.setLedMode(LedMode.OFF);
     Robot.vision.limeFront.setLedMode(LedMode.OFF);
-
   }
 
   @Override
@@ -66,10 +62,7 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.start();
     }
 
-    Robot.vision.limeFront.setCameraMode(CameraMode.DRIVERCAMERA);
-    Robot.vision.limeBack.setCameraMode(CameraMode.DRIVERCAMERA);
-    Robot.vision.limeFront.setPipeline(9);
-    Robot.vision.limeBack.setPipeline(9);
+    Robot.vision.setDriverCameraMode();
   }
 
   @Override
@@ -83,7 +76,6 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.cancel();
     }
     Robot.vision.setDriverCameraMode();
-
   }
 
   @Override

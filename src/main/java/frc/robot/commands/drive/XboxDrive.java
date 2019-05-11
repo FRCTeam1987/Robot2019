@@ -19,7 +19,6 @@ public class XboxDrive extends Command {
   @Override
   protected void initialize() {
     Robot.vision.limeFront.setPipeline(9);
-    Robot.vision.limeBack.setPipeline(9);
   }
 
   @Override

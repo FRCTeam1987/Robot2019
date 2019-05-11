@@ -9,43 +9,25 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.SetRumble;
 import frc.robot.commands.StopAll;
 import frc.robot.commands.arm.ArmManual;
-import frc.robot.commands.arm.SetArmAngleWithDegree;
-import frc.robot.commands.armavator.GoToDefense;
-import frc.robot.commands.armavator.SetArmSide;
 import frc.robot.commands.armavator.SetElevatorAndArm;
-import frc.robot.commands.armavator.SetRobotState;
+import frc.robot.commands.armavator.SmartSetRobotState;
 import frc.robot.commands.cargointake.CollectCargo;
-import frc.robot.commands.cargointake.CollectCargoFromGround;
 import frc.robot.commands.cargointake.IntakeCargo;
-import frc.robot.commands.cargointake.SetIntakeAngle;
 import frc.robot.commands.cargointake.SetIntakePivotManual;
-import frc.robot.commands.claw.ClawIntakeCargo;
-import frc.robot.commands.claw.CollectHatch;
-import frc.robot.commands.claw.ManipulateHatch;
 import frc.robot.commands.claw.ToggleHatchManipulator;
-import frc.robot.commands.claw.NewCollectHatch;
-import frc.robot.commands.claw.NewPlaceHatch;
 import frc.robot.commands.claw.Place;
-import frc.robot.commands.claw.PlaceHatch;
-import frc.robot.commands.climber.Climb;
 import frc.robot.commands.climber.ClimberManual;
 import frc.robot.commands.climber.EngageVacuum;
-import frc.robot.commands.climber.ServoValve;
-import frc.robot.commands.drive.DriveDistance;
-import frc.robot.commands.drive.DrivePivot;
 import frc.robot.commands.drive.ToggleShifter;
 import frc.robot.commands.elevator.ElevatorManual;
-import frc.robot.commands.vision.AutoAimbot;
 import frc.robot.commands.vision.DriveByAssist;
-import frc.robot.subsystems.Arm.ArmSetpoint;
-import frc.robot.subsystems.Arm.ArmSide;
 import frc.robot.subsystems.Elevator.ElevatorHeight;
 import frc.robot.util.XboxDPad;
 
 public class OI {
 
   private final XboxController driver;
-  private final XboxController coDriver;
+  private final XboxController xboxCoDriver;
 
   // Driver
   private final Button goToElevatorHeight;
@@ -62,21 +44,15 @@ public class OI {
   private final XboxDPad cargoIntakeManualBack;
 
   // Co-driver
-  private final Button switchPotentialClawSide;
-  private final Button level1HatchSet;
-  private final Button level2HatchSet;
-  private final Button cargoShipCargoSet;
-  private final Button level1CargoSet;
-  private final Button level2CargoSet;
-  private final Button loadingStationCargoSet;
-  private final Button defenseSet;
   private final Button stopAll;
-  private final Button hasHatch;
-  private final Button yeetOntoHab;
   private final Button deployClimber;
   private final Button climb;
   private final Button engageSuction;
-  private final Button goToDefense;
+
+  // Xbox Co-driver
+  private final XboxDPad level1Set;
+  private final XboxDPad level2Set;
+  private final XboxDPad cargoshipSet;
 
   public OI() {
     // Driver
@@ -94,23 +70,15 @@ public class OI {
     cargoIntakeManualForward = new XboxDPad(driver, XboxDPad.Direction.Left);
     cargoIntakeManualBack = new XboxDPad(driver, XboxDPad.Direction.Right);
 
-    // Co-Driver
-    coDriver = new XboxController(RobotMap.coDriverID);
-    switchPotentialClawSide = new JoystickButton(coDriver, RobotMap.switchPotentialClawSideButton);
-    level1HatchSet = new JoystickButton(coDriver, RobotMap.level1HatchSetButton);
-    level2HatchSet = new JoystickButton(coDriver, RobotMap.level2HatchSetButton);
-    cargoShipCargoSet = new JoystickButton(coDriver, RobotMap.cargoShipCargoSetButton);
-    level1CargoSet = new JoystickButton(coDriver, RobotMap.level1CargoSetButton);
-    level2CargoSet = new JoystickButton(coDriver, RobotMap.level2CargoSetButton);
-    loadingStationCargoSet = new JoystickButton(coDriver, RobotMap.loadingStationCargoSetButton);
-    defenseSet = new JoystickButton(coDriver, RobotMap.defenseSetButton);
-    stopAll = new JoystickButton(coDriver, RobotMap.stopAllButton);
-    hasHatch = new JoystickButton(coDriver, RobotMap.hasHatchButton);
-    yeetOntoHab = new JoystickButton(coDriver, RobotMap.yeetOntoHabButton);
-    deployClimber = new JoystickButton(coDriver, RobotMap.deployClimberButton);
-    climb = new JoystickButton(coDriver, RobotMap.climbButton);
-    engageSuction = new JoystickButton(coDriver, RobotMap.engageSuctionButton);
-    goToDefense = new JoystickButton(coDriver, RobotMap.goToDefenseButton);
+    // Xbox Co-driver
+    xboxCoDriver = new XboxController(RobotMap.xboxCoDriverID);
+    level1Set = new XboxDPad(xboxCoDriver, XboxDPad.Direction.Down);
+    level2Set = new XboxDPad(xboxCoDriver, XboxDPad.Direction.Up);
+    cargoshipSet = new XboxDPad(xboxCoDriver, XboxDPad.Direction.Right);
+    stopAll = new JoystickButton(xboxCoDriver, RobotMap.stopAllButton);
+    deployClimber = new JoystickButton(xboxCoDriver, RobotMap.deployClimberButton);
+    climb = new JoystickButton(xboxCoDriver, RobotMap.climbButton);
+    engageSuction = new JoystickButton(xboxCoDriver, RobotMap.engageSuctionButton);
 
     // Driver Buttons
     goToElevatorHeight.whenPressed(new SetElevatorAndArm());
@@ -129,21 +97,27 @@ public class OI {
     cargoIntakeManualBack.whileHeld(new SetIntakePivotManual(-0.6)); // was -.4
 
     // Co-Driver buttons
-    switchPotentialClawSide.whenPressed(new SetArmSide(ArmSide.FRONT));
-    switchPotentialClawSide.whenReleased(new SetArmSide(ArmSide.BACK));
-    level1HatchSet.whenPressed(new SetRobotState(ElevatorHeight.LEVEL1HATCH, ArmSetpoint.HATCH));
-    level2HatchSet.whenPressed(new SetRobotState(ElevatorHeight.LEVEL2HATCH, ArmSetpoint.HATCH));
-    cargoShipCargoSet.whenPressed(new SetRobotState(ElevatorHeight.CARGOSHIP, ArmSetpoint.CARGOSHIP));
-    level1CargoSet.whenPressed(new SetRobotState(ElevatorHeight.LEVEL1CARGOROCKET, ArmSetpoint.CARGOROCKETLVL1));
-    level2CargoSet.whenPressed(new SetRobotState(ElevatorHeight.LEVEL2CARGOROCKET, ArmSetpoint.CARGOROCKETLVL2));
-    loadingStationCargoSet.whenPressed(new SetRobotState(ElevatorHeight.LOADINGSTATIONCARGO, ArmSetpoint.CARGOLOADINGSTATION));
-    defenseSet.whenPressed(new SetRobotState(ElevatorHeight.HOME, ArmSetpoint.HOME));
-    yeetOntoHab.whenPressed(new SetRobotState(ElevatorHeight.FULLSENDLVL2, ArmSetpoint.FULLSENDLVL2));
+    // switchPotentialClawSide.whenPressed(new SetArmSide(ArmSide.FRONT));
+    // switchPotentialClawSide.whenReleased(new SetArmSide(ArmSide.BACK));
+    // level1HatchSet.whenPressed(new SetRobotState(ElevatorHeight.LEVEL1HATCH, ArmSetpoint.HATCH));
+    // level2HatchSet.whenPressed(new SetRobotState(ElevatorHeight.LEVEL2HATCH, ArmSetpoint.HATCH));
+    // cargoShipCargoSet.whenPressed(new SetRobotState(ElevatorHeight.CARGOSHIP, ArmSetpoint.CARGOSHIP));
+    // level1CargoSet.whenPressed(new SetRobotState(ElevatorHeight.LEVEL1CARGOROCKET, ArmSetpoint.CARGOROCKETLVL1));
+    // level2CargoSet.whenPressed(new SetRobotState(ElevatorHeight.LEVEL2CARGOROCKET, ArmSetpoint.CARGOROCKETLVL2));
+    // loadingStationCargoSet.whenPressed(new SetRobotState(ElevatorHeight.LOADINGSTATIONCARGO, ArmSetpoint.CARGOLOADINGSTATION));
+    // defenseSet.whenPressed(new SetRobotState(ElevatorHeight.HOME, ArmSetpoint.HOME));
+    // yeetOntoHab.whenPressed(new SetRobotState(ElevatorHeight.FULLSENDLVL2, ArmSetpoint.FULLSENDLVL2));
+    // stopAll.whenPressed(new StopAll());
+    // goToDefense.whenPressed(new GoToDefense());
+
+    // Xbox Co-driver buttons
+    level1Set.whenPressed(new SmartSetRobotState(ElevatorHeight.LEVEL1));
+    level2Set.whenPressed(new SmartSetRobotState(ElevatorHeight.LEVEL2));
+    cargoshipSet.whenPressed(new SmartSetRobotState(ElevatorHeight.CARGOSHIP));
     stopAll.whenPressed(new StopAll());
     deployClimber.whileHeld(new ClimberManual(-1));
-    climb.whileHeld(new ClimberManual(1.0));    
+    climb.whileHeld(new ClimberManual(1));    
     engageSuction.whenPressed(new EngageVacuum());
-    goToDefense.whenPressed(new GoToDefense());
 
     // SmartDashboard puts
     // SmartDashboard.putData("Re-zero Arm: Above Zero Sensor", new
@@ -183,7 +157,7 @@ public class OI {
     // SmartDashboard.putData("Move Servo 0", new ServoValve(0));
     // SmartDashboard.putData("Move Servo 90", new ServoValve(90));
 
-    SmartDashboard.putData("Engage Venturi",new EngageVacuum());
+    SmartDashboard.putData("Engage Venturi", new EngageVacuum());
 
     // SmartDashboard.putData("cargo-intake-off-floor", new CollectCargoFromGround());
     SmartDashboard.putData("Rumble Controller", new SetRumble(2));
@@ -198,7 +172,7 @@ public class OI {
   }
   
   public XboxController getCoDriver() {
-    return coDriver;
+    return xboxCoDriver;
   }
 
   public double getThrottle() {

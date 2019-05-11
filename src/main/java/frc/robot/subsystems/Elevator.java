@@ -143,7 +143,9 @@ public class Elevator extends Subsystem {
     FULLSENDLVL2,
     HOME,
     HABLEVEL2,
-    PREPFLOORCARGO
+    PREPFLOORCARGO,
+    LEVEL1,
+    LEVEL2
   }
 
   public void setElevatorHeight(final ElevatorHeight newElevatorHeight) {

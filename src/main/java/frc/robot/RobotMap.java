@@ -24,13 +24,22 @@ public class RobotMap {
     public static int level2CargoSetButton = 16;
     public static int loadingStationCargoSetButton = 10;
     public static int defenseSetButton = 5;
-    public static int stopAllButton = 11; //change ID
+    // public static int stopAllButton = 11; //change ID
     public static int hasHatchButton = 19;
     public static int yeetOntoHabButton = 17;
-    public static int deployClimberButton = 5;
-    public static int climbButton = 17;
-    public static int engageSuctionButton = 7;
+    // public static int deployClimberButton = 5;
+    // public static int climbButton = 17;
+    // public static int engageSuctionButton = 7;
     public static int goToDefenseButton = 20;
+
+    //Xbox Co-driver Buttons
+    public static int xboxCoDriverID = 2;
+    public static int stopAllButton = 2; //B
+    public static int cargoshipSetButton = 3;  //X
+    public static int loadingStationSetButton = 4; //Y
+    public static int deployClimberButton = 5; //Left Bumper
+    public static int climbButton = 6; //Right Bumper
+    public static int engageSuctionButton = 8; //Start
 
     //Drive
     public static double maxHighGearVelocity = 13;
